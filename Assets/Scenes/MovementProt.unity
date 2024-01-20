@@ -5110,9 +5110,10 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   circleRadius: 0.64
-  castDistance: 0.8
+  castDistance: 0.05
   fallLongMult: 1
   fallShortMult: 2
+  jumpvel: 7
 --- !u!1 &2147023128
 GameObject:
   m_ObjectHideFlags: 0
