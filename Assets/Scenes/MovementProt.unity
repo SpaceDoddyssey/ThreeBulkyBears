@@ -5109,13 +5109,11 @@ MonoBehaviour:
   platforms:
     serializedVersion: 2
     m_Bits: 64
-  circleRadius: 0.64
   castDistance: 0.1
   groundDrag: 0
+  bearStats: {fileID: 11400000, guid: 90d079be474d3444a962abf2ba60f468, type: 2}
   speed: 4.4
-  fallLongMult: 1
-  fallShortMult: 2
-  jumpvel: 7
+  onGround: 0
   visualizeCircleCast: 1
 --- !u!1 &2147023128
 GameObject:

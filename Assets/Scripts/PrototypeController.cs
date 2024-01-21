@@ -8,11 +8,12 @@ public class PlayerController2 : MonoBehaviour
     private CircleCollider2D cc;
     public LayerMask platforms;
     private Vector3 initialPos;
-    public float circleRadius;
     public float castDistance;
     public float groundDrag;
     private float horizontalInput;
     Vector2 moveDirection;
+    [SerializeField]
+    private BearStats bearStats;
     [Range(0, 10f)][SerializeField] private float speed = 4f;
 
     [SerializeField]
@@ -20,20 +21,14 @@ public class PlayerController2 : MonoBehaviour
     //bigger jump when holding jump button for longer
     private bool jump = false, jumpHeld = false;
 
-
-    [Range(0, 15f)][SerializeField] private float fallLongMult = 1f;
-    [Range(0, 15f)][SerializeField] private float fallShortMult = 2f;
-    [Range(0, 15f)][SerializeField] private float jumpvel = 7f;
-    //edit above values based on size of the bear
-
-    [SerializeField] private bool visualizeCircleCast = true;
+    [SerializeField] private bool visualizeCircleCast = false;
 
     void Start()
     {
         initialPos = transform.position;
         rb = GetComponent<Rigidbody2D>();
         cc = GetComponent<CircleCollider2D>();
-        circleRadius = cc.radius;
+        bearStats.circleRadius = cc.radius;
     }
 
     // Update is called once per frame
@@ -65,14 +60,14 @@ public class PlayerController2 : MonoBehaviour
 
         if (jump)
         {
-            rb.velocity += Vector2.up * jumpvel;
+            rb.velocity += Vector2.up * bearStats.jumpvel;
             jump = false;
         }
 
         if (rb.velocity.y > 0)
         {
             //Long jump or short jump
-            float multiplier = jumpHeld ? fallLongMult : fallShortMult;
+            float multiplier = jumpHeld ? bearStats.fallLongMult : bearStats.fallShortMult;
             rb.velocity += Vector2.up * Physics2D.gravity.y * (multiplier - 1) * Time.fixedDeltaTime;
         }
 
@@ -83,7 +78,7 @@ public class PlayerController2 : MonoBehaviour
         {
             // Thanks to copilot for this code
             // Calculate rotation angle based on velocity
-            float rotationAngle = -rb.velocity.x / (2 * Mathf.PI * circleRadius) * 360f;
+            float rotationAngle = -rb.velocity.x / (2 * Mathf.PI * bearStats.circleRadius) * 360f;
 
             // Apply rotation to the circle collider
             cc.transform.Rotate(Vector3.forward, rotationAngle * Time.fixedDeltaTime);
@@ -93,7 +88,7 @@ public class PlayerController2 : MonoBehaviour
     //check if the bear is touching the ground
     private void checkOnGround()
     {
-        onGround = Physics2D.CircleCast(transform.position, circleRadius, new Vector2(0, -1), castDistance, platforms);
+        onGround = Physics2D.CircleCast(transform.position, bearStats.circleRadius, new Vector2(0, -1), castDistance, platforms);
     }
 
     void OnDrawGizmos()
@@ -101,7 +96,7 @@ public class PlayerController2 : MonoBehaviour
         if (visualizeCircleCast)
         {
             Gizmos.color = Color.red;
-            Gizmos.DrawWireSphere(transform.position - new Vector3(0, castDistance, 0), circleRadius);
+            Gizmos.DrawWireSphere(transform.position - new Vector3(0, castDistance, 0), bearStats.circleRadius);
         }
     }
 
