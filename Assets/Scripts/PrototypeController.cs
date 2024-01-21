@@ -5,15 +5,20 @@ using UnityEngine;
 public class PlayerController2 : MonoBehaviour
 {
     private Rigidbody2D rb;
+    private SpriteRenderer spriteRenderer;
     private CircleCollider2D cc;
     public LayerMask platforms;
     private Vector3 initialPos;
     public float castDistance;
     public float groundDrag;
+    public float weight;
     private float horizontalInput;
     Vector2 moveDirection;
     [SerializeField]
     private BearStats bearStats;
+    private BearStats baby;
+    private BearStats mama;
+    private BearStats papa;
     [Range(0, 10f)][SerializeField] private float speed = 4f;
 
     [SerializeField]
@@ -28,12 +33,33 @@ public class PlayerController2 : MonoBehaviour
         initialPos = transform.position;
         rb = GetComponent<Rigidbody2D>();
         cc = GetComponent<CircleCollider2D>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
         bearStats.circleRadius = cc.radius;
+
+        baby = Resources.Load("BearStats/BabyBear") as BearStats;
+        mama = Resources.Load("BearStats/MamaBear") as BearStats;
+        papa = Resources.Load("BearStats/PapaBear") as BearStats;
     }
 
     // Update is called once per frame
     void Update()
     {
+        //switch between bears
+        if (Input.GetKeyDown(KeyCode.Z)) {
+            bearStats = baby;
+            spriteRenderer.sprite = bearStats.art;
+        }
+        
+        if (Input.GetKeyDown(KeyCode.X)) {
+            bearStats = mama;
+            spriteRenderer.sprite = bearStats.art;
+        }
+        
+        if (Input.GetKeyDown(KeyCode.C)) {
+            bearStats = papa;
+            spriteRenderer.sprite = bearStats.art;
+        }
+        
         checkOnGround();
         if (!jump)
         {
@@ -72,7 +98,7 @@ public class PlayerController2 : MonoBehaviour
         }
 
         //add force in direction we are moving
-        rb.AddForce(new Vector2(horizontalInput, 0) * speed * 10f, ForceMode2D.Force);
+        rb.AddForce(new Vector2(horizontalInput, 0) * bearStats.speed * 10f, ForceMode2D.Force);
 
         if (onGround)
         {
@@ -105,9 +131,9 @@ public class PlayerController2 : MonoBehaviour
     {
         Vector2 xVelocity = new Vector2(rb.velocity.x, 0f);
 
-        if (xVelocity.magnitude > speed)
+        if (xVelocity.magnitude > bearStats.speed)
         {
-            Vector2 cappedVelocity = xVelocity.normalized * speed;
+            Vector2 cappedVelocity = xVelocity.normalized * bearStats.speed;
             rb.velocity = new(cappedVelocity.x, rb.velocity.y);
         }
     }

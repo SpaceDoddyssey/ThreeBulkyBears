@@ -10,9 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1a29749d90a156c4a945ec1bd9838b4e, type: 3}
-  m_Name: PapaBear
+  m_Name: MamaBear
   m_EditorClassIdentifier: 
-  fallLongMult: 1
-  fallShortMult: 2
-  jumpvel: 4.5
-  circleRadius: 0.8
+  fallLongMult: 1.3
+  fallShortMult: 2.6
+  jumpvel: 7
+  speed: 3
+  weight: 2
+  circleRadius: 0.64
+  art: {fileID: -2413806693520163455, guid: a9435e4546744094298e294fcb6cb2a1, type: 3}
