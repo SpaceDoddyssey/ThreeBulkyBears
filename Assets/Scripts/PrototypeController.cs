@@ -7,19 +7,19 @@ public class PlayerController2 : MonoBehaviour
     private Rigidbody2D rb;
     private CircleCollider2D cc;
     public LayerMask platforms;
+    private Vector3 initialPos;
     public float circleRadius;
     public float castDistance;
     public float groundDrag;
     private float horizontalInput;
     Vector2 moveDirection;
-    [Range(0, 10f)] [SerializeField] private float speed = 2f;
+    [Range(0, 10f)][SerializeField] private float speed = 4f;
 
-    //float horizontal = 0f;
-    //float lastJumpY = 0f;
-    //private bool isFacingRight = true;
-
+    [SerializeField]
+    private bool onGround = false;
     //bigger jump when holding jump button for longer
-    bool jump = false, jumpHeld = false;
+    private bool jump = false, jumpHeld = false;
+
 
     [Range(0, 15f)][SerializeField] private float fallLongMult = 1f;
     [Range(0, 15f)][SerializeField] private float fallShortMult = 2f;
@@ -30,6 +30,7 @@ public class PlayerController2 : MonoBehaviour
 
     void Start()
     {
+        initialPos = transform.position;
         rb = GetComponent<Rigidbody2D>();
         cc = GetComponent<CircleCollider2D>();
         circleRadius = cc.radius;
@@ -38,21 +39,23 @@ public class PlayerController2 : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!jump) {
-            jump = isOnGround() && Input.GetKeyDown(KeyCode.Space);
+        checkOnGround();
+        if (!jump)
+        {
+            jump = onGround && Input.GetKeyDown(KeyCode.Space);
         }
 
-        jumpHeld = !isOnGround() && Input.GetKey(KeyCode.Space);
+        jumpHeld = !onGround && Input.GetKey(KeyCode.Space);
 
-        if (isOnGround()) {
-            rb.drag = groundDrag;
+        rb.drag = onGround ? groundDrag : 0f;
+
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            transform.position = initialPos;
         }
-        else {
-            rb.drag = 0;
-        }
-        
+
         horizontalInput = Input.GetAxisRaw("Horizontal");
-        SpeedControl();
+        LimitSpeed();
     }
 
     void FixedUpdate()
@@ -60,8 +63,6 @@ public class PlayerController2 : MonoBehaviour
         //universal jump logic
         moveDirection = new Vector2(1, 0) * horizontalInput;
 
-        //rb.AddTorque(moveDirection.normalized * speed * 10f, ForceMode2D.Force);
-        
         if (jump)
         {
             rb.velocity += Vector2.up * jumpvel;
@@ -75,15 +76,24 @@ public class PlayerController2 : MonoBehaviour
             rb.velocity += Vector2.up * Physics2D.gravity.y * (multiplier - 1) * Time.fixedDeltaTime;
         }
 
-        if (isOnGround()) {
-            rb.AddForce(moveDirection.normalized * speed * 10f, ForceMode2D.Force);
-        } //add force in direction we are moving
+        //add force in direction we are moving
+        rb.AddForce(new Vector2(horizontalInput, 0) * speed * 10f, ForceMode2D.Force);
+
+        if (onGround)
+        {
+            // Thanks to copilot for this code
+            // Calculate rotation angle based on velocity
+            float rotationAngle = -rb.velocity.x / (2 * Mathf.PI * circleRadius) * 360f;
+
+            // Apply rotation to the circle collider
+            cc.transform.Rotate(Vector3.forward, rotationAngle * Time.fixedDeltaTime);
+        }
     }
 
     //check if the bear is touching the ground
-    private bool isOnGround()
+    private void checkOnGround()
     {
-        return Physics2D.CircleCast(transform.position, circleRadius, new Vector2(0, -1), castDistance, platforms);
+        onGround = Physics2D.CircleCast(transform.position, circleRadius, new Vector2(0, -1), castDistance, platforms);
     }
 
     void OnDrawGizmos()
@@ -95,14 +105,15 @@ public class PlayerController2 : MonoBehaviour
         }
     }
 
-    private void SpeedControl()
+    //check if speed is above bear's speed if it is normalize it
+    private void LimitSpeed()
     {
-        Vector2 flatvel = new Vector2(rb.velocity.x, 0f);
+        Vector2 xVelocity = new Vector2(rb.velocity.x, 0f);
 
-        if (flatvel.magnitude > speed) {
-            Vector2 limitedvel = flatvel.normalized*speed;
-            rb.velocity = new (limitedvel.x, rb.velocity.y);
+        if (xVelocity.magnitude > speed)
+        {
+            Vector2 cappedVelocity = xVelocity.normalized * speed;
+            rb.velocity = new(cappedVelocity.x, rb.velocity.y);
         }
-        //check if speed is above bear's speed if it is normalize it
     }
 }
