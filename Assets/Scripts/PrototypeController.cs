@@ -13,13 +13,9 @@ public class PlayerController2 : MonoBehaviour
     public float groundDrag;
     public float weight;
     private float horizontalInput;
-    Vector2 moveDirection;
     [SerializeField]
     private BearStats bearStats;
-    private BearStats baby;
-    private BearStats mama;
-    private BearStats papa;
-    [Range(0, 10f)][SerializeField] private float speed = 4f;
+    private BearStats baby, mama, papa;
 
     [SerializeField]
     private bool onGround = false;
@@ -34,7 +30,7 @@ public class PlayerController2 : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         cc = GetComponent<CircleCollider2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
-        bearStats.circleRadius = cc.radius;
+        cc.radius = bearStats.circleRadius;
 
         baby = Resources.Load("BearStats/BabyBear") as BearStats;
         mama = Resources.Load("BearStats/MamaBear") as BearStats;
@@ -44,28 +40,15 @@ public class PlayerController2 : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //switch between bears
-        if (Input.GetKeyDown(KeyCode.Z)) {
-            bearStats = baby;
-            spriteRenderer.sprite = bearStats.art;
-        }
-        
-        if (Input.GetKeyDown(KeyCode.X)) {
-            bearStats = mama;
-            spriteRenderer.sprite = bearStats.art;
-        }
-        
-        if (Input.GetKeyDown(KeyCode.C)) {
-            bearStats = papa;
-            spriteRenderer.sprite = bearStats.art;
-        }
-        
+        if (Input.GetKeyDown(KeyCode.C)) ChangeBear(baby);
+        if (Input.GetKeyDown(KeyCode.V)) ChangeBear(mama);
+        if (Input.GetKeyDown(KeyCode.B)) ChangeBear(papa);
+
         checkOnGround();
         if (!jump)
         {
             jump = onGround && Input.GetKeyDown(KeyCode.Space);
         }
-
         jumpHeld = !onGround && Input.GetKey(KeyCode.Space);
 
         rb.drag = onGround ? groundDrag : 0f;
@@ -79,11 +62,16 @@ public class PlayerController2 : MonoBehaviour
         LimitSpeed();
     }
 
+    void ChangeBear(BearStats newBear)
+    {
+        bearStats = newBear;
+        spriteRenderer.sprite = bearStats.art;
+        cc.radius = bearStats.circleRadius;
+    }
+
     void FixedUpdate()
     {
         //universal jump logic
-        moveDirection = new Vector2(1, 0) * horizontalInput;
-
         if (jump)
         {
             rb.velocity += Vector2.up * bearStats.jumpvel;

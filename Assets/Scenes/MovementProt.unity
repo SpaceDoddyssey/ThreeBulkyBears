@@ -5033,12 +5033,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -2413806693520163455, guid: a9435e4546744094298e294fcb6cb2a1, type: 3}
+  m_Sprite: {fileID: 21300000, guid: a9435e4546744094298e294fcb6cb2a1, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 1.28, y: 1.28}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -5111,8 +5111,8 @@ MonoBehaviour:
     m_Bits: 64
   castDistance: 0.1
   groundDrag: 0
+  weight: 0
   bearStats: {fileID: 11400000, guid: 90d079be474d3444a962abf2ba60f468, type: 2}
-  speed: 4.4
   onGround: 0
   visualizeCircleCast: 1
 --- !u!1 &2147023128

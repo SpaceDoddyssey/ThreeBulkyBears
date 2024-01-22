@@ -16,6 +16,6 @@ MonoBehaviour:
   fallShortMult: 2
   jumpvel: 8.4
   speed: 4
-  weight: 2
+  weight: 1
   circleRadius: 0.45
   art: {fileID: 21300000, guid: 3635a77a337fe584596254329ebcdec0, type: 3}
