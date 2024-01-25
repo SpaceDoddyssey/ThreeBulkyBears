@@ -11,7 +11,6 @@ public class PlayerController2 : MonoBehaviour
     private Vector3 initialPos;
     public float castDistance;
     public float groundDrag;
-    public float weight;
     private float horizontalInput;
     [SerializeField]
     private BearStats bearStats;
@@ -67,6 +66,8 @@ public class PlayerController2 : MonoBehaviour
         bearStats = newBear;
         spriteRenderer.sprite = bearStats.art;
         cc.radius = bearStats.circleRadius;
+        rb.mass = bearStats.mass;
+        rb.gravityScale = bearStats.gravityMult;
     }
 
     void FixedUpdate()
