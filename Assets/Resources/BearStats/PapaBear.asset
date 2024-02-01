@@ -18,6 +18,8 @@ MonoBehaviour:
   speed: 2
   mass: 2
   gravityMult: 1.2
-  circleRadius: 0.8
+  circleRadius: 4
   art: {fileID: 21300000, guid: 8c621b5b0436a244884457d952859b9b, type: 3}
+  spriteWidthMultiplier: 1
+  spriteHeightMultiplier: 1
   breaksBranches: 1

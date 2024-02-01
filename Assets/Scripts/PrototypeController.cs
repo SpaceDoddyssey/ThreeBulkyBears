@@ -29,11 +29,12 @@ public class PlayerController2 : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         cc = GetComponent<CircleCollider2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
-        cc.radius = bearStats.circleRadius;
 
         baby = Resources.Load("BearStats/BabyBear") as BearStats;
         mama = Resources.Load("BearStats/MamaBear") as BearStats;
         papa = Resources.Load("BearStats/PapaBear") as BearStats;
+
+        ChangeBear(mama);
     }
 
     // Update is called once per frame
@@ -43,7 +44,7 @@ public class PlayerController2 : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.V)) ChangeBear(mama);
         if (Input.GetKeyDown(KeyCode.B)) ChangeBear(papa);
 
-        checkOnGround();
+        checkIfOnGround();
         if (!jump)
         {
             jump = onGround && Input.GetKeyDown(KeyCode.Space);
@@ -64,6 +65,8 @@ public class PlayerController2 : MonoBehaviour
     void ChangeBear(BearStats newBear)
     {
         bearStats = newBear;
+        float spriteScale = bearStats.circleRadius * 2 * bearStats.spriteSizeMultiplier;
+        spriteRenderer.size = new Vector2(spriteScale, spriteScale);
         spriteRenderer.sprite = bearStats.art;
         cc.radius = bearStats.circleRadius;
         rb.mass = bearStats.mass;
@@ -100,10 +103,11 @@ public class PlayerController2 : MonoBehaviour
         }
     }
 
+    float radiusDivisor = 5f; //I don't know why this is necessary to be honest, but it's related to the spriteRenderer
     //check if the bear is touching the ground
-    private void checkOnGround()
+    private void checkIfOnGround()
     {
-        onGround = Physics2D.CircleCast(transform.position, bearStats.circleRadius, new Vector2(0, -1), castDistance, platforms);
+        onGround = Physics2D.CircleCast(transform.position, bearStats.circleRadius / radiusDivisor, new Vector2(0, -1), castDistance, platforms);
     }
 
     void OnDrawGizmos()
@@ -111,7 +115,7 @@ public class PlayerController2 : MonoBehaviour
         if (visualizeCircleCast)
         {
             Gizmos.color = Color.red;
-            Gizmos.DrawWireSphere(transform.position - new Vector3(0, castDistance, 0), bearStats.circleRadius);
+            Gizmos.DrawWireSphere(transform.position - new Vector3(0, castDistance, 0), bearStats.circleRadius / radiusDivisor);
         }
     }
 
@@ -119,7 +123,6 @@ public class PlayerController2 : MonoBehaviour
     private void LimitSpeed()
     {
         Vector2 xVelocity = new Vector2(rb.velocity.x, 0f);
-
         if (xVelocity.magnitude > bearStats.speed)
         {
             Vector2 cappedVelocity = xVelocity.normalized * bearStats.speed;
