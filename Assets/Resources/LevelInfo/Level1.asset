@@ -16,5 +16,4 @@ MonoBehaviour:
   levelName: 
   sceneName: MovementProt
   description: 
-  levelIcon: {fileID: 0}
-  isUnlocked: 0
+  isUnlocked: 1
