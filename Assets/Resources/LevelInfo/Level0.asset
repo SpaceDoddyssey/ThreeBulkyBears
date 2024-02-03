@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 64de2cce1215943759e59cf3a361f373, type: 3}
-  m_Name: Level2
+  m_Name: Level0
   m_EditorClassIdentifier: 
   levelID: 0
   levelName: 
-  sceneName: 
+  sceneName: Level0
   description: 
   isUnlocked: 1

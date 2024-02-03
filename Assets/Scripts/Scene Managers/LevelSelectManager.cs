@@ -2,20 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
-public class MenuManager : MonoBehaviour
+public class LevelSelectManager : MonoBehaviour
 {
+    private GameManager gameManager;
     public List<LevelInfo> levels;
     public List<GameObject> levelIcons;
     private int curLevelIndex = 0;
-    public LevelInfo curLevelInfo = null;
 
-
-
-    // Awake is called when the script instance is being loaded
-    void Awake()
+    //Start is called before the first frame update
+    void Start()
     {
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         selectLevel(0);
     }
 
@@ -25,37 +23,44 @@ public class MenuManager : MonoBehaviour
         CheckInput();
     }
 
-    
-
-    void CheckInput(){
-        if(Input.GetKeyDown(KeyCode.A)){
+    void CheckInput()
+    {
+        if (Input.GetKeyDown(KeyCode.A))
+        {
             int newLevel = curLevelIndex - 1;
-            if(newLevel < 0){
+            if (newLevel < 0)
+            {
                 return;
             }
             selectLevel(newLevel);
         }
-        if(Input.GetKeyDown(KeyCode.D)){
+        if (Input.GetKeyDown(KeyCode.D))
+        {
             //Debug.Log("hello");
             int newLevel = curLevelIndex + 1;
-            if(newLevel >= levels.Count || !levels[newLevel].isUnlocked){
+            if (newLevel >= levels.Count || !levels[newLevel].isUnlocked)
+            {
                 return;
             }
             selectLevel(newLevel);
         }
-        if(Input.GetKeyDown(KeyCode.Space)){
-            goToLevel(levels[curLevelIndex].sceneName);
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            goToLevel(levels[curLevelIndex]);
         }
     }
 
-    public void selectLevel(int index){
+    public void selectLevel(int index)
+    {
 
         levelIcons[curLevelIndex].transform.localScale = new Vector2(1, 1);
         curLevelIndex = index;
         levelIcons[curLevelIndex].transform.localScale = new Vector2(1.5f, 1.5f);
     }
 
-    public void goToLevel(string level) {
-        SceneManager.LoadScene(level);
+    public void goToLevel(LevelInfo level)
+    {
+        gameManager.curLevelInfo = level;
+        SceneManager.LoadScene("MainLevelScene");
     }
 }
