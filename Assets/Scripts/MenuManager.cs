@@ -8,10 +8,13 @@ public class MenuManager : MonoBehaviour
 {
     public List<LevelInfo> levels;
     public List<GameObject> levelIcons;
-    private int curLevelSelected = 0;
+    private int curLevelIndex = 0;
+    public LevelInfo curLevelInfo = null;
 
-    // Start is called before the first frame update
-    void Start()
+
+
+    // Awake is called when the script instance is being loaded
+    void Awake()
     {
         selectLevel(0);
     }
@@ -22,9 +25,11 @@ public class MenuManager : MonoBehaviour
         CheckInput();
     }
 
+    
+
     void CheckInput(){
         if(Input.GetKeyDown(KeyCode.A)){
-            int newLevel = curLevelSelected - 1;
+            int newLevel = curLevelIndex - 1;
             if(newLevel < 0){
                 return;
             }
@@ -32,22 +37,22 @@ public class MenuManager : MonoBehaviour
         }
         if(Input.GetKeyDown(KeyCode.D)){
             //Debug.Log("hello");
-            int newLevel = curLevelSelected + 1;
+            int newLevel = curLevelIndex + 1;
             if(newLevel >= levels.Count || !levels[newLevel].isUnlocked){
                 return;
             }
             selectLevel(newLevel);
         }
         if(Input.GetKeyDown(KeyCode.Space)){
-            goToLevel(levels[curLevelSelected].sceneName);
+            goToLevel(levels[curLevelIndex].sceneName);
         }
     }
 
-    public void selectLevel(int levelIndex){
+    public void selectLevel(int index){
 
-        levelIcons[curLevelSelected].transform.localScale = new Vector2(1, 1);
-        curLevelSelected = levelIndex;
-        levelIcons[curLevelSelected].transform.localScale = new Vector2(1.5f, 1.5f);
+        levelIcons[curLevelIndex].transform.localScale = new Vector2(1, 1);
+        curLevelIndex = index;
+        levelIcons[curLevelIndex].transform.localScale = new Vector2(1.5f, 1.5f);
     }
 
     public void goToLevel(string level) {

@@ -8,4 +8,6 @@ public class LevelInfo : ScriptableObject {
     public string description;
     private float bestTime;
     public bool isUnlocked;
+
+    public GameObject levelPrefab;
 }
