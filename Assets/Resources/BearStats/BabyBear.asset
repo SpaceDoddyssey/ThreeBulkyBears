@@ -20,6 +20,5 @@ MonoBehaviour:
   gravityMult: 0.8
   circleRadius: 2.25
   art: {fileID: 21300000, guid: 3635a77a337fe584596254329ebcdec0, type: 3}
-  spriteWidthMultiplier: 1
-  spriteHeightMultiplier: 1
+  spriteSizeMultiplier: 1.52
   breaksBranches: 0

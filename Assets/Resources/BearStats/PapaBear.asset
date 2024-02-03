@@ -15,10 +15,10 @@ MonoBehaviour:
   fallLongMult: 2
   fallShortMult: 4
   jumpvel: 4.5
-  speed: 2
+  speed: 3.5
   mass: 2
-  gravityMult: 1.2
+  gravityMult: 2.34
   circleRadius: 4
   art: {fileID: 21300000, guid: 8c621b5b0436a244884457d952859b9b, type: 3}
-  spriteSizeMultiplier: 1
+  spriteSizeMultiplier: 1.2
   breaksBranches: 1
