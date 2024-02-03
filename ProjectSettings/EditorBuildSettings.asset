@@ -11,4 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/MovementProt.unity
     guid: 40e9fea951dc68e499a86c53d07e3a4c
+  - enabled: 1
+    path: Assets/Scenes/LevelLoadProt.unity
+    guid: 1f556dd61194e0845b26181c1d88d140
   m_configObjects: {}
