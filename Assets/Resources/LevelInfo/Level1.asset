@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: Level1
   m_EditorClassIdentifier: 
   levelID: 0
-  levelName: 
+  levelName: Level 1
   sceneName: MovementProt
   description: 
   isUnlocked: 1
+  levelPrefab: {fileID: 0}

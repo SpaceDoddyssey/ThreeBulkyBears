@@ -12,7 +12,6 @@ public class MenuManager : MonoBehaviour
     public LevelInfo curLevelInfo = null;
 
 
-
     // Awake is called when the script instance is being loaded
     void Awake()
     {
