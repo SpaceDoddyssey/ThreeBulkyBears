@@ -14,7 +14,7 @@ public class LevelManager : MonoBehaviour
     private bool win = false;
     private bool lose = false;
     private bool paused = false;
-    [SerializeField] private Canvas gameOverCanvas;
+    private GameObject gameOverText, victoryText;
 
     void Awake()
     {
@@ -34,9 +34,10 @@ public class LevelManager : MonoBehaviour
         playerObj = GameObject.Find("Bear");
         bearController = playerObj.GetComponent<BearController>();
 
-        //replace this logic with game over screen prefab
-        gameOverCanvas = GameObject.Find("GameOverCanvas").GetComponent<Canvas>();
-        gameOverCanvas.enabled = false;
+        gameOverText = GameObject.Find("GameOverText");
+        gameOverText.SetActive(false);
+        victoryText = GameObject.Find("VictoryText");
+        victoryText.SetActive(false);
 
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
@@ -61,7 +62,9 @@ public class LevelManager : MonoBehaviour
         {
             bearController.ResetBear();
             lose = false;
-            gameOverCanvas.enabled = false;
+            win = false;
+            gameOverText.SetActive(false);
+            victoryText.SetActive(false);
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
         }
@@ -102,7 +105,8 @@ public class LevelManager : MonoBehaviour
     //game over logic
     public void GameOver()
     {
-        gameOverCanvas.enabled = true;
+        if (win) { return; }
+        gameOverText.SetActive(true);
 
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
@@ -118,6 +122,16 @@ public class LevelManager : MonoBehaviour
     //win logic
     public void Victory()
     {
+        victoryText.SetActive(true);
 
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+
+        bearController.controllable = false;
+
+        if (Input.GetKeyDown(KeyCode.K))
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
     }
 }
