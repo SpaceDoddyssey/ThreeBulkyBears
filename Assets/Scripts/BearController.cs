@@ -20,6 +20,8 @@ public class BearController : MonoBehaviour
     private bool onGround = false;
     //bigger jump when holding jump button for longer
     private bool jump = false, jumpHeld = false;
+    //Disabled when in Game Over state
+    public bool controllable = true;
 
     [SerializeField] private bool visualizeCircleCast = false;
 
@@ -40,30 +42,35 @@ public class BearController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.C)) ChangeBear(baby);
-        if (Input.GetKeyDown(KeyCode.V)) ChangeBear(mama);
-        if (Input.GetKeyDown(KeyCode.B)) ChangeBear(papa);
-
         checkIfOnGround();
+
+        if (controllable)
+        {
+            HandleControls();
+        }
+
+        rb.drag = onGround ? groundDrag : 0f;
+
+        LimitSpeed();
+    }
+
+    private void HandleControls()
+    {
         if (!jump)
         {
             jump = onGround && Input.GetKeyDown(KeyCode.Space);
         }
         jumpHeld = !onGround && Input.GetKey(KeyCode.Space);
 
-        rb.drag = onGround ? groundDrag : 0f;
-
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            ResetBear();
-        }
-
         horizontalInput = Input.GetAxisRaw("Horizontal");
-        LimitSpeed();
+        if (Input.GetKeyDown(KeyCode.C)) ChangeBear(baby);
+        if (Input.GetKeyDown(KeyCode.V)) ChangeBear(mama);
+        if (Input.GetKeyDown(KeyCode.B)) ChangeBear(papa);
     }
 
     public void ResetBear()
     {
+        controllable = true;
         rb.velocity = Vector2.zero;
         transform.position = initialPos;
         ChangeBear(mama);

@@ -7,32 +7,36 @@ public class LevelManager : MonoBehaviour
 {
     private GameManager gameManager;
 
-    public GameObject player;
+    public GameObject playerObj;
+    public BearController bearController;
     public Camera maincamera;
     public Scene levelSubscene;
     private bool win = false;
     private bool lose = false;
     private bool paused = false;
-    [SerializeField] private Canvas gameover;
+    [SerializeField] private Canvas gameOverCanvas;
 
     void Awake()
     {
-        gameManager = GameObject.Find("GameManager")?.GetComponent<GameManager>();
-        if (gameManager == null)
+        GameObject gameManagerObj = GameObject.Find("GameManager");
+        if (gameManagerObj == null) { return; }
+        gameManager = gameManagerObj.GetComponent<GameManager>();
+        if (gameManager == null) { return; }
+        if (gameManager.curLevelInfo != null)
         {
-            Debug.LogError("GameManager not found in scene");
+            Debug.Log("Loading level: " + gameManager.curLevelInfo.sceneName);
+            SceneManager.LoadScene(gameManager.curLevelInfo.sceneName, LoadSceneMode.Additive);
         }
-        Debug.Log("Loading level: " + gameManager.curLevelInfo.sceneName);
-        SceneManager.LoadScene(gameManager.curLevelInfo.sceneName, LoadSceneMode.Additive);
     }
 
     void Start()
     {
-        player = GameObject.Find("Bear");
+        playerObj = GameObject.Find("Bear");
+        bearController = playerObj.GetComponent<BearController>();
 
         //replace this logic with game over screen prefab
-        gameover = GameObject.Find("GameOverCanvas").GetComponent<Canvas>();
-        gameover.enabled = false;
+        gameOverCanvas = GameObject.Find("GameOverCanvas").GetComponent<Canvas>();
+        gameOverCanvas.enabled = false;
 
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
@@ -51,6 +55,15 @@ public class LevelManager : MonoBehaviour
         if (win)
         {
             Victory();
+        }
+
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            bearController.ResetBear();
+            lose = false;
+            gameOverCanvas.enabled = false;
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
         }
 
         if (Input.GetKeyDown(KeyCode.P))
@@ -89,12 +102,12 @@ public class LevelManager : MonoBehaviour
     //game over logic
     public void GameOver()
     {
-
-        gameover.enabled = true;
+        gameOverCanvas.enabled = true;
 
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
-        Time.timeScale = 0;
+
+        bearController.controllable = false;
 
         if (Input.GetKeyDown(KeyCode.K))
         {
