@@ -8,9 +8,17 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private string sceneToLoad;
 
-    public void Awake()
+    void Awake()
     {
-        DontDestroyOnLoad(gameObject);
+        GameManager[] gameManagers = FindObjectsOfType<GameManager>();
+        if (gameManagers.Length > 1)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            DontDestroyOnLoad(gameObject);
+        }
     }
     public void Start()
     {
