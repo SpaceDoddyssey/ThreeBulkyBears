@@ -13,7 +13,7 @@ public class BearController : MonoBehaviour
     public float groundDrag;
     private float horizontalInput;
     [SerializeField]
-    private BearStats bearStats;
+    public BearStats bearStats;
     private BearStats baby, mama, papa;
 
     [SerializeField]

@@ -3,7 +3,10 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "BearStats", menuName = "BearStats")]
 public class BearStats : ScriptableObject
 {
+    public string bearName;
+
     //Add more stats as needed
+    [Space]
     [Header("Stats")]
     [Range(0, 15f)] public float fallLongMult = 1f;
     [Range(0, 15f)] public float fallShortMult = 2f;
