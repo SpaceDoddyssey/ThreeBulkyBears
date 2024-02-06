@@ -74,14 +74,20 @@ public class LevelManager : MonoBehaviour
             lose = true;
         }
 
-        if (Input.GetKeyDown(KeyCode.Escape) && !paused)
+        //Temporarily replacing pause logic with return to level select
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
-            paused = true;
+            SceneManager.UnloadSceneAsync(gameManager.curLevelInfo.sceneName);
+            SceneManager.LoadScene("LevelSelection");
         }
-        else if (Input.GetKeyDown(KeyCode.Escape) && paused)
-        {
-            paused = false;
-        }
+        // if (Input.GetKeyDown(KeyCode.Escape) && !paused)
+        // {
+        //     paused = true;
+        // }
+        // else if (Input.GetKeyDown(KeyCode.Escape) && paused)
+        // {
+        //     paused = false;
+        // }
 
     }
 
