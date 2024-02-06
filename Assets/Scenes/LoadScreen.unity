@@ -133,7 +133,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 158120124125209041, guid: 9f4d2ef9a366ed34f83e5b36e058a780, type: 3}
       propertyPath: sceneToLoad
-      value: LevelSelection
+      value: MainMenu
       objectReference: {fileID: 0}
     - target: {fileID: 429465046820304888, guid: 9f4d2ef9a366ed34f83e5b36e058a780, type: 3}
       propertyPath: m_LocalPosition.x

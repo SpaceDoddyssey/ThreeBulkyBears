@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Level0
   m_EditorClassIdentifier: 
   levelID: 0
-  levelName: 
+  levelName: Tutorial
   sceneName: Level0
-  description: 
+  description: Learn how to play the game
   isUnlocked: 1
