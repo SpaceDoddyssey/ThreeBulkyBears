@@ -48,10 +48,10 @@ public class LevelSelectManager : MonoBehaviour
         {
             goToLevel(levels[curLevelIndex]);
         }
-        if (Input.GetKeyDown(KeyCode.Escape))
+        /*if (Input.GetKeyDown(KeyCode.Escape))
         {
             SceneManager.LoadScene("MainMenu");
-        }
+        }*/
     }
 
     public void selectLevel(int index)
