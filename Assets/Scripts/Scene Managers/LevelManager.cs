@@ -60,7 +60,8 @@ public class LevelManager : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.R))
         {
-            bearController.ResetBear();
+            //bearController.ResetBear();
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
             lose = false;
             win = false;
             gameOverText.SetActive(false);
