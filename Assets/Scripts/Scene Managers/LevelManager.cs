@@ -11,8 +11,8 @@ public class LevelManager : MonoBehaviour
     public BearController bearController;
     public Camera maincamera;
     public Scene levelSubscene;
-    private bool win = false;
-    private bool lose = false;
+    private bool won = false;
+    private bool lost = false;
     private bool paused = false;
     private GameObject gameOverText, victoryText;
 
@@ -48,12 +48,12 @@ public class LevelManager : MonoBehaviour
 
         Pause();
 
-        if (lose)
+        if (lost)
         {
             GameOver();
         }
 
-        if (win)
+        if (won)
         {
             Victory();
         }
@@ -62,8 +62,8 @@ public class LevelManager : MonoBehaviour
         {
             //bearController.ResetBear();
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-            lose = false;
-            win = false;
+            lost = false;
+            won = false;
             gameOverText.SetActive(false);
             victoryText.SetActive(false);
             Cursor.lockState = CursorLockMode.Locked;
@@ -72,7 +72,7 @@ public class LevelManager : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.P))
         {
-            lose = true;
+            lost = true;
         }
 
         //Temporarily replacing pause logic with return to level select
@@ -112,9 +112,10 @@ public class LevelManager : MonoBehaviour
     //game over logic
     public void GameOver()
     {
-        if (win) { return; }
+        if (won) { return; }
         gameOverText.SetActive(true);
 
+        lost = true;
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
 
@@ -129,8 +130,10 @@ public class LevelManager : MonoBehaviour
     //win logic
     public void Victory()
     {
+        if (lost) { return; }
         victoryText.SetActive(true);
 
+        won = true;
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
 

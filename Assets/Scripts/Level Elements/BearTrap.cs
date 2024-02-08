@@ -4,11 +4,13 @@ using UnityEngine;
 
 public class BearTrap : MonoBehaviour
 {
+    public Sprite closedSprite;
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        //TODO: change to closed sprite if triggered
         if (collision.gameObject.tag == "Player")
         {
+            GetComponent<SpriteRenderer>().sprite = closedSprite;
             GameObject.Find("LevelManager").GetComponent<LevelManager>().GameOver();
         }
     }
