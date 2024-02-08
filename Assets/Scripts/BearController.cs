@@ -63,9 +63,11 @@ public class BearController : MonoBehaviour
         jumpHeld = !onGround && Input.GetKey(KeyCode.Space);
 
         horizontalInput = Input.GetAxisRaw("Horizontal");
-        if (Input.GetKeyDown(KeyCode.C)) ChangeBear(baby);
-        if (Input.GetKeyDown(KeyCode.V)) ChangeBear(mama);
-        if (Input.GetKeyDown(KeyCode.B)) ChangeBear(papa);
+        // if (Input.GetKeyDown(KeyCode.C)) ChangeBear(baby);
+        // if (Input.GetKeyDown(KeyCode.V)) ChangeBear(mama);
+        // if (Input.GetKeyDown(KeyCode.B)) ChangeBear(papa);
+        if (Input.GetKeyDown(KeyCode.W)) ChangeBearUp();
+        if (Input.GetKeyDown(KeyCode.S)) ChangeBearDown();
     }
 
     public void ResetBear()
@@ -85,6 +87,30 @@ public class BearController : MonoBehaviour
         cc.radius = bearStats.circleRadius;
         rb.mass = bearStats.mass;
         rb.gravityScale = bearStats.gravityMult;
+    }
+
+    void ChangeBearUp()
+    {
+        if (bearStats == baby)
+        {
+            ChangeBear(mama);
+        }
+        else if (bearStats == mama)
+        {
+            ChangeBear(papa);
+        }
+    }
+
+    void ChangeBearDown()
+    {
+        if (bearStats == papa)
+        {
+            ChangeBear(mama);
+        }
+        else if (bearStats == mama)
+        {
+            ChangeBear(baby);
+        }
     }
 
     void FixedUpdate()
