@@ -36,7 +36,6 @@ public class LevelSelectManager : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.D))
         {
-            //Debug.Log("hello");
             int newLevel = curLevelIndex + 1;
             if (newLevel >= levels.Count || !levels[newLevel].isUnlocked)
             {
@@ -48,10 +47,10 @@ public class LevelSelectManager : MonoBehaviour
         {
             goToLevel(levels[curLevelIndex]);
         }
-        /*if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
             SceneManager.LoadScene("MainMenu");
-        }*/
+        }
     }
 
     public void selectLevel(int index)
