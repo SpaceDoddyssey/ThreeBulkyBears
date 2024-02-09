@@ -146,7 +146,7 @@ public class BearController : MonoBehaviour
     //check if the bear is touching the ground
     private void checkIfOnGround()
     {
-        onGround = Physics2D.CircleCast(transform.position, bearStats.circleRadius / radiusDivisor, new Vector2(0, -1), castDistance, platforms);
+        onGround = Physics2D.CircleCast(transform.position, bearStats.circleRadius / radiusDivisor - 0.05f, new Vector2(0, -1), castDistance, platforms);
     }
 
     void OnDrawGizmos()
@@ -154,7 +154,7 @@ public class BearController : MonoBehaviour
         if (visualizeCircleCast)
         {
             Gizmos.color = Color.red;
-            Gizmos.DrawWireSphere(transform.position - new Vector3(0, castDistance, 0), bearStats.circleRadius / radiusDivisor);
+            Gizmos.DrawWireSphere(transform.position - new Vector3(0, castDistance, 0), bearStats.circleRadius / radiusDivisor - 0.05f);
         }
     }
 

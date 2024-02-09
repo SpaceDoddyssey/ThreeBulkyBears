@@ -953,8 +953,8 @@ MonoBehaviour:
   platforms:
     serializedVersion: 2
     m_Bits: 64
-  castDistance: 0
-  groundDrag: 0
+  castDistance: 0.1
+  groundDrag: 1
   bearStats: {fileID: 11400000, guid: 90d079be474d3444a962abf2ba60f468, type: 2}
   onGround: 0
   controllable: 1
