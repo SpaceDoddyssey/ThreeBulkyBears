@@ -11,8 +11,8 @@ public class LevelManager : MonoBehaviour
     public BearController bearController;
     public Camera maincamera;
     public Scene levelSubscene;
-    private bool won = false;
-    private bool lost = false;
+    public bool won = false;
+    public bool lost = false;
     private bool paused = false;
     private GameObject gameOverText, victoryText;
 
