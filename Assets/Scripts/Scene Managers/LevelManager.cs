@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using TMPro; 
 
 public class LevelManager : MonoBehaviour
 {
@@ -15,6 +16,13 @@ public class LevelManager : MonoBehaviour
     public bool lost = false;
     private bool paused = false;
     private GameObject gameOverText, victoryText;
+
+    //timer components 
+    public TextMeshProUGUI timerText; 
+
+    //timer settings 
+    public float currentTime = 0; 
+    public bool countDown; 
 
     void Awake()
     {
@@ -45,6 +53,12 @@ public class LevelManager : MonoBehaviour
 
     void Update()
     {
+        //timer update 
+        if (!paused && (!won || !lost))
+        {
+            currentTime = countDown ? currentTime -= Time.deltaTime : currentTime += Time.deltaTime; 
+            //timerText.text = "Time: " + currentTime.ToString(); 
+        }
 
         Pause();
 
@@ -142,6 +156,26 @@ public class LevelManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.K))
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
+
+        //Time.stopTimer();
+        GameObject gameManagerObj = GameObject.Find("GameManager");
+        if (gameManagerObj == null) { return; }
+        gameManager = gameManagerObj.GetComponent<GameManager>();
+        if (gameManager == null) { return; }
+        if (gameManager.curLevelInfo != null)
+        {
+            Debug.Log("Best Time: " + gameManager.curLevelInfo.bestTime);
+            Debug.Log("Current Time: " + currentTime);
+            //if (gameManager.curLevelInfo.bestTime == 0)
+            
+            gameManager.curLevelInfo.bestTime = currentTime;
+                 
+            
+            if (currentTime <= gameManager.curLevelInfo.bestTime){
+                gameManager.curLevelInfo.bestTime = currentTime; 
+            }
+            //SceneManager.LoadScene(gameManager.curLevelInfo.sceneName, LoadSceneMode.Additive);
         }
     }
 }

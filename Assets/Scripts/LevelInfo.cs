@@ -7,6 +7,6 @@ public class LevelInfo : ScriptableObject
     public string levelName;
     public string sceneName;
     public string description;
-    private float bestTime;
+    public float bestTime;
     public bool isUnlocked;
 }
