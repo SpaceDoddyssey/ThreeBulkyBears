@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using TMPro; 
+using TMPro;
 
 public class LevelManager : MonoBehaviour
 {
@@ -18,11 +18,10 @@ public class LevelManager : MonoBehaviour
     private GameObject gameOverText, victoryText;
 
     //timer components 
-    public TextMeshProUGUI timerText; 
+    public TextMeshProUGUI timerText;
 
     //timer settings 
-    public float currentTime = 0; 
-    public bool countDown; 
+    public float currentTime = 0;
 
     void Awake()
     {
@@ -56,70 +55,41 @@ public class LevelManager : MonoBehaviour
         //timer update 
         if (!paused && (!won || !lost))
         {
-            currentTime = countDown ? currentTime -= Time.deltaTime : currentTime += Time.deltaTime; 
-            //timerText.text = "Time: " + currentTime.ToString(); 
-        }
-
-        Pause();
-
-        if (lost)
-        {
-            GameOver();
-        }
-
-        if (won)
-        {
-            Victory();
+            currentTime = currentTime += Time.deltaTime;
         }
 
         if (Input.GetKeyDown(KeyCode.R))
         {
-            //bearController.ResetBear();
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-            lost = false;
-            won = false;
-            gameOverText.SetActive(false);
-            victoryText.SetActive(false);
-            Cursor.lockState = CursorLockMode.Locked;
-            Cursor.visible = false;
         }
 
         if (Input.GetKeyDown(KeyCode.P))
         {
-            lost = true;
+            TogglePause();
         }
 
-        //Temporarily replacing pause logic with return to level select
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             SceneManager.UnloadSceneAsync(gameManager.curLevelInfo.sceneName);
             SceneManager.LoadScene("LevelSelection");
         }
-        // if (Input.GetKeyDown(KeyCode.Escape) && !paused)
-        // {
-        //     paused = true;
-        // }
-        // else if (Input.GetKeyDown(KeyCode.Escape) && paused)
-        // {
-        //     paused = false;
-        // }
-
     }
 
-    //check if game is paused and pause logic
-    public void Pause()
+    public void TogglePause()
     {
-        if (paused)
+        if (!paused)
         {
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
             Time.timeScale = 0;
+            paused = true;
         }
         else
         {
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
             Time.timeScale = 1;
+            paused = false;
         }
     }
 
@@ -153,29 +123,15 @@ public class LevelManager : MonoBehaviour
 
         bearController.controllable = false;
 
-        if (Input.GetKeyDown(KeyCode.K))
-        {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-        }
-
-        //Time.stopTimer();
-        GameObject gameManagerObj = GameObject.Find("GameManager");
-        if (gameManagerObj == null) { return; }
-        gameManager = gameManagerObj.GetComponent<GameManager>();
-        if (gameManager == null) { return; }
         if (gameManager.curLevelInfo != null)
         {
             Debug.Log("Best Time: " + gameManager.curLevelInfo.bestTime);
             Debug.Log("Current Time: " + currentTime);
-            //if (gameManager.curLevelInfo.bestTime == 0)
-            
-            gameManager.curLevelInfo.bestTime = currentTime;
-                 
-            
-            if (currentTime <= gameManager.curLevelInfo.bestTime){
-                gameManager.curLevelInfo.bestTime = currentTime; 
+
+            if (currentTime <= gameManager.curLevelInfo.bestTime)
+            {
+                gameManager.curLevelInfo.bestTime = currentTime;
             }
-            //SceneManager.LoadScene(gameManager.curLevelInfo.sceneName, LoadSceneMode.Additive);
         }
     }
 }
