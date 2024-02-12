@@ -5,8 +5,6 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     public LevelInfo curLevelInfo = null;
-    [SerializeField]
-    private string sceneToLoad;
 
     void Awake()
     {
