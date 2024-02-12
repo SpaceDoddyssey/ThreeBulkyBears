@@ -15,9 +15,9 @@ MonoBehaviour:
   bearName: Baby
   fallLongMult: 1
   fallShortMult: 2
-  jumpvel: 8.4
+  jumpvel: 5.3
   speed: 4.5
-  mass: 2
+  mass: 1.18
   gravityMult: 0.8
   circleRadius: 2.25
   art: {fileID: 21300000, guid: 3635a77a337fe584596254329ebcdec0, type: 3}
