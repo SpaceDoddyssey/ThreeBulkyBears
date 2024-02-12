@@ -4,9 +4,12 @@ using UnityEngine;
 
 public class BearController : MonoBehaviour
 {
+    //Components
     private Rigidbody2D rb;
-    private SpriteRenderer spriteRenderer;
     private CircleCollider2D cc;
+    private SpriteRenderer spriteRenderer;
+    private AudioSource audioSource;
+
     public LayerMask platforms;
     private Vector3 initialPos;
     public float castDistance;
@@ -19,7 +22,7 @@ public class BearController : MonoBehaviour
     [SerializeField]
     private bool onGround = false;
     //bigger jump when holding jump button for longer
-    private bool jump = false, jumpHeld = false;
+    private bool jumping = false, jumpHeld = false;
     //Disabled when in Game Over state
     public bool controllable = true;
 
@@ -27,10 +30,11 @@ public class BearController : MonoBehaviour
 
     void Start()
     {
-        initialPos = GameObject.Find("BearSpawnLoc").transform.position;
         rb = GetComponent<Rigidbody2D>();
         cc = GetComponent<CircleCollider2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        audioSource = GetComponent<AudioSource>();
+        initialPos = GameObject.Find("BearSpawnLoc").transform.position;
 
         baby = Resources.Load("BearStats/BabyBear") as BearStats;
         mama = Resources.Load("BearStats/MamaBear") as BearStats;
@@ -56,9 +60,13 @@ public class BearController : MonoBehaviour
 
     private void HandleControls()
     {
-        if (!jump)
+        if (jumping && onGround && rb.velocity.y <= 0)
         {
-            jump = onGround && Input.GetKeyDown(KeyCode.Space);
+            jumping = false;
+        }
+        if (!jumping && onGround && Input.GetKeyDown(KeyCode.Space))
+        {
+            Jump();
         }
         jumpHeld = !onGround && Input.GetKey(KeyCode.Space);
 
@@ -113,14 +121,15 @@ public class BearController : MonoBehaviour
         }
     }
 
+    void Jump()
+    {
+        rb.velocity += Vector2.up * bearStats.jumpvel;
+        jumping = true;
+        audioSource.PlayOneShot(bearStats.jumpSound);
+    }
+
     void FixedUpdate()
     {
-        //universal jump logic
-        if (jump)
-        {
-            rb.velocity += Vector2.up * bearStats.jumpvel;
-            jump = false;
-        }
         if (rb.velocity.y > 0)
         {
             //Long jump or short jump

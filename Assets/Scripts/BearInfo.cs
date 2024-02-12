@@ -21,6 +21,7 @@ public class BearStats : ScriptableObject
     public Sprite art;
     [Tooltip("The sprite will always fit to the size of the circle collider, this is for more minute adjustments")]
     public float spriteSizeMultiplier = 1f;
+    public AudioClip jumpSound;
 
     [Space]
     [Header("Abilities")]
