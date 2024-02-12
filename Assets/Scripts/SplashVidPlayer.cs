@@ -17,7 +17,10 @@ public class SplashVidPlayer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        if (Input.anyKey && !Input.GetMouseButton(0))
+        {
+            LoadMenu();
+        }
     }
 
     public void PlayVideo()
@@ -29,6 +32,21 @@ public class SplashVidPlayer : MonoBehaviour
             string videoPath = System.IO.Path.Combine(Application.streamingAssetsPath, videoFileName);
             videoPlayer.url = videoPath;
             videoPlayer.Play();
+            videoPlayer.loopPointReached += VideoOver;
+        }
+    }
+
+    public void VideoOver(VideoPlayer vp)
+    {
+        LoadMenu();
+    }
+
+    private void LoadMenu()
+    {
+        GameManager gameManager = FindObjectOfType<GameManager>();
+        if (gameManager)
+        {
+            gameManager.LoadScene("MainMenu");
         }
     }
 }

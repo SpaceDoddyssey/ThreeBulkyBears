@@ -20,11 +20,9 @@ public class GameManager : MonoBehaviour
             DontDestroyOnLoad(gameObject);
         }
     }
-    public void Start()
+
+    public void LoadScene(string sceneName)
     {
-        if (sceneToLoad != "")
-        {
-            SceneManager.LoadScene(sceneToLoad);
-        }
+        SceneManager.LoadScene(sceneName);
     }
 }
