@@ -1,18 +1,19 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
 
 public class MainMenuManager : MonoBehaviour
 {
-    public List<GameObject> buttons;
-    public int curButtonIndex = 0;
+    [SerializeField] GameObject mainMenuScreen, settingsScreen, creditsScreen;
+    [SerializeField] List<GameObject> buttons;
+    private int curButtonIndex = 0;
+    private GameManager gameManager;
 
     // Start is called before the first frame update
     void Start()
     {
         selectButton(0);
+        gameManager = FindObjectOfType<GameManager>();
     }
 
     // Update is called once per frame
@@ -34,7 +35,6 @@ public class MainMenuManager : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.S))
         {
-            //Debug.Log("hello");
             int newButton = curButtonIndex + 1;
             if (newButton >= buttons.Count)
             {
@@ -45,6 +45,11 @@ public class MainMenuManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             buttons[curButtonIndex].GetComponent<Button>().onClick.Invoke();
+        }
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            ReturnToMain();
         }
     }
 
@@ -57,6 +62,25 @@ public class MainMenuManager : MonoBehaviour
 
     public void NewGame()
     {
+        gameManager.LoadScene("LevelSelection");
+    }
 
+    public void Credits()
+    {
+        mainMenuScreen.SetActive(false);
+        creditsScreen.SetActive(true);
+    }
+
+    public void Settings()
+    {
+        mainMenuScreen.SetActive(false);
+        settingsScreen.SetActive(true);
+    }
+
+    public void ReturnToMain()
+    {
+        mainMenuScreen.SetActive(true);
+        creditsScreen.SetActive(false);
+        settingsScreen.SetActive(false);
     }
 }

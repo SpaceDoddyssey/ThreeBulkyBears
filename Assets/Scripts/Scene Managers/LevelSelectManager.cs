@@ -66,4 +66,9 @@ public class LevelSelectManager : MonoBehaviour
         gameManager.curLevelInfo = level;
         SceneManager.LoadScene("MainLevelScene");
     }
+
+    public void ReturnToMain()
+    {
+        SceneManager.LoadScene("MainMenu");
+    }
 }
