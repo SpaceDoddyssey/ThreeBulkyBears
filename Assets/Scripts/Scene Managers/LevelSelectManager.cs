@@ -70,7 +70,7 @@ public class LevelSelectManager : MonoBehaviour
         LevelInfo level = levels[curLevelIndex];
         
         levelNameText.text = "Name: " + level.levelName; 
-        bestTimeText.text = "Best Time: ";
+        bestTimeText.text = "Best Time: " + level.bestTime.ToString();
         goalTimeText.text = "Goal Time: " + level.goalTime.ToString();   
         // levelname = levelName; 
         // time = bestTime()
