@@ -15,7 +15,7 @@ public class LevelManager : MonoBehaviour
     public bool won = false;
     public bool lost = false;
     public bool paused = false;
-    private GameObject gameOverText, victoryText;
+    private GameObject gameOverText, victoryText, pauseMenu;
 
     //timer components 
     public TextMeshProUGUI timerText;
@@ -25,10 +25,8 @@ public class LevelManager : MonoBehaviour
 
     void Awake()
     {
-        GameObject gameManagerObj = GameObject.Find("GameManager");
-        if (gameManagerObj == null) { return; }
-        gameManager = gameManagerObj.GetComponent<GameManager>();
-        if (gameManager == null) { return; }
+        gameManager = FindObjectOfType<GameManager>();
+        if (gameManager == null) { Debug.Log("Game Manager not found"); return; }
         if (gameManager.curLevelInfo != null)
         {
             Debug.Log("Loading level: " + gameManager.curLevelInfo.sceneName);
@@ -45,6 +43,8 @@ public class LevelManager : MonoBehaviour
         gameOverText.SetActive(false);
         victoryText = GameObject.Find("VictoryText");
         victoryText.SetActive(false);
+        pauseMenu = GameObject.Find("Pause Menu");
+        pauseMenu.SetActive(false);
 
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
@@ -70,8 +70,7 @@ public class LevelManager : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            SceneManager.UnloadSceneAsync(gameManager.curLevelInfo.sceneName);
-            SceneManager.LoadScene("LevelSelection");
+            TogglePause();
         }
     }
 
@@ -83,7 +82,7 @@ public class LevelManager : MonoBehaviour
             Cursor.visible = true;
             Time.timeScale = 0;
             paused = true;
-            GameObject.Find("Pause Menu").SetActive(true);
+            pauseMenu.SetActive(true);
         }
         else
         {
@@ -91,7 +90,7 @@ public class LevelManager : MonoBehaviour
             Cursor.visible = false;
             Time.timeScale = 1;
             paused = false;
-            GameObject.Find("Pause Menu").SetActive(false);
+            pauseMenu.SetActive(false);
         }
     }
 
