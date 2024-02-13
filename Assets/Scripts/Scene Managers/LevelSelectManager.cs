@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class LevelSelectManager : MonoBehaviour
 {
@@ -9,12 +10,18 @@ public class LevelSelectManager : MonoBehaviour
     public List<LevelInfo> levels;
     public List<GameObject> levelIcons;
     private int curLevelIndex = 0;
+    public TextMeshProUGUI levelNameText, bestTimeText, goalTimeText; 
 
     //Start is called before the first frame update
     void Start()
     {
         gameManager = GameObject.Find("GameManager")?.GetComponent<GameManager>();
         selectLevel(0);
+        //KeyDownEvent += KeyCodeDebug;
+    }
+
+    void KeyCodeDebug(){
+        
     }
 
     // Update is called once per frame
@@ -47,7 +54,7 @@ public class LevelSelectManager : MonoBehaviour
         {
             goToLevel(levels[curLevelIndex]);
         }
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.J))
         {
             SceneManager.LoadScene("MainMenu");
         }
@@ -59,6 +66,17 @@ public class LevelSelectManager : MonoBehaviour
         levelIcons[curLevelIndex].transform.localScale = new Vector2(1, 1);
         curLevelIndex = index;
         levelIcons[curLevelIndex].transform.localScale = new Vector2(1.5f, 1.5f);
+
+        LevelInfo level = levels[curLevelIndex];
+        
+        levelNameText.text = "Name: " + level.levelName; 
+        bestTimeText.text = "Best Time: ";
+        goalTimeText.text = "Goal Time: " + level.goalTime.ToString();   
+        // levelname = levelName; 
+        // time = bestTime()
+        // best_time = time.ToString(); 
+
+
     }
 
     public void goToLevel(LevelInfo level)

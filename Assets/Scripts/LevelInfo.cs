@@ -9,6 +9,7 @@ public class LevelInfo : ScriptableObject
     public string sceneName;
     public string description;
     private double _bestTime = Double.PositiveInfinity;
+    public float goalTime;
     public bool isUnlocked;
 
     public double bestTime
