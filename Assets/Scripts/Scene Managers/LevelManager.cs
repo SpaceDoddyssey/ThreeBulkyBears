@@ -14,7 +14,7 @@ public class LevelManager : MonoBehaviour
     public Scene levelSubscene;
     public bool won = false;
     public bool lost = false;
-    private bool paused = false;
+    public bool paused = false;
     private GameObject gameOverText, victoryText;
 
     //timer components 
@@ -83,6 +83,7 @@ public class LevelManager : MonoBehaviour
             Cursor.visible = true;
             Time.timeScale = 0;
             paused = true;
+            GameObject.Find("Pause Menu").SetActive(true);
         }
         else
         {
@@ -90,6 +91,7 @@ public class LevelManager : MonoBehaviour
             Cursor.visible = false;
             Time.timeScale = 1;
             paused = false;
+            GameObject.Find("Pause Menu").SetActive(false);
         }
     }
 

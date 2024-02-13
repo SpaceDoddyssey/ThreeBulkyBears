@@ -21,8 +21,10 @@ public class MainMenuManager : MonoBehaviour
         CheckInput();
     }
 
-    void CheckInput(){
-        if(Input.GetKeyDown(KeyCode.W)){
+    void CheckInput()
+    {
+        if (Input.GetKeyDown(KeyCode.W))
+        {
             int newButton = curButtonIndex - 1;
             if (newButton < 0)
             {
@@ -42,12 +44,7 @@ public class MainMenuManager : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            //Debug.Log(curButtonIndex);
-            if (curButtonIndex == 1) 
-            {
-                SceneManager.LoadScene("LevelSelection");
-            }
-            //goToScene(buttons[curButtonIndex]);
+            buttons[curButtonIndex].GetComponent<Button>().onClick.Invoke();
         }
     }
 
@@ -58,12 +55,8 @@ public class MainMenuManager : MonoBehaviour
         buttons[curButtonIndex].transform.localScale = new Vector2(1.3f, 1.3f);
     }
 
-    // public void NewGame()
+    public void NewGame()
+    {
 
-    /*public void goToScene(string scene) {
-        if (curButtonIndex == 1) 
-        {
-            SceneManager.LoadScene(scene);
-        }
-    }*/
+    }
 }
