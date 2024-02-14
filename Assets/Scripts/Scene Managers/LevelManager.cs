@@ -10,7 +10,6 @@ public class LevelManager : MonoBehaviour
 
     public GameObject playerObj;
     public BearController bearController;
-    public Camera maincamera;
     public Scene levelSubscene;
     public bool won = false;
     public bool lost = false;

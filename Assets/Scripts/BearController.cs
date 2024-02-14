@@ -152,7 +152,6 @@ public class BearController : MonoBehaviour
     }
 
     float radiusDivisor = 5f; //I don't know why this is necessary to be honest, but it's related to the spriteRenderer
-    //check if the bear is touching the ground
     private void checkIfOnGround()
     {
         onGround = Physics2D.CircleCast(transform.position, bearStats.circleRadius / radiusDivisor - 0.05f, new Vector2(0, -1), castDistance, platforms);

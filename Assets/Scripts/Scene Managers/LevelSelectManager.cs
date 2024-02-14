@@ -16,7 +16,7 @@ public class LevelSelectManager : MonoBehaviour
     void Start()
     {
         gameManager = GameObject.Find("GameManager")?.GetComponent<GameManager>();
-        selectLevel(0);
+        SelectLevel(0);
     }
 
     // Update is called once per frame
@@ -27,35 +27,23 @@ public class LevelSelectManager : MonoBehaviour
 
     void CheckInput()
     {
-        if (Input.GetKeyDown(KeyCode.A))
-        {
-            int newLevel = curLevelIndex - 1;
-            if (newLevel < 0)
-            {
-                return;
-            }
-            selectLevel(newLevel);
-        }
-        if (Input.GetKeyDown(KeyCode.D))
-        {
-            int newLevel = curLevelIndex + 1;
-            if (newLevel >= levels.Count || !levels[newLevel].isUnlocked)
-            {
-                return;
-            }
-            selectLevel(newLevel);
-        }
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            goToLevel(levels[curLevelIndex]);
-        }
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            SceneManager.LoadScene("MainMenu");
-        }
+        if (Input.GetKeyDown(KeyCode.A)) ChangeSelectedLevel(-1);
+        if (Input.GetKeyDown(KeyCode.D)) ChangeSelectedLevel(1);
+        if (Input.GetKeyDown(KeyCode.Space)) GoToLevel(levels[curLevelIndex]);
+        if (Input.GetKeyDown(KeyCode.Escape)) SceneManager.LoadScene("MainMenu");
     }
 
-    public void selectLevel(int index)
+    void ChangeSelectedLevel(int direction)
+    {
+        int newLevel = curLevelIndex + direction;
+        if (newLevel < 0 || newLevel >= levels.Count || !levels[newLevel].isUnlocked)
+        {
+            return;
+        }
+        SelectLevel(newLevel);
+    }
+
+    public void SelectLevel(int index)
     {
 
         levelIcons[curLevelIndex].transform.localScale = new Vector2(1, 1);
@@ -79,7 +67,7 @@ public class LevelSelectManager : MonoBehaviour
         goalTimeText.text = "Goal Time: " + gt.ToString("m':'ss'.'fff");
     }
 
-    public void goToLevel(LevelInfo level)
+    public void GoToLevel(LevelInfo level)
     {
         gameManager.curLevelInfo = level;
         SceneManager.LoadScene("MainLevelScene");

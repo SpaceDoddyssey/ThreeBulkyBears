@@ -12,7 +12,7 @@ public class MainMenuManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        selectButton(0);
+        SelectButton(0);
         gameManager = FindObjectOfType<GameManager>();
     }
 
@@ -24,36 +24,26 @@ public class MainMenuManager : MonoBehaviour
 
     void CheckInput()
     {
-        if (Input.GetKeyDown(KeyCode.W))
-        {
-            int newButton = curButtonIndex - 1;
-            if (newButton < 0)
-            {
-                return;
-            }
-            selectButton(newButton);
-        }
-        if (Input.GetKeyDown(KeyCode.S))
-        {
-            int newButton = curButtonIndex + 1;
-            if (newButton >= buttons.Count)
-            {
-                return;
-            }
-            selectButton(newButton);
-        }
+        if (Input.GetKeyDown(KeyCode.W)) ChangeSelectedButton(-1);
+        if (Input.GetKeyDown(KeyCode.S)) ChangeSelectedButton(1);
+        if (Input.GetKeyDown(KeyCode.Escape)) ReturnToMain();
         if (Input.GetKeyDown(KeyCode.Space))
         {
             buttons[curButtonIndex].GetComponent<Button>().onClick.Invoke();
         }
-
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            ReturnToMain();
-        }
     }
 
-    public void selectButton(int index)
+    void ChangeSelectedButton(int direction)
+    {
+        int newButton = curButtonIndex + direction;
+        if (newButton < 0 || newButton >= buttons.Count)
+        {
+            return;
+        }
+        SelectButton(newButton);
+    }
+
+    public void SelectButton(int index)
     {
         buttons[curButtonIndex].transform.localScale = new Vector2(1, 1);
         curButtonIndex = index;
