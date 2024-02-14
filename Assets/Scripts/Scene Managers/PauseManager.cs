@@ -61,11 +61,13 @@ public class PauseManager : MonoBehaviour
 
     public void ReturnToMenu()
     {
+        Time.timeScale = 1;
         FindObjectOfType<GameManager>().LoadScene("MainMenu");
     }
 
     public void ReturnToLevelSelect()
     {
+        Time.timeScale = 1;
         FindObjectOfType<GameManager>().LoadScene("LevelSelection");
     }
 
