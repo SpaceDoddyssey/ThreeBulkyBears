@@ -17,10 +17,8 @@ public class LevelManager : MonoBehaviour
     public bool paused = false;
     private GameObject gameOverText, victoryText, pauseMenu;
 
-    //timer components 
+    //timer 
     public TextMeshProUGUI timerText;
-
-    //timer settings 
     public float currentTime = 0;
 
     void Awake()
@@ -94,7 +92,6 @@ public class LevelManager : MonoBehaviour
         }
     }
 
-    //game over logic
     public void GameOver()
     {
         if (won) { return; }
@@ -112,7 +109,6 @@ public class LevelManager : MonoBehaviour
         }
     }
 
-    //win logic
     public void Victory()
     {
         if (lost) { return; }

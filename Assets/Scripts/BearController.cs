@@ -9,6 +9,7 @@ public class BearController : MonoBehaviour
     private CircleCollider2D cc;
     private SpriteRenderer spriteRenderer;
     private AudioSource audioSource;
+    private LevelManager levelMan;
 
     public LayerMask platforms;
     private Vector3 initialPos;
@@ -34,6 +35,7 @@ public class BearController : MonoBehaviour
         cc = GetComponent<CircleCollider2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         audioSource = GetComponent<AudioSource>();
+        levelMan = FindObjectOfType<LevelManager>();
         initialPos = GameObject.Find("BearSpawnLoc").transform.position;
 
         baby = Resources.Load("BearStats/BabyBear") as BearStats;
@@ -60,6 +62,7 @@ public class BearController : MonoBehaviour
 
     private void HandleControls()
     {
+        if (levelMan.paused) { return; }
         if (jumping && onGround && rb.velocity.y <= 0)
         {
             jumping = false;
@@ -71,9 +74,6 @@ public class BearController : MonoBehaviour
         jumpHeld = !onGround && Input.GetKey(KeyCode.Space);
 
         horizontalInput = Input.GetAxisRaw("Horizontal");
-        // if (Input.GetKeyDown(KeyCode.C)) ChangeBear(baby);
-        // if (Input.GetKeyDown(KeyCode.V)) ChangeBear(mama);
-        // if (Input.GetKeyDown(KeyCode.B)) ChangeBear(papa);
         if (Input.GetKeyDown(KeyCode.W)) ChangeBearUp();
         if (Input.GetKeyDown(KeyCode.S)) ChangeBearDown();
     }
