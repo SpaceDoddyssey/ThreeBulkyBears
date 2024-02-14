@@ -31,6 +31,12 @@ public class LevelSelectManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.D)) ChangeSelectedLevel(1);
         if (Input.GetKeyDown(KeyCode.Space)) GoToLevel(levels[curLevelIndex]);
         if (Input.GetKeyDown(KeyCode.Escape)) SceneManager.LoadScene("MainMenu");
+        if (Input.GetKeyDown(KeyCode.LeftBracket))
+        {
+            //For testing, DELETE for final build ///////////////////////////////////////////////////////////
+            PlayerPrefs.DeleteAll();
+            SelectLevel(curLevelIndex);
+        }
     }
 
     void ChangeSelectedLevel(int direction)
@@ -45,24 +51,24 @@ public class LevelSelectManager : MonoBehaviour
 
     public void SelectLevel(int index)
     {
-
         levelIcons[curLevelIndex].transform.localScale = new Vector2(1, 1);
         curLevelIndex = index;
         levelIcons[curLevelIndex].transform.localScale = new Vector2(1.5f, 1.5f);
 
         LevelInfo level = levels[curLevelIndex];
-
         levelNameText.text = level.levelName;
 
-        if (level.bestTime == double.PositiveInfinity)
+        float bestTime = PlayerPrefs.GetFloat(level.sceneName + "BestTime", float.PositiveInfinity);
+        if (bestTime == float.PositiveInfinity)
         {
             bestTimeText.text = "Best Time: None so far!";
         }
         else
         {
-            TimeSpan bt = TimeSpan.FromSeconds(level.bestTime);
+            TimeSpan bt = TimeSpan.FromSeconds(bestTime);
             bestTimeText.text = "Best Time: " + bt.ToString("m':'ss'.'fff");
         }
+
         TimeSpan gt = TimeSpan.FromSeconds(level.goalTime);
         goalTimeText.text = "Goal Time: " + gt.ToString("m':'ss'.'fff");
     }

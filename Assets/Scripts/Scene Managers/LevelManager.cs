@@ -121,13 +121,13 @@ public class LevelManager : MonoBehaviour
 
         if (gameManager.curLevelInfo != null)
         {
-            // float bestTime = gameManager.curLevelInfo.levelName + "BestTime"
-            Debug.Log("Best Time: " + gameManager.curLevelInfo.bestTime);
+            float bestTime = PlayerPrefs.GetFloat(gameManager.curLevelInfo.sceneName + "BestTime", float.PositiveInfinity);
+            Debug.Log("Best Time: " + bestTime);
             Debug.Log("Current Time: " + currentTime);
 
-            if (currentTime <= gameManager.curLevelInfo.bestTime)
+            if (currentTime <= bestTime)
             {
-                gameManager.curLevelInfo.bestTime = currentTime;
+                PlayerPrefs.SetFloat(gameManager.curLevelInfo.sceneName + "BestTime", currentTime);
             }
         }
     }

@@ -16,4 +16,5 @@ MonoBehaviour:
   levelName: Level 1
   sceneName: Level1
   description: 
+  goalTime: 25
   isUnlocked: 1
