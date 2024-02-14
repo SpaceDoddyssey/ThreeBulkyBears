@@ -1,4 +1,4 @@
-using System.Collections;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -10,18 +10,13 @@ public class LevelSelectManager : MonoBehaviour
     public List<LevelInfo> levels;
     public List<GameObject> levelIcons;
     private int curLevelIndex = 0;
-    public TextMeshProUGUI levelNameText, bestTimeText, goalTimeText; 
+    public TextMeshProUGUI levelNameText, bestTimeText, goalTimeText;
 
     //Start is called before the first frame update
     void Start()
     {
         gameManager = GameObject.Find("GameManager")?.GetComponent<GameManager>();
         selectLevel(0);
-        //KeyDownEvent += KeyCodeDebug;
-    }
-
-    void KeyCodeDebug(){
-        
     }
 
     // Update is called once per frame
@@ -54,7 +49,7 @@ public class LevelSelectManager : MonoBehaviour
         {
             goToLevel(levels[curLevelIndex]);
         }
-        if (Input.GetKeyDown(KeyCode.J))
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
             SceneManager.LoadScene("MainMenu");
         }
@@ -68,15 +63,20 @@ public class LevelSelectManager : MonoBehaviour
         levelIcons[curLevelIndex].transform.localScale = new Vector2(1.5f, 1.5f);
 
         LevelInfo level = levels[curLevelIndex];
-        
-        levelNameText.text = "Name: " + level.levelName; 
-        bestTimeText.text = "Best Time: " + level.bestTime.ToString();
-        goalTimeText.text = "Goal Time: " + level.goalTime.ToString();   
-        // levelname = levelName; 
-        // time = bestTime()
-        // best_time = time.ToString(); 
 
+        levelNameText.text = level.levelName;
 
+        if (level.bestTime == double.PositiveInfinity)
+        {
+            bestTimeText.text = "Best Time: None so far!";
+        }
+        else
+        {
+            TimeSpan bt = TimeSpan.FromSeconds(level.bestTime);
+            bestTimeText.text = "Best Time: " + bt.ToString("m':'ss'.'fff");
+        }
+        TimeSpan gt = TimeSpan.FromSeconds(level.goalTime);
+        goalTimeText.text = "Goal Time: " + gt.ToString("m':'ss'.'fff");
     }
 
     public void goToLevel(LevelInfo level)

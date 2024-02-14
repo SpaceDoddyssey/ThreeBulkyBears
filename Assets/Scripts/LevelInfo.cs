@@ -1,5 +1,4 @@
 using UnityEngine;
-using System;
 
 [CreateAssetMenu(fileName = "LevelInfo", menuName = "Level")]
 public class LevelInfo : ScriptableObject
@@ -8,7 +7,7 @@ public class LevelInfo : ScriptableObject
     public string levelName;
     public string sceneName;
     public string description;
-    private double _bestTime = Double.PositiveInfinity;
+    private double _bestTime = double.PositiveInfinity;
     public float goalTime;
     public bool isUnlocked;
 
