@@ -99,11 +99,11 @@ public class BearController : MonoBehaviour
 
     void ChangeBearUp()
     {
-        if (bearStats == baby)
+        if (bearStats == baby && !Physics2D.CircleCast(new Vector2(transform.position.x, transform.position.y + (mama.circleRadius - baby.circleRadius)), mama.circleRadius / radiusDivisor - 0.05f, new Vector2(0, 1), castDistance, platforms))
         {
             ChangeBear(mama);
         }
-        else if (bearStats == mama)
+        else if (bearStats == mama && !Physics2D.CircleCast(new Vector2(transform.position.x, transform.position.y + (papa.circleRadius - baby.circleRadius)), papa.circleRadius / radiusDivisor - 0.05f, new Vector2(0, 1), castDistance, platforms))
         {
             ChangeBear(papa);
         }
