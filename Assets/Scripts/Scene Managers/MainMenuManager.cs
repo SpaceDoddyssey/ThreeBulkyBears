@@ -8,6 +8,7 @@ public class MainMenuManager : MonoBehaviour
     [SerializeField] List<GameObject> buttons;
     private int curButtonIndex = 0;
     private GameManager gameManager;
+    private bool onMainScreen = true;
 
     // Start is called before the first frame update
     void Start()
@@ -35,6 +36,7 @@ public class MainMenuManager : MonoBehaviour
 
     void ChangeSelectedButton(int direction)
     {
+        if (!onMainScreen) { return; } //Don't change buttons while on settings or credits screens (settings will have buttons but not yet implemented)
         int newButton = curButtonIndex + direction;
         if (newButton < 0 || newButton >= buttons.Count)
         {
@@ -59,12 +61,14 @@ public class MainMenuManager : MonoBehaviour
     {
         mainMenuScreen.SetActive(false);
         creditsScreen.SetActive(true);
+        onMainScreen = false;
     }
 
     public void Settings()
     {
         mainMenuScreen.SetActive(false);
         settingsScreen.SetActive(true);
+        onMainScreen = false;
     }
 
     public void ReturnToMain()
@@ -72,5 +76,6 @@ public class MainMenuManager : MonoBehaviour
         mainMenuScreen.SetActive(true);
         creditsScreen.SetActive(false);
         settingsScreen.SetActive(false);
+        onMainScreen = true;
     }
 }
