@@ -99,11 +99,11 @@ public class BearController : MonoBehaviour
 
     void ChangeBearUp()
     {
-        if (bearStats == baby)
+        if (bearStats == baby && CheckRoomForBear(mama))
         {
             ChangeBear(mama);
         }
-        else if (bearStats == mama)
+        else if (bearStats == mama && CheckRoomForBear(papa))
         {
             ChangeBear(papa);
         }
@@ -151,10 +151,9 @@ public class BearController : MonoBehaviour
         }
     }
 
-    float radiusDivisor = 5f; //I don't know why this is necessary to be honest, but it's related to the spriteRenderer
     private void checkIfOnGround()
     {
-        onGround = Physics2D.CircleCast(transform.position, bearStats.circleRadius / radiusDivisor - 0.05f, new Vector2(0, -1), castDistance, platforms);
+        onGround = Physics2D.CircleCast(transform.position, bearStats.circleRadius - 0.05f, new Vector2(0, -1), castDistance, platforms);
     }
 
     void OnDrawGizmos()
@@ -162,7 +161,7 @@ public class BearController : MonoBehaviour
         if (visualizeCircleCast)
         {
             Gizmos.color = Color.red;
-            Gizmos.DrawWireSphere(transform.position - new Vector3(0, castDistance, 0), bearStats.circleRadius / radiusDivisor - 0.05f);
+            Gizmos.DrawWireSphere(transform.position - new Vector3(0, castDistance, 0), bearStats.circleRadius - 0.05f);
         }
     }
 
@@ -175,5 +174,41 @@ public class BearController : MonoBehaviour
             Vector2 cappedVelocity = xVelocity.normalized * bearStats.speed;
             rb.velocity = new(cappedVelocity.x, rb.velocity.y);
         }
+    }
+
+    bool CheckRoomForBear(BearStats newBear)
+    {
+        float newDiameter = newBear.circleRadius * 2;
+        float verticalRoom, horizontalRoom;
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.up, newDiameter, platforms);
+        if (hit.collider == null)
+            return true;
+        else
+            verticalRoom = hit.distance;
+
+        hit = Physics2D.Raycast(transform.position, Vector2.down, newDiameter, platforms);
+        if (hit.collider == null)
+            return true;
+        else
+            verticalRoom += hit.distance;
+
+        if (verticalRoom < newDiameter)
+            return false;
+
+        hit = Physics2D.Raycast(transform.position, Vector2.right, newDiameter, platforms);
+        if (hit.collider == null)
+            return true;
+        else
+            horizontalRoom = hit.distance;
+
+        hit = Physics2D.Raycast(transform.position, Vector2.left, newDiameter, platforms);
+        if (hit.collider == null)
+            return true;
+        else
+            horizontalRoom += hit.distance;
+
+        if (horizontalRoom < newDiameter)
+            return false;
+        return true;
     }
 }

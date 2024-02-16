@@ -19,7 +19,7 @@ MonoBehaviour:
   speed: 4.5
   mass: 1.18
   gravityMult: 0.8
-  circleRadius: 2.25
+  circleRadius: 0.44
   art: {fileID: 21300000, guid: 3635a77a337fe584596254329ebcdec0, type: 3}
   spriteSizeMultiplier: 1.52
   jumpSound: {fileID: 8300000, guid: 745bccc9270b78347b37667de2f0ec12, type: 3}
