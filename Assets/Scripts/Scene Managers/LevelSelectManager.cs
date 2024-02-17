@@ -70,7 +70,7 @@ public class LevelSelectManager : MonoBehaviour
         }
 
         TimeSpan gt = TimeSpan.FromSeconds(level.goalTime);
-        goalTimeText.text = "Goal Time: " + gt.ToString("m':'ss'.'fff");
+        goalTimeText.text = "Gold Time: " + gt.ToString("m':'ss'.'fff");
     }
 
     public void GoToLevel(LevelInfo level)
