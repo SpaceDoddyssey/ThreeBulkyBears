@@ -36,7 +36,9 @@ public class BearController : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         audioSource = GetComponent<AudioSource>();
         levelMan = FindObjectOfType<LevelManager>();
-        initialPos = GameObject.Find("BearSpawnLoc").transform.position;
+        GameObject bearSpawnLoc = GameObject.Find("BearSpawnLoc");
+        bearSpawnLoc.GetComponent<SpriteRenderer>().enabled = false;
+        initialPos = bearSpawnLoc.transform.position;
 
         baby = Resources.Load("BearStats/BabyBear") as BearStats;
         mama = Resources.Load("BearStats/MamaBear") as BearStats;
