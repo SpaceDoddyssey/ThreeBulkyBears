@@ -2451,6 +2451,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Flag
       objectReference: {fileID: 0}
+    - target: {fileID: 7235140657780914801, guid: 22c97eff7b388764bad953189072ad2e, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8290829006695418357, guid: 22c97eff7b388764bad953189072ad2e, type: 3}
       propertyPath: m_IsTrigger
       value: 1
