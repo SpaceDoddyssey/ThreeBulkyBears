@@ -15,7 +15,7 @@ public class CameraController : MonoBehaviour
         bear = GameObject.Find("Bear").transform;
         levelManager = GameObject.Find("LevelManager").GetComponent<LevelManager>();
         offset = new Vector3(0f, 0f, -10f);
-        minYVal = GameObject.Find("FallingDeathZone").transform.position.y + mainCamera.orthographicSize + 1;
+        minYVal = GameObject.Find("FallingDeathZoneLoc").transform.position.y + mainCamera.orthographicSize + 1;
     }
 
     void Update()
