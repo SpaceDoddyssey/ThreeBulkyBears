@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levelID: 2
   levelName: Level 2
-  sceneName: Level0
+  sceneName: Level2
   description: 
+  goalTime: 0
   isUnlocked: 1
