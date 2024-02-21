@@ -11,6 +11,7 @@ public class BearTrap : MonoBehaviour
         if (collision.gameObject.tag == "Player")
         {
             GetComponent<SpriteRenderer>().sprite = closedSprite;
+            GetComponent<AudioSource>().Play();
             GameObject.Find("LevelManager").GetComponent<LevelManager>().GameOver();
         }
     }
