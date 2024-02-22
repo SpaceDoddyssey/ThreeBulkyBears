@@ -19,6 +19,8 @@ public class BearController : MonoBehaviour
     [SerializeField]
     public BearStats bearStats;
     private BearStats baby, mama, papa;
+    private KeyCode lastKeyPress;
+    private KeyCode nextLastKeyPress;
 
     [SerializeField]
     private bool onGround = false;
@@ -26,6 +28,10 @@ public class BearController : MonoBehaviour
     private bool jumping = false, jumpHeld = false;
     //Disabled when in Game Over state
     public bool controllable = true;
+    private float timeSincePress;
+    private float storeSpeedBaby;
+    private float storeSpeedMama;
+    private float storeSpeedPapa;
 
     [SerializeField] private bool visualizeCircleCast = false;
 
@@ -44,6 +50,9 @@ public class BearController : MonoBehaviour
         mama = Resources.Load("BearStats/MamaBear") as BearStats;
         papa = Resources.Load("BearStats/PapaBear") as BearStats;
 
+        storeSpeedBaby = baby.speed;
+        storeSpeedMama = mama.speed;
+        storeSpeedPapa = papa.speed;
         ResetBear();
     }
 
@@ -167,15 +176,162 @@ public class BearController : MonoBehaviour
         }
     }
 
-    //check if speed is above bear's speed if it is normalize it
+    //handle momentum when moving constantly in a direction, check if speed is above bear's speed if it is normalize it
     private void LimitSpeed()
     {
+        timeSincePress = 0f;
         Vector2 xVelocity = new Vector2(rb.velocity.x, 0f);
-        if (xVelocity.magnitude > bearStats.speed)
+        Vector2 cappedVelocity;
+        
+        if (bearStats == baby) 
         {
-            Vector2 cappedVelocity = xVelocity.normalized * bearStats.speed;
-            rb.velocity = new(cappedVelocity.x, rb.velocity.y);
+            if (Input.GetKeyDown(KeyCode.A) && onGround) {
+                if (rb.velocity.x > 0) {
+                    storeSpeedBaby = bearStats.speed;
+                    timeSincePress = 0f;
+
+                    cappedVelocity = xVelocity.normalized * (bearStats.speed * 1.5f);
+                    rb.velocity = new(cappedVelocity.x, rb.velocity.y); 
+                }
+
+                if (xVelocity.magnitude > (bearStats.speed * 1.5f)) {
+                    cappedVelocity = xVelocity.normalized * (bearStats.speed * 1.5f);
+                    rb.velocity = new(cappedVelocity.x, rb.velocity.y);                
+                }
+                
+                if (timeSincePress < 1) {
+                    storeSpeedBaby += 0.000000001f;
+                }
+                else if (timeSincePress < 2) {
+                    storeSpeedBaby += 0.00000001f;        
+                }
+                
+                timeSincePress += Time.deltaTime;
+            }
+            else if (Input.GetKeyDown(KeyCode.D) && onGround) {
+                if (rb.velocity.x < 0) {
+                    storeSpeedBaby = bearStats.speed;
+                    timeSincePress = 0f;
+
+                    cappedVelocity = xVelocity.normalized * (bearStats.speed * 1.5f);
+                    rb.velocity = new(cappedVelocity.x, rb.velocity.y);
+                }
+
+                if (xVelocity.magnitude > (bearStats.speed * 1.5f)) {
+                    cappedVelocity = xVelocity.normalized * (bearStats.speed * 1.5f);
+                    rb.velocity = new(cappedVelocity.x, rb.velocity.y);                
+                }
+                
+                if (timeSincePress < 1) {
+                    storeSpeedBaby += 0.000000001f;
+                }
+                else if (timeSincePress < 2) {
+                    storeSpeedBaby += 0.00000001f;        
+                }
+                
+                timeSincePress += Time.deltaTime;
+            }           
         }
+        else if (bearStats == mama)
+        {
+            if (Input.GetKeyDown(KeyCode.A) && onGround) {
+                if (rb.velocity.x > 0) {
+                    storeSpeedMama = bearStats.speed;
+                    timeSincePress = 0f;
+
+                    cappedVelocity = xVelocity.normalized * (bearStats.speed * 1.5f);
+                    rb.velocity = new(cappedVelocity.x, rb.velocity.y);
+                }
+                lastKeyPress = nextLastKeyPress;
+                
+                if (timeSincePress < 5) {
+                    storeSpeedMama += 0.1f;
+                }
+                
+                if (xVelocity.magnitude > (bearStats.speed * 1.5f)) {
+                    cappedVelocity = xVelocity.normalized * (bearStats.speed * 1.5f);
+                    rb.velocity = new(cappedVelocity.x, rb.velocity.y);                
+                }
+            }
+            else if (Input.GetKeyDown(KeyCode.D) && onGround) {
+                if (rb.velocity.x < 0) {
+                    storeSpeedMama = bearStats.speed;
+                    timeSincePress = 0f;
+
+                    cappedVelocity = xVelocity.normalized * (bearStats.speed * 1.5f);
+                    rb.velocity = new(cappedVelocity.x, rb.velocity.y);
+                }
+                
+                if (timeSincePress < 5) {
+                    storeSpeedMama += 0.1f;
+                }
+                
+                if (xVelocity.magnitude > (bearStats.speed * 1.5f)) {
+                    cappedVelocity = xVelocity.normalized * (bearStats.speed * 1.5f);
+                    rb.velocity = new(cappedVelocity.x, rb.velocity.y);                
+                }
+                
+                timeSincePress += Time.deltaTime;
+            }
+            // else {
+            //     if (xVelocity.magnitude > (storeSpeedMama * 1.5)) {
+            //         cappedVelocity = xVelocity.normalized * storeSpeedMama;
+            //         rb.velocity = new(cappedVelocity.x, rb.velocity.y);                
+            //     }
+            // }
+        }
+        else if (bearStats == papa)
+        {
+            if (Input.GetKeyDown(KeyCode.A) && onGround) {
+                if (rb.velocity.x > 0) {
+                    storeSpeedPapa = bearStats.speed;
+                    timeSincePress = 0f;
+
+                    cappedVelocity = xVelocity.normalized * (bearStats.speed * 1.5f);
+                    rb.velocity = new(cappedVelocity.x, rb.velocity.y);  
+                }
+                
+                if (timeSincePress < 5) {
+                    storeSpeedPapa += 0.1f;
+                }
+                
+                if (xVelocity.magnitude > (bearStats.speed * 1.5f)) {
+                    cappedVelocity = xVelocity.normalized * (bearStats.speed * 1.5f);
+                    rb.velocity = new(cappedVelocity.x, rb.velocity.y);                
+                }
+            }
+            else if (Input.GetKeyDown(KeyCode.D) && onGround) {
+                if (rb.velocity.x > 0) {
+                    storeSpeedPapa = bearStats.speed;
+                    timeSincePress = 0f;
+
+                    cappedVelocity = xVelocity.normalized * (bearStats.speed * 1.5f);
+                    rb.velocity = new(cappedVelocity.x, rb.velocity.y);  
+                }
+                
+                if (timeSincePress < 5) {
+                    storeSpeedPapa += 0.1f;
+                }
+                
+                if (xVelocity.magnitude > (bearStats.speed * 1.5f)) {
+                    cappedVelocity = xVelocity.normalized * (bearStats.speed * 1.5f);
+                    rb.velocity = new(cappedVelocity.x, rb.velocity.y);                
+                }
+                
+                timeSincePress += Time.deltaTime;
+            }
+            // else {
+            //     if (xVelocity.magnitude > (storeSpeedPapa * 1.5f)) {
+            //         cappedVelocity = xVelocity.normalized * storeSpeedPapa;
+            //         rb.velocity = new(cappedVelocity.x, rb.velocity.y);                
+            //     }                
+            // }
+        }
+        // if (xVelocity.magnitude > bearStats.speed)
+        // {
+        //     Vector2 cappedVelocity = xVelocity.normalized * bearStats.speed;
+        //     rb.velocity = new(cappedVelocity.x, rb.velocity.y);
+        // }
     }
 
     bool CheckRoomForBear(BearStats newBear)
