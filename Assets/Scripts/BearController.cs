@@ -68,7 +68,7 @@ public class BearController : MonoBehaviour
 
         rb.drag = onGround ? groundDrag : 0f;
 
-        LimitSpeed();
+        OldHandleMovement();
     }
 
     private void HandleControls()
@@ -176,40 +176,29 @@ public class BearController : MonoBehaviour
         }
     }
 
+    private void OldHandleMovement()
+    {
+        Vector2 xVelocity = new Vector2(rb.velocity.x, 0f);
+        if (xVelocity.magnitude > bearStats.speed)
+        {
+            Vector2 cappedVelocity = xVelocity.normalized * bearStats.speed;
+            rb.velocity = new(cappedVelocity.x, rb.velocity.y);
+        }
+    }
+
     //handle momentum when moving constantly in a direction, check if speed is above bear's speed if it is normalize it
-    private void LimitSpeed()
+    private void HandleMovement()
     {
         timeSincePress = 0f;
         Vector2 xVelocity = new Vector2(rb.velocity.x, 0f);
         Vector2 cappedVelocity;
-        
-        if (bearStats == baby) 
+
+        if (bearStats == baby)
         {
-            if (Input.GetKeyDown(KeyCode.A) && onGround) {
-                if (rb.velocity.x > 0) {
-                    storeSpeedBaby = bearStats.speed;
-                    timeSincePress = 0f;
-
-                    cappedVelocity = xVelocity.normalized * (bearStats.speed * 1.5f);
-                    rb.velocity = new(cappedVelocity.x, rb.velocity.y); 
-                }
-
-                if (xVelocity.magnitude > (bearStats.speed * 1.5f)) {
-                    cappedVelocity = xVelocity.normalized * (bearStats.speed * 1.5f);
-                    rb.velocity = new(cappedVelocity.x, rb.velocity.y);                
-                }
-                
-                if (timeSincePress < 1) {
-                    storeSpeedBaby += 0.000000001f;
-                }
-                else if (timeSincePress < 2) {
-                    storeSpeedBaby += 0.00000001f;        
-                }
-                
-                timeSincePress += Time.deltaTime;
-            }
-            else if (Input.GetKeyDown(KeyCode.D) && onGround) {
-                if (rb.velocity.x < 0) {
+            if (Input.GetKeyDown(KeyCode.A) && onGround)
+            {
+                if (rb.velocity.x > 0)
+                {
                     storeSpeedBaby = bearStats.speed;
                     timeSincePress = 0f;
 
@@ -217,25 +206,58 @@ public class BearController : MonoBehaviour
                     rb.velocity = new(cappedVelocity.x, rb.velocity.y);
                 }
 
-                if (xVelocity.magnitude > (bearStats.speed * 1.5f)) {
+                if (xVelocity.magnitude > (bearStats.speed * 1.5f))
+                {
                     cappedVelocity = xVelocity.normalized * (bearStats.speed * 1.5f);
-                    rb.velocity = new(cappedVelocity.x, rb.velocity.y);                
+                    rb.velocity = new(cappedVelocity.x, rb.velocity.y);
                 }
-                
-                if (timeSincePress < 1) {
+
+                if (timeSincePress < 1)
+                {
                     storeSpeedBaby += 0.000000001f;
                 }
-                else if (timeSincePress < 2) {
-                    storeSpeedBaby += 0.00000001f;        
+                else if (timeSincePress < 2)
+                {
+                    storeSpeedBaby += 0.00000001f;
                 }
-                
+
                 timeSincePress += Time.deltaTime;
-            }           
+            }
+            else if (Input.GetKeyDown(KeyCode.D) && onGround)
+            {
+                if (rb.velocity.x < 0)
+                {
+                    storeSpeedBaby = bearStats.speed;
+                    timeSincePress = 0f;
+
+                    cappedVelocity = xVelocity.normalized * (bearStats.speed * 1.5f);
+                    rb.velocity = new(cappedVelocity.x, rb.velocity.y);
+                }
+
+                if (xVelocity.magnitude > (bearStats.speed * 1.5f))
+                {
+                    cappedVelocity = xVelocity.normalized * (bearStats.speed * 1.5f);
+                    rb.velocity = new(cappedVelocity.x, rb.velocity.y);
+                }
+
+                if (timeSincePress < 1)
+                {
+                    storeSpeedBaby += 0.000000001f;
+                }
+                else if (timeSincePress < 2)
+                {
+                    storeSpeedBaby += 0.00000001f;
+                }
+
+                timeSincePress += Time.deltaTime;
+            }
         }
         else if (bearStats == mama)
         {
-            if (Input.GetKeyDown(KeyCode.A) && onGround) {
-                if (rb.velocity.x > 0) {
+            if (Input.GetKeyDown(KeyCode.A) && onGround)
+            {
+                if (rb.velocity.x > 0)
+                {
                     storeSpeedMama = bearStats.speed;
                     timeSincePress = 0f;
 
@@ -243,34 +265,40 @@ public class BearController : MonoBehaviour
                     rb.velocity = new(cappedVelocity.x, rb.velocity.y);
                 }
                 lastKeyPress = nextLastKeyPress;
-                
-                if (timeSincePress < 5) {
+
+                if (timeSincePress < 5)
+                {
                     storeSpeedMama += 0.1f;
                 }
-                
-                if (xVelocity.magnitude > (bearStats.speed * 1.5f)) {
+
+                if (xVelocity.magnitude > (bearStats.speed * 1.5f))
+                {
                     cappedVelocity = xVelocity.normalized * (bearStats.speed * 1.5f);
-                    rb.velocity = new(cappedVelocity.x, rb.velocity.y);                
+                    rb.velocity = new(cappedVelocity.x, rb.velocity.y);
                 }
             }
-            else if (Input.GetKeyDown(KeyCode.D) && onGround) {
-                if (rb.velocity.x < 0) {
+            else if (Input.GetKeyDown(KeyCode.D) && onGround)
+            {
+                if (rb.velocity.x < 0)
+                {
                     storeSpeedMama = bearStats.speed;
                     timeSincePress = 0f;
 
                     cappedVelocity = xVelocity.normalized * (bearStats.speed * 1.5f);
                     rb.velocity = new(cappedVelocity.x, rb.velocity.y);
                 }
-                
-                if (timeSincePress < 5) {
+
+                if (timeSincePress < 5)
+                {
                     storeSpeedMama += 0.1f;
                 }
-                
-                if (xVelocity.magnitude > (bearStats.speed * 1.5f)) {
+
+                if (xVelocity.magnitude > (bearStats.speed * 1.5f))
+                {
                     cappedVelocity = xVelocity.normalized * (bearStats.speed * 1.5f);
-                    rb.velocity = new(cappedVelocity.x, rb.velocity.y);                
+                    rb.velocity = new(cappedVelocity.x, rb.velocity.y);
                 }
-                
+
                 timeSincePress += Time.deltaTime;
             }
             // else {
@@ -282,42 +310,50 @@ public class BearController : MonoBehaviour
         }
         else if (bearStats == papa)
         {
-            if (Input.GetKeyDown(KeyCode.A) && onGround) {
-                if (rb.velocity.x > 0) {
+            if (Input.GetKeyDown(KeyCode.A) && onGround)
+            {
+                if (rb.velocity.x > 0)
+                {
                     storeSpeedPapa = bearStats.speed;
                     timeSincePress = 0f;
 
                     cappedVelocity = xVelocity.normalized * (bearStats.speed * 1.5f);
-                    rb.velocity = new(cappedVelocity.x, rb.velocity.y);  
+                    rb.velocity = new(cappedVelocity.x, rb.velocity.y);
                 }
-                
-                if (timeSincePress < 5) {
+
+                if (timeSincePress < 5)
+                {
                     storeSpeedPapa += 0.1f;
                 }
-                
-                if (xVelocity.magnitude > (bearStats.speed * 1.5f)) {
+
+                if (xVelocity.magnitude > (bearStats.speed * 1.5f))
+                {
                     cappedVelocity = xVelocity.normalized * (bearStats.speed * 1.5f);
-                    rb.velocity = new(cappedVelocity.x, rb.velocity.y);                
+                    rb.velocity = new(cappedVelocity.x, rb.velocity.y);
                 }
             }
-            else if (Input.GetKeyDown(KeyCode.D) && onGround) {
-                if (rb.velocity.x > 0) {
+            else if (Input.GetKeyDown(KeyCode.D) && onGround)
+            {
+                if (rb.velocity.x > 0)
+                {
                     storeSpeedPapa = bearStats.speed;
                     timeSincePress = 0f;
 
                     cappedVelocity = xVelocity.normalized * (bearStats.speed * 1.5f);
-                    rb.velocity = new(cappedVelocity.x, rb.velocity.y);  
+                    rb.velocity = new(cappedVelocity.x, rb.velocity.y);
                 }
-                
-                if (timeSincePress < 5) {
+
+                if (timeSincePress < 5)
+                {
                     storeSpeedPapa += 0.1f;
                 }
-                
-                if (xVelocity.magnitude > (bearStats.speed * 1.5f)) {
+
+                if (xVelocity.magnitude > (bearStats.speed * 1.5f))
+                {
                     cappedVelocity = xVelocity.normalized * (bearStats.speed * 1.5f);
-                    rb.velocity = new(cappedVelocity.x, rb.velocity.y);                
+                    rb.velocity = new(cappedVelocity.x, rb.velocity.y);
                 }
-                
+
                 timeSincePress += Time.deltaTime;
             }
             // else {
