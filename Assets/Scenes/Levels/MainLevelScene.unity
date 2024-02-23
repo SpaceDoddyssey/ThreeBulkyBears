@@ -2665,12 +2665,12 @@ MonoBehaviour:
   platforms:
     serializedVersion: 2
     m_Bits: 64
-  castDistance: 0.1
+  castDistance: 0.2
   groundDrag: 1
   bearStats: {fileID: 11400000, guid: 90d079be474d3444a962abf2ba60f468, type: 2}
   onGround: 0
   controllable: 1
-  visualizeCircleCast: 0
+  visualizeCircleCast: 1
 --- !u!82 &2018896687
 AudioSource:
   m_ObjectHideFlags: 0
