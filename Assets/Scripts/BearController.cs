@@ -11,6 +11,7 @@ public class BearController : MonoBehaviour
     private AudioSource audioSource;
     private LevelManager levelMan;
 
+    public AudioClip cantChangeSound;
     public LayerMask platforms;
     private Vector3 initialPos;
     public float castDistance;
@@ -110,13 +111,27 @@ public class BearController : MonoBehaviour
 
     void ChangeBearUp()
     {
-        if (bearStats == baby && CheckRoomForBear(mama))
+        if (bearStats == baby)
         {
-            ChangeBear(mama);
+            if (CheckRoomForBear(mama))
+            {
+                ChangeBear(mama);
+            }
+            else
+            {
+                audioSource.PlayOneShot(cantChangeSound);
+            }
         }
-        else if (bearStats == mama && CheckRoomForBear(papa))
+        else if (bearStats == mama)
         {
-            ChangeBear(papa);
+            if (CheckRoomForBear(papa))
+            {
+                ChangeBear(papa);
+            }
+            else
+            {
+                audioSource.PlayOneShot(cantChangeSound);
+            }
         }
     }
 

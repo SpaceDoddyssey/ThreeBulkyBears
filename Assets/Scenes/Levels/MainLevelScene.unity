@@ -2644,6 +2644,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f25c1b6c8eb55b14baf8bc4a0c915684, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cantChangeSound: {fileID: 8300000, guid: 6af78a781c914be4f989f922675364da, type: 3}
   platforms:
     serializedVersion: 2
     m_Bits: 64
