@@ -34,6 +34,10 @@ jobs:
           name: build-webgl
           path: build/WebGL/WebGL/*
           if-no-files-found: error
+      - name: Decompress brotli files for Github Pages
+        shell: bash
+        run: | 
+          find ./build/WebGL -type f -iname '*.br' -exec brotli -dj {} \;
       - name: Upload GitHub Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
