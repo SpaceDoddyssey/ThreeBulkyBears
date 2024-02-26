@@ -14,7 +14,11 @@ public class LevelManager : MonoBehaviour
     public bool won = false;
     public bool lost = false;
     public bool paused = false;
-    private GameObject gameOverText, victoryText, pauseMenu;
+    public GameObject pauseMenu;
+
+    //Sign vars
+    public GameObject gameOverObj, victoryObj;
+    public Vector3 signStartPos;
 
     //timer 
     public TextMeshProUGUI timerText;
@@ -35,13 +39,6 @@ public class LevelManager : MonoBehaviour
     {
         playerObj = GameObject.Find("Bear");
         bearController = playerObj.GetComponent<BearController>();
-
-        gameOverText = GameObject.Find("GameOverText");
-        gameOverText.SetActive(false);
-        victoryText = GameObject.Find("VictoryText");
-        victoryText.SetActive(false);
-        pauseMenu = GameObject.Find("Pause Menu");
-        pauseMenu.SetActive(false);
 
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
@@ -67,7 +64,14 @@ public class LevelManager : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            TogglePause();
+            if (won || lost)
+            {
+                SceneManager.LoadScene("LevelSelection");
+            }
+            else
+            {
+                TogglePause();
+            }
         }
     }
 
@@ -94,29 +98,18 @@ public class LevelManager : MonoBehaviour
     public void GameOver()
     {
         if (won) { return; }
-        gameOverText.SetActive(true);
+        StartCoroutine(DropDownSign(gameOverObj));
 
         lost = true;
-        Cursor.lockState = CursorLockMode.None;
-        Cursor.visible = true;
-
         bearController.controllable = false;
-
-        if (Input.GetKeyDown(KeyCode.K))
-        {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-        }
     }
 
     public void Victory()
     {
         if (lost) { return; }
-        victoryText.SetActive(true);
+        StartCoroutine(DropDownSign(victoryObj));
 
         won = true;
-        Cursor.lockState = CursorLockMode.None;
-        Cursor.visible = true;
-
         bearController.controllable = false;
 
         if (gameManager.curLevelInfo != null)
@@ -129,6 +122,25 @@ public class LevelManager : MonoBehaviour
             {
                 PlayerPrefs.SetFloat(gameManager.curLevelInfo.sceneName + "BestTime", currentTime);
             }
+        }
+    }
+
+    public IEnumerator DropDownSign(GameObject sign)
+    {
+        float delay = 0.3f;
+        yield return new WaitForSeconds(delay);
+
+        Vector3 targetPos = new Vector3(0, 0, 0);
+        Vector3 startPos = signStartPos;
+        float elapsedTime = 0;
+        float initialFallDuration = 1.5f;
+        while (elapsedTime < initialFallDuration)
+        {
+            elapsedTime += Time.deltaTime;
+            float t = Mathf.Clamp01(elapsedTime / initialFallDuration);
+            t = Mathf.SmoothStep(0, 1, t); //smoothing function
+            sign.transform.localPosition = Vector3.Lerp(startPos, targetPos, t);
+            yield return null;
         }
     }
 }

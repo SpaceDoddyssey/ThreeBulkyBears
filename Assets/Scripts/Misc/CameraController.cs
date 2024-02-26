@@ -21,7 +21,7 @@ public class CameraController : MonoBehaviour
 
     void Update()
     {
-        if (levelManager.lost) { return; }
+        if (levelManager.lost || levelManager.won) { return; }
         transform.position = new Vector3(bear.position.x + offset.x, bear.position.y + offset.y, offset.z);
         if (transform.position.y < minYVal)
         {
