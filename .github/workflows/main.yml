@@ -38,6 +38,7 @@ jobs:
         shell: bash
         run: | 
           find ./build/WebGL -type f -iname '*.br' -exec brotli -dj {} \;
+          sed -i 's/\.br//g' build/WebGL/WebGL/index.html
       - name: Upload GitHub Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
