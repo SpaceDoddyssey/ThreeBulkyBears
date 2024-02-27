@@ -86,8 +86,8 @@ public class BearController : MonoBehaviour
         jumpHeld = !onGround && Input.GetKey(KeyCode.Space);
 
         horizontalInput = Input.GetAxisRaw("Horizontal");
-        if (Input.GetKeyDown(KeyCode.W)) ChangeBearUp();
-        if (Input.GetKeyDown(KeyCode.S)) ChangeBearDown();
+        if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow)) ChangeBearUp();
+        if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow)) ChangeBearDown();
     }
 
     public void ResetBear()
