@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
+using Cinemachine;
 
 public class LevelManager : MonoBehaviour
 {
@@ -100,6 +101,7 @@ public class LevelManager : MonoBehaviour
         if (won) { return; }
         StartCoroutine(DropDownSign(gameOverObj));
 
+        GameObject.Find("CameraFollowPoint").transform.parent = null;
         lost = true;
         bearController.controllable = false;
     }
@@ -109,6 +111,7 @@ public class LevelManager : MonoBehaviour
         if (lost) { return; }
         StartCoroutine(DropDownSign(victoryObj));
 
+        GameObject.Find("CameraFollowPoint").transform.parent = null;
         won = true;
         bearController.controllable = false;
 
