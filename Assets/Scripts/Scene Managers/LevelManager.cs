@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
 using Cinemachine;
+using System;
 
 public class LevelManager : MonoBehaviour
 {
@@ -38,19 +39,15 @@ public class LevelManager : MonoBehaviour
 
     void Start()
     {
-        playerObj = GameObject.Find("Bear");
-        bearController = playerObj.GetComponent<BearController>();
-
-        Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }
 
     void Update()
     {
         //timer update 
-        if (!paused && (!won || !lost))
+        if (!paused && !(won || lost))
         {
-            currentTime = currentTime += Time.deltaTime;
+            UpdateTimer();
         }
 
         if (Input.GetKeyDown(KeyCode.R))
@@ -76,11 +73,17 @@ public class LevelManager : MonoBehaviour
         }
     }
 
+    public void UpdateTimer()
+    {
+        currentTime += Time.deltaTime;
+        TimeSpan curTime = TimeSpan.FromSeconds(currentTime);
+        timerText.text = curTime.ToString("m':'ss'.'fff");
+    }
+
     public void TogglePause()
     {
         if (!paused)
         {
-            Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
             Time.timeScale = 0;
             paused = true;
@@ -88,7 +91,6 @@ public class LevelManager : MonoBehaviour
         }
         else
         {
-            Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
             Time.timeScale = 1;
             paused = false;
