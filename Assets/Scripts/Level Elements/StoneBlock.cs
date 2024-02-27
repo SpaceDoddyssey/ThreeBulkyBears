@@ -11,7 +11,9 @@ public class StoneBlock : MonoBehaviour
             BearController bearController = collision.gameObject.GetComponent<BearController>();
             if (bearController.bearStats.bearName == "Papa")
             {
-                Destroy(gameObject);
+                GetComponent<AudioSource>().Play();
+                GetComponent<SpriteRenderer>().enabled = false;
+                GetComponent<BoxCollider2D>().enabled = false;
             }
         }
     }

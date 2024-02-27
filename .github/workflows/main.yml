@@ -1,0 +1,84 @@
+name: Build project
+on:
+  push:
+    branches:
+      - 'main'
+      - 'release'
+jobs:
+  build:
+    name: Build for web
+    runs-on: rick-linux
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          lfs: true
+      - name: Cache Unity libraries
+        uses: actions/cache@v3
+        with:
+          key: library
+          path: Library
+      - name: Unity build
+        uses: game-ci/unity-builder@v4
+        env:
+          UNITY_LICENSE: ${{secrets.UNITY_LICENSE}}
+          UNITY_EMAIL: ${{secrets.UNITY_EMAIL}}
+          UNITY_PASSWORD: ${{secrets.UNITY_PASSWORD}}
+        with:
+          targetPlatform: WebGL
+          runAsHostUser: true
+      - name: Upload artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: build-webgl
+          path: build/WebGL/WebGL/*
+          if-no-files-found: error
+      - name: Decompress brotli files for Github Pages
+        shell: bash
+        run: | 
+          find ./build/WebGL -type f -iname '*.br' -exec brotli -dj {} \;
+          sed -i 's/\.br//g' build/WebGL/WebGL/index.html
+      - name: Upload GitHub Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: build/WebGL/WebGL/
+  deploy-ghpages:
+    name: Deploy to GitHub Pages
+    runs-on: rick-linux
+    needs: build
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{steps.deployment.outputs.page_url}}
+    steps:
+      - name: Configure GitHub Pages
+        uses: actions/configure-pages@v4
+      - name: Deploy to GitHub Pages
+        uses: actions/deploy-pages@v4
+        id: deployment
+  deploy-itch:
+    name: Deploy to Itch.io
+    runs-on: rick-linux
+    needs: build
+    if: ${{github.ref == 'refs/heads/release'}}
+    steps:
+      - name: Download artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: build-webgl
+          path: build/WebGL
+      - name: Push build with Butler
+        shell: bash
+        env:
+          BUTLER_API_KEY: ${{secrets.BUTLER_API_KEY}}
+        run: |
+          rm -rfv butler
+          mkdir butler
+          cd butler
+          curl -JLO https://broth.itch.zone/butler/linux-amd64/15.21.0/archive/default
+          unzip butler-linux-amd64.zip
+          cd ..
+          ./butler/butler push build/WebGL ${{vars.BUTLER_DEST}}

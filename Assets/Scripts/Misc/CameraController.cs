@@ -3,32 +3,25 @@ using UnityEngine.SceneManagement;
 
 public class CameraController : MonoBehaviour
 {
-
-    private Transform bear;
-    private Vector3 offset;
     private Camera mainCamera;
+    private Transform cameraFollowPoint;
     private float minYVal;
     private LevelManager levelManager;
 
     void Start()
     {
+        cameraFollowPoint = GameObject.Find("CameraFollowPoint").transform;
         mainCamera = GetComponent<Camera>();
-        bear = GameObject.Find("Bear").transform;
         levelManager = GameObject.Find("LevelManager").GetComponent<LevelManager>();
-        offset = new Vector3(0f, 0f, -10f);
         minYVal = GameObject.Find("FallingDeathZoneLoc").transform.position.y + mainCamera.orthographicSize + 1;
+        transform.position = GameObject.Find("BearSpawnLoc").transform.position + new Vector3(0, 0, -10);
     }
 
-    void Update()
+    void FixedUpdate()
     {
-        if (levelManager.lost) { return; }
-        transform.position = new Vector3(bear.position.x + offset.x, bear.position.y + offset.y, offset.z);
-        if (transform.position.y < minYVal)
+        if (cameraFollowPoint.transform.position.y < minYVal)
         {
-            transform.position = new Vector3(transform.position.x, minYVal, transform.position.z);
+            cameraFollowPoint.position = new Vector3(cameraFollowPoint.position.x, minYVal, cameraFollowPoint.position.z);
         }
     }
-
 }
-
-
