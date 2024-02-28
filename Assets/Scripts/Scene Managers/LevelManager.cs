@@ -13,8 +13,7 @@ public class LevelManager : MonoBehaviour
     public GameObject playerObj;
     public BearController bearController;
     public Scene levelSubscene;
-    public bool won = false;
-    public bool lost = false;
+    public bool isGameOver;
     public bool paused = false;
     public GameObject pauseMenu;
 
@@ -45,7 +44,7 @@ public class LevelManager : MonoBehaviour
     void Update()
     {
         //timer update 
-        if (!paused && !(won || lost))
+        if (!paused && !isGameOver)
         {
             UpdateTimer();
         }
@@ -62,7 +61,7 @@ public class LevelManager : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            if (won || lost)
+            if (isGameOver)
             {
                 SceneManager.LoadScene("LevelSelection");
             }
@@ -100,21 +99,21 @@ public class LevelManager : MonoBehaviour
 
     public void GameOver()
     {
-        if (won) { return; }
+        if (isGameOver) { return; }
         StartCoroutine(DropDownSign(gameOverObj));
 
         GameObject.Find("CameraFollowPoint").transform.parent = null;
-        lost = true;
+        isGameOver = true;
         bearController.controllable = false;
     }
 
     public void Victory()
     {
-        if (lost) { return; }
+        if (isGameOver) { return; }
         StartCoroutine(DropDownSign(victoryObj));
 
         GameObject.Find("CameraFollowPoint").transform.parent = null;
-        won = true;
+        isGameOver = true;
         bearController.controllable = false;
 
         if (gameManager.curLevelInfo != null)
