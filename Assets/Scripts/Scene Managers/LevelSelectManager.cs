@@ -11,6 +11,7 @@ public class LevelSelectManager : MonoBehaviour
     public List<GameObject> levelIcons;
     private int curLevelIndex = 0;
     public TextMeshProUGUI levelNameText, bestTimeText, goalTimeText;
+    [SerializeField] UnityEngine.UI.Image starImage;
 
     //Start is called before the first frame update
     void Start()
@@ -70,7 +71,16 @@ public class LevelSelectManager : MonoBehaviour
         }
 
         TimeSpan gt = TimeSpan.FromSeconds(level.goalTime);
-        goalTimeText.text = "Gold Time: " + gt.ToString("m':'ss'.'fff");
+        if (bestTime < level.goalTime)
+        {
+            goalTimeText.text = "Gold Time: " + gt.ToString("m':'ss'.'fff") + " (Achieved!)";
+            starImage.enabled = true;
+        }
+        else
+        {
+            goalTimeText.text = "Gold Time: " + gt.ToString("m':'ss'.'fff");
+            starImage.enabled = false;
+        }
     }
 
     public void GoToLevel(LevelInfo level)
