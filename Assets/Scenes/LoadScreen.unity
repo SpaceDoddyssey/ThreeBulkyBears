@@ -342,7 +342,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0320e96e5a8a3174d83e3a8823e654ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  videoFileName: SplashAnimation.mp4
+  videoFileName: SplashAnimation2.mp4
 --- !u!1 &1075652526
 GameObject:
   m_ObjectHideFlags: 0
