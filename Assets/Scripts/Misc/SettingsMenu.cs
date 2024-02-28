@@ -9,21 +9,38 @@ public class SettingsMenu : MonoBehaviour
     [SerializeField] AudioMixer mixer;
     [SerializeField] Slider musicSlider;
     [SerializeField] Slider sfxSlider;
-    public const string MIXER_MUSIC = "musicVol";
-    public const string MIXER_SFX = "sfxVol";
+    public const string MUSIC_KEY = "musicVol";
+    public const string SFX_KEY = "sfxVol";
 
-    void Start()
+    private void Start()
     {
-        musicSlider.value = PlayerPrefs.GetFloat(AudioManager.MUSIC_KEY, 1f);
-        sfxSlider.value = PlayerPrefs.GetFloat(AudioManager.SFX_KEY, 1f);
-    }
-    public void MusicVolume (float volume)
-    {
-        mixer.SetFloat(MIXER_MUSIC, volume);
+        LoadVolume();
     }
 
-    public void SFXVolume (float volume)
+    void LoadVolume()
     {
-        mixer.SetFloat(MIXER_SFX, volume);
+        float musicVol = PlayerPrefs.GetFloat(MUSIC_KEY, 1f);
+        float sfxVol = PlayerPrefs.GetFloat(SFX_KEY, 1f);
+        mixer.SetFloat(MUSIC_KEY, musicVol);
+        mixer.SetFloat(SFX_KEY, sfxVol);
+        musicSlider.value = Mathf.Pow(10, musicVol / 20);
+        sfxSlider.value = Mathf.Pow(10, sfxVol / 20);
+    }
+
+    public void SetMusicVolume()
+    {
+        mixer.SetFloat(MUSIC_KEY, convertVolume(musicSlider.value));
+        PlayerPrefs.SetFloat(MUSIC_KEY, convertVolume(musicSlider.value));
+    }
+
+    public void SetSFXVolume()
+    {
+        mixer.SetFloat(SFX_KEY, convertVolume(sfxSlider.value));
+        PlayerPrefs.SetFloat(SFX_KEY, convertVolume(sfxSlider.value));
+    }
+
+    float convertVolume(float input)
+    {
+        return Mathf.Log10(input) * 20;
     }
 }
