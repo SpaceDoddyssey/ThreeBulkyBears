@@ -15,8 +15,7 @@ public class BearController : MonoBehaviour
     public LayerMask platforms;
     public float castDistance;
     public float groundDrag, airStopMult;
-    private float horizontalInput;
-    private GameObject bearSpawnLoc;
+    public float acceleration, deceleration;
 
     [Header("Changed in the script")]
     public BearStats curBearStats;
@@ -29,8 +28,9 @@ public class BearController : MonoBehaviour
     private bool jumping = false, jumpHeld = false;
     //Disabled when in Game Over state
     public bool controllable = true;
-    private bool activeMomentum;
     public float maxSpeed;
+    private float horizontalInput;
+    private GameObject bearSpawnLoc;
 
     [SerializeField] private bool visualizeCircleCast = false;
 
@@ -55,16 +55,12 @@ public class BearController : MonoBehaviour
     {
         checkIfOnGround();
 
-        HandleControls();
+        if (controllable)
+            HandleControls();
 
         ApplyDrag();
 
-        if (activeMomentum && controllable)
-            HandleMomentum();
-        else
-        {
-            LimitSpeed(curBearStats.speed);
-        }
+        HandleMomentum();
     }
 
     private void ApplyDrag()
@@ -81,7 +77,6 @@ public class BearController : MonoBehaviour
 
     private void HandleControls()
     {
-        if (!controllable) { return; }
         if (jumping && onGround && rb.velocity.y <= 0)
         {
             jumping = false;
@@ -102,8 +97,8 @@ public class BearController : MonoBehaviour
         controllable = true;
         rb.velocity = Vector2.zero;
         transform.position = bearSpawnLoc.transform.position;
-        maxSpeed = mama.speed;
         ChangeBear(mama);
+        maxSpeed = mama.speed;
     }
 
     void ChangeBear(BearStats newBear)
@@ -116,7 +111,6 @@ public class BearController : MonoBehaviour
         cc.radius = curBearStats.circleRadius;
         rb.mass = curBearStats.mass;
         rb.gravityScale = curBearStats.gravityMult;
-        activeMomentum = true;
     }
 
     void ChangeBearUp()
@@ -214,16 +208,20 @@ public class BearController : MonoBehaviour
     //handle momentum when moving constantly in a direction by editing speed cap
     void HandleMomentum()
     {
-        float speedDifference = curBearStats.speed - prevBearStats.speed;
-        maxSpeed += Mathf.Sign(speedDifference) * 0.01f;
-        LimitSpeed(maxSpeed); //edit speed cap over time until it matches new bear
-
-        if ((speedDifference > 0 && maxSpeed >= curBearStats.speed) ||
-            (speedDifference < 0 && maxSpeed <= curBearStats.speed))
+        float speedDifference = maxSpeed - curBearStats.speed;
+        if (Mathf.Abs(speedDifference) < 0.1f)
         {
             maxSpeed = curBearStats.speed;
-            activeMomentum = false;
+            LimitSpeed(maxSpeed);
+            return;
         }
+        Debug.Log("Max Speed: " + maxSpeed + " Cur Bear Speed: " + curBearStats.speed + " Speed Difference: " + speedDifference);
+        if (speedDifference > 0)
+            maxSpeed -= deceleration * Time.deltaTime;
+        else if (speedDifference < 0)
+            maxSpeed += acceleration * Time.deltaTime;
+
+        LimitSpeed(maxSpeed); //edit speed cap over time until it matches new bear
     }
 
     bool CheckRoomForBear(BearStats newBear)
