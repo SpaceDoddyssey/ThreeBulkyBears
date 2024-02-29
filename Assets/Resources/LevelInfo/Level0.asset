@@ -16,5 +16,5 @@ MonoBehaviour:
   levelName: Tutorial
   sceneName: Level0
   description: Learn how to play the game
-  goalTime: 14.5
+  goalTime: 13
   isUnlocked: 1
