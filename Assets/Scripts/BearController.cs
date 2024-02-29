@@ -53,7 +53,7 @@ public class BearController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        checkIfOnGround();
+        CheckIfOnGround();
 
         if (controllable)
             HandleControls();
@@ -181,9 +181,23 @@ public class BearController : MonoBehaviour
         }
     }
 
-    private void checkIfOnGround()
+    private bool CheckIfOnGround()
     {
-        onGround = Physics2D.CircleCast(transform.position, curBearStats.circleRadius - 0.05f, new Vector2(0, -1), castDistance, platforms);
+        var cast = Physics2D.CircleCast(transform.position, curBearStats.circleRadius - 0.05f, new Vector2(0, -1), castDistance, platforms);
+
+        onGround = cast.collider != null;
+        if (onGround)
+        {
+            MovingPlatform movingPlatform = cast.collider.GetComponent<MovingPlatform>();
+            if (movingPlatform != null)
+            {
+                transform.parent = movingPlatform.transform;
+                return true;
+            }
+        }
+
+        transform.parent = null;
+        return false;
     }
 
     void OnDrawGizmos()
@@ -215,7 +229,7 @@ public class BearController : MonoBehaviour
             LimitSpeed(maxSpeed);
             return;
         }
-        Debug.Log("Max Speed: " + maxSpeed + " Cur Bear Speed: " + curBearStats.speed + " Speed Difference: " + speedDifference);
+
         if (speedDifference > 0)
             maxSpeed -= deceleration * Time.deltaTime;
         else if (speedDifference < 0)
