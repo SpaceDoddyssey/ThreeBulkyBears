@@ -16,7 +16,7 @@ MonoBehaviour:
   fallLongMult: 1.3
   fallShortMult: 2.6
   jumpvel: 11.5
-  speed: 3
+  speed: 3.5
   mass: 1.82
   gravityMult: 1
   circleRadius: 0.625
