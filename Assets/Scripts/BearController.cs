@@ -9,21 +9,19 @@ public class BearController : MonoBehaviour
     private CircleCollider2D cc;
     private SpriteRenderer spriteRenderer;
     private AudioSource audioSource;
-    private LevelManager levelMan;
 
+    [Header("Set in Inspector")]
     public AudioClip cantChangeSound;
     public LayerMask platforms;
-    private Vector3 initialPos;
     public float castDistance;
-    public float groundDrag;
+    public float groundDrag, airStopMult;
     private float horizontalInput;
-    [SerializeField]
-    public BearStats bearStats;
+    private GameObject bearSpawnLoc;
+
+    [Header("Changed in the script")]
+    public BearStats curBearStats;
+    public BearStats prevBearStats;
     private BearStats baby, mama, papa;
-    private BearStats curr_bear;
-    private BearStats next_bear;
-    private KeyCode lastKeyPress;
-    private KeyCode nextLastKeyPress;
 
     [SerializeField]
     private bool onGround = false;
@@ -32,7 +30,7 @@ public class BearController : MonoBehaviour
     //Disabled when in Game Over state
     public bool controllable = true;
     private bool activeMomentum;
-    private float cap;
+    public float maxSpeed;
 
     [SerializeField] private bool visualizeCircleCast = false;
 
@@ -42,10 +40,8 @@ public class BearController : MonoBehaviour
         cc = GetComponent<CircleCollider2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         audioSource = GetComponent<AudioSource>();
-        levelMan = FindObjectOfType<LevelManager>();
-        GameObject bearSpawnLoc = GameObject.Find("BearSpawnLoc");
+        bearSpawnLoc = GameObject.Find("BearSpawnLoc");
         bearSpawnLoc.GetComponent<SpriteRenderer>().enabled = false;
-        initialPos = bearSpawnLoc.transform.position;
 
         baby = Resources.Load("BearStats/BabyBear") as BearStats;
         mama = Resources.Load("BearStats/MamaBear") as BearStats;
@@ -59,26 +55,33 @@ public class BearController : MonoBehaviour
     {
         checkIfOnGround();
 
-        if (controllable)
+        HandleControls();
+
+        ApplyDrag();
+
+        if (activeMomentum && controllable)
+            HandleMomentum();
+        else
         {
-            HandleControls();
+            LimitSpeed(curBearStats.speed);
         }
+    }
 
-
-        rb.drag = onGround ? groundDrag : 0f;
-
-        if (activeMomentum && controllable) {
-            HandleMomentum(curr_bear, bearStats);
-        }
-        else {
-            cap = bearStats.speed;
-            LimitSpeed(bearStats.speed);
+    private void ApplyDrag()
+    {
+        if (onGround)
+            rb.drag = groundDrag;
+        else
+        {
+            rb.drag = 0;
+            if (horizontalInput == 0)
+                rb.velocity = new Vector2(rb.velocity.x * airStopMult, rb.velocity.y);
         }
     }
 
     private void HandleControls()
     {
-        if (levelMan.paused) { return; }
+        if (!controllable) { return; }
         if (jumping && onGround && rb.velocity.y <= 0)
         {
             jumping = false;
@@ -98,42 +101,42 @@ public class BearController : MonoBehaviour
     {
         controllable = true;
         rb.velocity = Vector2.zero;
-        transform.position = initialPos;
-        ChangeBear(mama, mama);
+        transform.position = bearSpawnLoc.transform.position;
+        maxSpeed = mama.speed;
+        ChangeBear(mama);
     }
 
-    void ChangeBear(BearStats oldBear, BearStats newBear)
+    void ChangeBear(BearStats newBear)
     {
-        bearStats = newBear;
-        float spriteScale = bearStats.circleRadius * 2 * bearStats.spriteSizeMultiplier;
+        prevBearStats = curBearStats;
+        curBearStats = newBear;
+        float spriteScale = curBearStats.circleRadius * 2 * curBearStats.spriteSizeMultiplier;
         spriteRenderer.size = new Vector2(spriteScale, spriteScale);
-        spriteRenderer.sprite = bearStats.art;
-        cc.radius = bearStats.circleRadius;
-        rb.mass = bearStats.mass;
-        rb.gravityScale = bearStats.gravityMult;
-        curr_bear = oldBear;
-        cap = oldBear.speed;
+        spriteRenderer.sprite = curBearStats.art;
+        cc.radius = curBearStats.circleRadius;
+        rb.mass = curBearStats.mass;
+        rb.gravityScale = curBearStats.gravityMult;
         activeMomentum = true;
     }
 
     void ChangeBearUp()
     {
-        if (bearStats == baby)
+        if (curBearStats == baby)
         {
             if (CheckRoomForBear(mama))
             {
-                ChangeBear(baby, mama);
+                ChangeBear(mama);
             }
             else
             {
                 audioSource.PlayOneShot(cantChangeSound);
             }
         }
-        else if (bearStats == mama)
+        else if (curBearStats == mama)
         {
             if (CheckRoomForBear(papa))
             {
-                ChangeBear(mama, papa);
+                ChangeBear(papa);
             }
             else
             {
@@ -144,21 +147,21 @@ public class BearController : MonoBehaviour
 
     void ChangeBearDown()
     {
-        if (bearStats == papa)
+        if (curBearStats == papa)
         {
-            ChangeBear(papa, mama);
+            ChangeBear(mama);
         }
-        else if (bearStats == mama)
+        else if (curBearStats == mama)
         {
-            ChangeBear(mama, baby);
+            ChangeBear(baby);
         }
     }
 
     void Jump()
     {
-        rb.velocity += Vector2.up * bearStats.jumpvel;
+        rb.velocity += Vector2.up * curBearStats.jumpvel;
         jumping = true;
-        audioSource.PlayOneShot(bearStats.jumpSound);
+        audioSource.PlayOneShot(curBearStats.jumpSound);
     }
 
     void FixedUpdate()
@@ -166,18 +169,18 @@ public class BearController : MonoBehaviour
         if (rb.velocity.y > 0)
         {
             //Long jump or short jump
-            float multiplier = jumpHeld ? bearStats.fallLongMult : bearStats.fallShortMult;
+            float multiplier = jumpHeld ? curBearStats.fallLongMult : curBearStats.fallShortMult;
             rb.velocity += Vector2.up * Physics2D.gravity.y * (multiplier - 1) * Time.fixedDeltaTime;
         }
 
         //add force in direction we are moving
-        rb.AddForce(new Vector2(horizontalInput, 0) * bearStats.speed * 10f, ForceMode2D.Force);
+        rb.AddForce(new Vector2(horizontalInput, 0) * curBearStats.speed * 10f, ForceMode2D.Force);
 
         if (onGround)
         {
             // Thanks to copilot for this code
             // Calculate rotation angle based on velocity
-            float rotationAngle = -rb.velocity.x / (2 * Mathf.PI * bearStats.circleRadius) * 360f;
+            float rotationAngle = -rb.velocity.x / (2 * Mathf.PI * curBearStats.circleRadius) * 360f;
 
             // Apply rotation to the circle collider
             cc.transform.Rotate(Vector3.forward, rotationAngle * Time.fixedDeltaTime);
@@ -186,7 +189,7 @@ public class BearController : MonoBehaviour
 
     private void checkIfOnGround()
     {
-        onGround = Physics2D.CircleCast(transform.position, bearStats.circleRadius - 0.05f, new Vector2(0, -1), castDistance, platforms);
+        onGround = Physics2D.CircleCast(transform.position, curBearStats.circleRadius - 0.05f, new Vector2(0, -1), castDistance, platforms);
     }
 
     void OnDrawGizmos()
@@ -194,7 +197,7 @@ public class BearController : MonoBehaviour
         if (visualizeCircleCast)
         {
             Gizmos.color = Color.red;
-            Gizmos.DrawWireSphere(transform.position - new Vector3(0, castDistance, 0), bearStats.circleRadius - 0.05f);
+            Gizmos.DrawWireSphere(transform.position - new Vector3(0, castDistance, 0), curBearStats.circleRadius - 0.05f);
         }
     }
 
@@ -209,27 +212,17 @@ public class BearController : MonoBehaviour
     }
 
     //handle momentum when moving constantly in a direction by editing speed cap
-    void HandleMomentum(BearStats curr_bear, BearStats next_bear)
-    {       
-        if (curr_bear.speed > next_bear.speed) {
-            cap -= 0.01f;
-            LimitSpeed(cap); //edit speed cap over time until it matches new bear
+    void HandleMomentum()
+    {
+        float speedDifference = curBearStats.speed - prevBearStats.speed;
+        maxSpeed += Mathf.Sign(speedDifference) * 0.01f;
+        LimitSpeed(maxSpeed); //edit speed cap over time until it matches new bear
 
-            if (cap <= next_bear.speed) {
-                cap = next_bear.speed;
-                activeMomentum = false;
-                return;
-            }              
-        }
-        else if (next_bear.speed > curr_bear.speed) {
-            cap += 0.01f;
-            LimitSpeed(cap); //edit speed cap over time until it matches new bear
-
-            if (cap >= next_bear.speed) {
-                cap = next_bear.speed;
-                activeMomentum = false;
-                return;
-            }
+        if ((speedDifference > 0 && maxSpeed >= curBearStats.speed) ||
+            (speedDifference < 0 && maxSpeed <= curBearStats.speed))
+        {
+            maxSpeed = curBearStats.speed;
+            activeMomentum = false;
         }
     }
 
