@@ -13,7 +13,6 @@ public class MovingPlatform : MonoBehaviour
     private void Start()
     {
         transform.position = points[startingPoint].position;
-
     }
     private void Update()
     {
