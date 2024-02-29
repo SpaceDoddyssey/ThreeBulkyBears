@@ -3,15 +3,30 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Audio;
+using UnityEngine.Localization.Settings;
+using TMPro;
 
 public class SettingsMenu : MonoBehaviour
 {
     [SerializeField] AudioMixer mixer;
     [SerializeField] Slider musicSlider;
     [SerializeField] Slider sfxSlider;
+    [SerializeField] private TMP_Dropdown dropdown;
+
     public const string MUSIC_KEY = "musicVol";
     public const string SFX_KEY = "sfxVol";
 
+    // IEnumerator SetLocale(int _localeID){
+    //     yield return LocalizationSettings.InitializationOperation;
+    //     LocalizationSettings.SelectedLocale = LocalizationSettings.AvaliableLocales.Locales[_localeID];
+    // }
+
+    // public void ChangeLocale(int localeID)
+    // {
+    //     StartCoroutine(SetLocale())
+    // }
+    
+    
     private void Start()
     {
         LoadVolume();
@@ -42,5 +57,12 @@ public class SettingsMenu : MonoBehaviour
     float convertVolume(float input)
     {
         return Mathf.Log10(input) * 20;
+    }
+
+    public void GetLanguage()
+    {
+        int pickedIndex = dropdown.value;
+        string selectedOption = dropdown.options[pickedIndex].text;
+        Debug.Log(selectedOption);
     }
 }
