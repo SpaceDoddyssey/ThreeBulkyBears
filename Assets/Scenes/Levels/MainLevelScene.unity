@@ -1407,8 +1407,7 @@ MonoBehaviour:
   bearController: {fileID: 2018896686}
   levelSubscene:
     m_Handle: 0
-  won: 0
-  lost: 0
+  isGameOver: 0
   paused: 0
   pauseMenu: {fileID: 2062382514}
   gameOverObj: {fileID: 40989680}
@@ -2266,10 +2265,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2018896683}
+  - component: {fileID: 2018896686}
   - component: {fileID: 2018896682}
   - component: {fileID: 2018896681}
   - component: {fileID: 2018896685}
-  - component: {fileID: 2018896686}
   - component: {fileID: 2018896687}
   m_Layer: 0
   m_Name: Bear
@@ -2426,9 +2425,14 @@ MonoBehaviour:
     m_Bits: 64
   castDistance: 0.2
   groundDrag: 1
-  bearStats: {fileID: 11400000, guid: 90d079be474d3444a962abf2ba60f468, type: 2}
+  airStopMult: 0.98
+  acceleration: 4
+  deceleration: 3
+  curBearStats: {fileID: 11400000, guid: 90d079be474d3444a962abf2ba60f468, type: 2}
+  prevBearStats: {fileID: 11400000, guid: 90d079be474d3444a962abf2ba60f468, type: 2}
   onGround: 0
   controllable: 1
+  maxSpeed: 0
   visualizeCircleCast: 1
 --- !u!82 &2018896687
 AudioSource:
