@@ -9,6 +9,7 @@ public class BearController : MonoBehaviour
     private CircleCollider2D cc;
     private SpriteRenderer spriteRenderer;
     private AudioSource audioSource;
+    private CameraController cameraController;
 
     [Header("Set in Inspector")]
     public AudioClip cantChangeSound;
@@ -17,7 +18,7 @@ public class BearController : MonoBehaviour
     public float groundDrag, airStopMult;
     public float acceleration, deceleration;
 
-    [Header("Changed in the script")]
+    [Header("Changed dynamically")]
     public BearStats curBearStats;
     public BearStats prevBearStats;
     private BearStats baby, mama, papa;
@@ -42,6 +43,7 @@ public class BearController : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
         bearSpawnLoc = GameObject.Find("BearSpawnLoc");
         bearSpawnLoc.GetComponent<SpriteRenderer>().enabled = false;
+        cameraController = GameObject.Find("Main Camera").GetComponent<CameraController>();
 
         baby = Resources.Load("BearStats/BabyBear") as BearStats;
         mama = Resources.Load("BearStats/MamaBear") as BearStats;
@@ -236,6 +238,15 @@ public class BearController : MonoBehaviour
             maxSpeed += acceleration * Time.deltaTime;
 
         LimitSpeed(maxSpeed); //edit speed cap over time until it matches new bear
+    }
+
+    void OnCollisionEnter2D(Collision2D collisionInfo)
+    {
+        if (curBearStats == papa)
+        {
+            float collisionForce = collisionInfo.relativeVelocity.magnitude / Time.fixedDeltaTime;
+            cameraController.Shake(collisionForce / 100, collisionForce / 500);
+        }
     }
 
     bool CheckRoomForBear(BearStats newBear)
