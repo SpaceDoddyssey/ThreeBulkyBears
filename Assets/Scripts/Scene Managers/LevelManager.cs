@@ -1,9 +1,7 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
-using Cinemachine;
 using System;
 
 public class LevelManager : MonoBehaviour
@@ -51,7 +49,7 @@ public class LevelManager : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.R))
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            ResetLevel();
         }
 
         if (Input.GetKeyDown(KeyCode.P))
@@ -77,6 +75,29 @@ public class LevelManager : MonoBehaviour
         currentTime += Time.deltaTime;
         TimeSpan curTime = TimeSpan.FromSeconds(currentTime);
         timerText.text = curTime.ToString("m':'ss'.'fff");
+    }
+
+    void ResetLevel()
+    {
+        if (gameManager != null)
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
+        else
+        {
+            bearController.controllable = true;
+            currentTime = 0;
+            isGameOver = false;
+            bearController.controllable = true;
+            Cursor.visible = false;
+            pauseMenu.SetActive(false);
+            gameOverObj.transform.localPosition = signStartPos;
+            victoryObj.transform.localPosition = signStartPos;
+            GameObject.Find("CameraFollowPoint").transform.parent = playerObj.transform;
+            GameObject.Find("BearSpawnLoc").GetComponent<SpriteRenderer>().enabled = false;
+            GameObject.Find("FlagLoc").GetComponent<SpriteRenderer>().enabled = false;
+            bearController.ResetBear();
+        }
     }
 
     public void TogglePause()
