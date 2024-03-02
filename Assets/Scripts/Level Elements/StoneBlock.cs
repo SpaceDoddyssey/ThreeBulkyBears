@@ -9,7 +9,7 @@ public class StoneBlock : MonoBehaviour
         if (collision.gameObject.tag == "Player")
         {
             BearController bearController = collision.gameObject.GetComponent<BearController>();
-            if (bearController.bearStats.bearName == "Papa")
+            if (bearController.curBearStats.bearName == "Papa")
             {
                 GetComponent<AudioSource>().Play();
                 GetComponent<SpriteRenderer>().enabled = false;

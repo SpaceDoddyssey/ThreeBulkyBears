@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using UnityEngine.Audio;
 using UnityEngine.Localization.Settings;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class SettingsMenu : MonoBehaviour
 {
@@ -30,6 +31,11 @@ public class SettingsMenu : MonoBehaviour
     private void Start()
     {
         LoadVolume();
+    }
+
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape)) SceneManager.LoadScene("MainMenu");
     }
 
     void LoadVolume()
@@ -64,5 +70,10 @@ public class SettingsMenu : MonoBehaviour
         int pickedIndex = dropdown.value;
         string selectedOption = dropdown.options[pickedIndex].text;
         Debug.Log(selectedOption);
+    }
+
+    public void ReturnToMain()
+    {
+        SceneManager.LoadScene("MainMenu");
     }
 }
