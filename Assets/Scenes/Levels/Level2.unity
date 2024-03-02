@@ -529,7 +529,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2174540810835733791, guid: 740d569dd8bccba49add2b76c77ba29f, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 99.61688
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2174540810835733791, guid: 740d569dd8bccba49add2b76c77ba29f, type: 3}
       propertyPath: m_LocalRotation.w
@@ -740,7 +740,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3294881110526990501, guid: 3ef524d1aaab5fa4a9c0aab5561d8a96, type: 3}
   m_PrefabInstance: {fileID: 1749995459}
   m_PrefabAsset: {fileID: 0}
-<<<<<<< HEAD
 --- !u!1 &1781899218
 GameObject:
   m_ObjectHideFlags: 0
@@ -772,7 +771,7 @@ Transform:
   m_LocalScale: {x: -0.0046348083, y: -0.008021354, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 649848781}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1781899220
 SpriteRenderer:
@@ -901,7 +900,7 @@ RectTransform:
   m_LocalScale: {x: 1.3308809, y: 1.3308809, z: 1.3308809}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 760472846}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90.659}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -968,8 +967,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1785530562}
   m_CullTransparentMesh: 1
-=======
->>>>>>> 49267a7a4cc2b8de45e9c6357cda002f72e7d7b3
 --- !u!1001 &1832373924
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14133,3 +14130,5 @@ SceneRoots:
   - {fileID: 2105909102}
   - {fileID: 7928789782505430708}
   - {fileID: 1159098123}
+  - {fileID: 1781899219}
+  - {fileID: 1785530563}
