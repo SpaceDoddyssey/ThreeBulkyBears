@@ -8,7 +8,7 @@ public class CameraController : MonoBehaviour
     private Transform cameraFollowPoint;
     private float minYVal;
     public CinemachineVirtualCamera cmCam;
-    public float shakeStrengthMult, shakeDurationMult, maxShakeDuration;
+    public float shakeStrengthMult, shakeDurationMult, maxShakeIntesity, maxShakeDuration;
 
     void Start()
     {
@@ -29,9 +29,14 @@ public class CameraController : MonoBehaviour
 
     public void Shake(float shakeIntensity, float shakeDuration)
     {
+        Debug.Log("Shake intensity: " + shakeIntensity + " Shake duration: " + shakeDuration);
         if (shakeDuration > maxShakeDuration)
         {
             shakeDuration = maxShakeDuration;
+        }
+        if (shakeIntensity > maxShakeIntesity)
+        {
+            shakeIntensity = maxShakeIntesity;
         }
         StartCoroutine(_ProcessShake(shakeIntensity * shakeStrengthMult, shakeDuration * shakeDurationMult));
     }
