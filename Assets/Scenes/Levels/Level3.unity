@@ -201,9 +201,45 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 850181395388891356, guid: 40eea66ab9438744cabe77cac6ae4840, type: 3}
+      propertyPath: m_StringReference.m_TableEntryReference.m_KeyId
+      value: 12729450496
+      objectReference: {fileID: 0}
+    - target: {fileID: 850181395388891356, guid: 40eea66ab9438744cabe77cac6ae4840, type: 3}
+      propertyPath: m_UpdateString.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 850181395388891356, guid: 40eea66ab9438744cabe77cac6ae4840, type: 3}
+      propertyPath: m_StringReference.m_TableReference.m_TableCollectionName
+      value: GUID:abf4d654a39d8984dae6dae3912acf4f
+      objectReference: {fileID: 0}
+    - target: {fileID: 850181395388891356, guid: 40eea66ab9438744cabe77cac6ae4840, type: 3}
+      propertyPath: m_UpdateString.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 850181395388891356, guid: 40eea66ab9438744cabe77cac6ae4840, type: 3}
+      propertyPath: m_UpdateString.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1904609397}
+    - target: {fileID: 850181395388891356, guid: 40eea66ab9438744cabe77cac6ae4840, type: 3}
+      propertyPath: m_UpdateString.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 850181395388891356, guid: 40eea66ab9438744cabe77cac6ae4840, type: 3}
+      propertyPath: m_UpdateString.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: set_text
+      objectReference: {fileID: 0}
+    - target: {fileID: 850181395388891356, guid: 40eea66ab9438744cabe77cac6ae4840, type: 3}
+      propertyPath: m_UpdateString.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: TMPro.TMP_Text, Unity.TextMeshPro
+      objectReference: {fileID: 0}
+    - target: {fileID: 850181395388891356, guid: 40eea66ab9438744cabe77cac6ae4840, type: 3}
+      propertyPath: m_UpdateString.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 4279866420925102716, guid: 40eea66ab9438744cabe77cac6ae4840, type: 3}
       propertyPath: m_Name
-      value: TutorialText
+      value: HighJumpTutorial
       objectReference: {fileID: 0}
     - target: {fileID: 5367504216893630348, guid: 40eea66ab9438744cabe77cac6ae4840, type: 3}
       propertyPath: m_text
@@ -1558,6 +1594,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 815324049079765977, guid: 2b09ef812d355474aa4a750ee237a715, type: 3}
   m_PrefabInstance: {fileID: 1805077098}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1904609397 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5367504216893630348, guid: 40eea66ab9438744cabe77cac6ae4840, type: 3}
+  m_PrefabInstance: {fileID: 192007159}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9541d86e2fd84c1d9990edf0852d74ab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1907112374
 PrefabInstance:
   m_ObjectHideFlags: 0
