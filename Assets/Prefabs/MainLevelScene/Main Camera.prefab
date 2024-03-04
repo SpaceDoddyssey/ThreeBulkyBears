@@ -218,6 +218,7 @@ MonoBehaviour:
   shakeDurationMult: 0.8
   maxShakeIntesity: 10
   maxShakeDuration: 1
+  recoveryDuration: 10
 --- !u!114 &6810077937185141121
 MonoBehaviour:
   m_ObjectHideFlags: 0
