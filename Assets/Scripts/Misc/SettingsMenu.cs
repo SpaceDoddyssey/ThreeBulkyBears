@@ -17,25 +17,9 @@ public class SettingsMenu : MonoBehaviour
     public const string MUSIC_KEY = "musicVol";
     public const string SFX_KEY = "sfxVol";
 
-    // IEnumerator SetLocale(int _localeID){
-    //     yield return LocalizationSettings.InitializationOperation;
-    //     LocalizationSettings.SelectedLocale = LocalizationSettings.AvaliableLocales.Locales[_localeID];
-    // }
-
-    // public void ChangeLocale(int localeID)
-    // {
-    //     StartCoroutine(SetLocale())
-    // }
-    
-    
     private void Start()
     {
         LoadVolume();
-    }
-
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Escape)) SceneManager.LoadScene("MainMenu");
     }
 
     void LoadVolume()
