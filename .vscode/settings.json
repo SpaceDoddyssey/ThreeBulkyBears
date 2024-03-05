@@ -51,5 +51,6 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "ThreeBulkyBears.sln"
+    "dotnet.defaultSolution": "ThreeBulkyBears.sln",
+    "dotnet.preferCSharpExtension": true
 }
