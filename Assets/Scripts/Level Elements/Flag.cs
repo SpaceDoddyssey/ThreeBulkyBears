@@ -19,13 +19,14 @@ public class Flag : MonoBehaviour
         if (collision.gameObject.tag == "Player")
         {
             GameObject.Find("LevelManager").GetComponent<LevelManager>().Victory();
-            Debug.Log("Poofing");
             StartCoroutine(Poof());
         }
     }
 
     public IEnumerator Poof()
     {
+        GetComponent<AudioSource>().Play();
+
         GetComponent<SpriteRenderer>().sprite = poofSmoke;
 
         yield return new WaitForSeconds(0.4f);
