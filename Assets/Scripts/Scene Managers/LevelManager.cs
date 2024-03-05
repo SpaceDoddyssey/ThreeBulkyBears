@@ -108,6 +108,7 @@ public class LevelManager : MonoBehaviour
             Time.timeScale = 0;
             paused = true;
             pauseMenu.SetActive(true);
+            bearController.controllable = false;
         }
         else
         {
@@ -115,6 +116,7 @@ public class LevelManager : MonoBehaviour
             Time.timeScale = 1;
             paused = false;
             pauseMenu.SetActive(false);
+            bearController.controllable = true;
         }
     }
 
