@@ -10,6 +10,7 @@ public class BearController : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     private AudioSource audioSource;
     private CameraController cameraController;
+    private CurBearDisplay curBearDisplay;
 
     [Header("Set in Inspector")]
     public AudioClip cantChangeSound;
@@ -35,15 +36,21 @@ public class BearController : MonoBehaviour
 
     [SerializeField] private bool visualizeCircleCast = false;
 
-    void Start()
+    void GetReferences()
     {
         rb = GetComponent<Rigidbody2D>();
         cc = GetComponent<CircleCollider2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         audioSource = GetComponent<AudioSource>();
         bearSpawnLoc = GameObject.Find("BearSpawnLoc");
-        bearSpawnLoc.GetComponent<SpriteRenderer>().enabled = false;
         cameraController = GameObject.Find("Main Camera").GetComponent<CameraController>();
+        curBearDisplay = GameObject.Find("CurBearDisplay").GetComponent<CurBearDisplay>();
+    }
+
+    void Start()
+    {
+        GetReferences();
+        bearSpawnLoc.GetComponent<SpriteRenderer>().enabled = false;
 
         baby = Resources.Load("BearStats/BabyBear") as BearStats;
         mama = Resources.Load("BearStats/MamaBear") as BearStats;
@@ -113,6 +120,7 @@ public class BearController : MonoBehaviour
         cc.radius = curBearStats.circleRadius;
         rb.mass = curBearStats.mass;
         rb.gravityScale = curBearStats.gravityMult;
+        curBearDisplay.UpdateDisplay(curBearStats);
     }
 
     void ChangeBearUp()

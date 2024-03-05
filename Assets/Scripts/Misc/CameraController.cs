@@ -8,7 +8,8 @@ public class CameraController : MonoBehaviour
     private Transform cameraFollowPoint;
     private float minYVal;
     public CinemachineVirtualCamera cmCam;
-    public float shakeStrengthMult, shakeDurationMult, maxShakeDuration;
+    public float shakeStrengthMult, shakeDurationMult, maxShakeIntesity, maxShakeDuration;
+    public float recoveryDuration;
 
     void Start()
     {
@@ -20,7 +21,6 @@ public class CameraController : MonoBehaviour
 
     void FixedUpdate()
     {
-        cmCam.transform.position = new Vector3(cmCam.transform.position.x, cmCam.transform.position.y, -10f);
         if (cameraFollowPoint.transform.position.y < minYVal)
         {
             cameraFollowPoint.position = new Vector3(cameraFollowPoint.position.x, minYVal, cameraFollowPoint.position.z);
@@ -29,9 +29,14 @@ public class CameraController : MonoBehaviour
 
     public void Shake(float shakeIntensity, float shakeDuration)
     {
+        Debug.Log("Shake intensity: " + shakeIntensity + " Shake duration: " + shakeDuration);
         if (shakeDuration > maxShakeDuration)
         {
             shakeDuration = maxShakeDuration;
+        }
+        if (shakeIntensity > maxShakeIntesity)
+        {
+            shakeIntensity = maxShakeIntesity;
         }
         StartCoroutine(_ProcessShake(shakeIntensity * shakeStrengthMult, shakeDuration * shakeDurationMult));
     }
@@ -62,7 +67,22 @@ public class CameraController : MonoBehaviour
         cmCam.enabled = false;
         cmCam.enabled = true;
         Vector3 bearPos = GameObject.Find("Bear").transform.position;
-        cmCam.transform.position = new Vector3(bearPos.x, bearPos.y, bearPos.z - 10);
+
+        //Reset to resting rotation
+        elapsedTime = 0f;
+        Quaternion startRotation = transform.rotation;
+        Quaternion targetRotation = Quaternion.identity;
+
+        while (elapsedTime < recoveryDuration)
+        {
+            float t = elapsedTime / recoveryDuration;
+            transform.rotation = Quaternion.Lerp(startRotation, targetRotation, t);
+
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        transform.rotation = targetRotation;
     }
 
     public void Noise(float amplitudeGain, float frequencyGain)
