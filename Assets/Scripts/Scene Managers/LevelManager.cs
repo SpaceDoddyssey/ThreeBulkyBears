@@ -49,6 +49,10 @@ public class LevelManager : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.R))
         {
+            if (paused)
+            {
+                TogglePause();
+            }
             ResetLevel();
         }
 
