@@ -14,6 +14,7 @@ public class StoneBlock : MonoBehaviour
                 GetComponent<AudioSource>().Play();
                 GetComponent<SpriteRenderer>().enabled = false;
                 GetComponent<BoxCollider2D>().enabled = false;
+                GetComponent<ParticleSystem>().Play();
             }
         }
     }
