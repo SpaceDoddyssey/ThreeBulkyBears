@@ -137,8 +137,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5367504216893630348, guid: 40eea66ab9438744cabe77cac6ae4840, type: 3}
       propertyPath: m_text
-      value: You'll have to switch back to mama bear here. Baby Bear is too weak
-        to jump, and Papa Bear is too heavy
+      value: Press Space to jump. You'll have to switch back to Mama Bear First -
+        Baby Bear is too weak to jump, and Papa Bear is too heavy
       objectReference: {fileID: 0}
     - target: {fileID: 5367504216893630348, guid: 40eea66ab9438744cabe77cac6ae4840, type: 3}
       propertyPath: m_margin.x
@@ -1048,7 +1048,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4279866420925102716, guid: 40eea66ab9438744cabe77cac6ae4840, type: 3}
       propertyPath: m_Name
-      value: SwitchMamaBear (1)
+      value: SpaceToJumpHigher
       objectReference: {fileID: 0}
     - target: {fileID: 5367504216893630348, guid: 40eea66ab9438744cabe77cac6ae4840, type: 3}
       propertyPath: m_text
