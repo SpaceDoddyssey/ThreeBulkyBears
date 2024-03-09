@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: -8883078829934470129}
   - component: {fileID: 2703673169289697159}
   m_Layer: 6
-  m_Name: SpikeTrap
+  m_Name: ProjectileTrap
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -29,7 +29,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.0625, y: 0.0625, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -140,14 +140,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1120430056409501362}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ffdcadf558600084fac15a74000a8ce8, type: 3}
+  m_Script: {fileID: 11500000, guid: cd2b347632f130d4792bd2507635be77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   spike: {fileID: 3387105079090671955, guid: 971c650c05234104bbc5f1e0a9cfd4a5, type: 3}
-  spawnLocation: {fileID: 0}
-  spawnRotation: {x: 0, y: 0, z: 0, w: 0}
+  spawnLocation: {x: 0, y: 0}
   platforms:
     serializedVersion: 2
     m_Bits: 0
   timeSinceSpawn: 0
-  spawnTime: 0.5
+  direction: 0

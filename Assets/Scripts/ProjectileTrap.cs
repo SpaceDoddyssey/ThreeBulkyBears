@@ -2,15 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SpikeTrap : MonoBehaviour
+public class ProjectileTrap : MonoBehaviour  
 {
     public GameObject spike;
     public Vector2 spawnLocation;
     public LayerMask platforms;
 
-    [SerializeField] private float timeSinceSpawn = 0;
+    [SerializeField] 
+    private float timeSinceSpawn = 0;
+    private float spawnTime = 2f;
+    
     public float direction = 0; //0 if facing left, 1 if facing right
-    public float spawnTime = 0.5f;
 
     void Start()
     {
@@ -25,13 +27,13 @@ public class SpikeTrap : MonoBehaviour
     void Update()
     {
         timeSinceSpawn += Time.deltaTime;
-
         if (timeSinceSpawn > spawnTime && direction == 0) {
-            Instantiate(spike, spawnLocation, Quaternion.Euler(0, 0, 0));
+            Instantiate(spike, spawnLocation, Quaternion.Euler(0, 0, 0), this.transform);
             timeSinceSpawn = 0;
         }
-        else {
-            Instantiate(spike, spawnLocation, Quaternion.Euler(180, 0, 0));
+        else if (timeSinceSpawn > spawnTime)
+        {
+            Instantiate(spike, spawnLocation, Quaternion.Euler(180, 0, 0), this.transform);
             timeSinceSpawn = 0;            
         }
     }
