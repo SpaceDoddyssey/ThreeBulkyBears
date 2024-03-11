@@ -17,4 +17,5 @@ public class LevelInfo : ScriptableObject
     [Header("Level Construction Settings")]
     public float fallingDeathZoneY;
     public float cloudBoundLeft, cloudBoundRight;
+    //There should maybe be a lower and upper cloudbound here too but I don't feel like adding those right now
 }
