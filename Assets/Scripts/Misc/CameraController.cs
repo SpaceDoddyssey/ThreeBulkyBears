@@ -57,7 +57,6 @@ public class CameraController : MonoBehaviour
             float lerpIntensity = Mathf.Lerp(startIntensity, endIntensity, t);
 
             Noise(lerpIntensity, lerpIntensity);
-            Debug.Log("lerpIntensity: " + lerpIntensity);
 
             elapsedTime += Time.deltaTime;
             yield return null;
