@@ -97,7 +97,7 @@ public class LevelManager : MonoBehaviour
             pauseMenu.SetActive(false);
             gameOverObj.transform.localPosition = signStartPos;
             victoryObj.transform.localPosition = signStartPos;
-            GameObject.Find("CameraFollowPoint").transform.parent = playerObj.transform;
+            FindObjectOfType<CameraController>().followBear = true;
             GameObject.Find("BearSpawnLoc").GetComponent<SpriteRenderer>().enabled = false;
             GameObject.Find("FlagLoc").GetComponent<SpriteRenderer>().enabled = false;
             bearController.ResetBear();
@@ -129,7 +129,7 @@ public class LevelManager : MonoBehaviour
         if (isGameOver) { return; }
         StartCoroutine(DropDownSign(gameOverObj));
 
-        GameObject.Find("CameraFollowPoint").transform.parent = null;
+        FindObjectOfType<CameraController>().followBear = false;
         isGameOver = true;
         bearController.controllable = false;
     }
@@ -139,7 +139,7 @@ public class LevelManager : MonoBehaviour
         if (isGameOver) { return; }
         StartCoroutine(DropDownSign(victoryObj));
 
-        GameObject.Find("CameraFollowPoint").transform.parent = null;
+        FindObjectOfType<CameraController>().followBear = false;
         isGameOver = true;
         bearController.controllable = false;
 

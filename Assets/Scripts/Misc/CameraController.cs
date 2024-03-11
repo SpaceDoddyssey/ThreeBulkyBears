@@ -10,18 +10,27 @@ public class CameraController : MonoBehaviour
     public CinemachineVirtualCamera cmCam;
     public float shakeStrengthMult, shakeDurationMult, maxShakeIntesity, maxShakeDuration;
     public float recoveryDuration;
+    public bool followBear = true;
+    public GameObject bear;
 
     void Start()
     {
         cameraFollowPoint = GameObject.Find("CameraFollowPoint").transform;
+        bear = GameObject.Find("Bear");
         mainCamera = GetComponent<Camera>();
         minYVal = GameObject.Find("GameManager").GetComponent<GameManager>().curLevelInfo.fallingDeathZoneY + mainCamera.orthographicSize + 1;
-        transform.position = GameObject.Find("BearSpawnLoc").transform.position + new Vector3(0, 0, -10);
+        Vector3 startPos = GameObject.Find("BearSpawnLoc").transform.position + new Vector3(0, 0, -10);
+        transform.position = startPos;
+        cameraFollowPoint.position = startPos;
     }
 
-    void FixedUpdate()
+    void Update()
     {
-        if (cameraFollowPoint.transform.position.y < minYVal)
+        if (followBear)
+        {
+            cameraFollowPoint.position = bear.transform.position;
+        }
+        if (cameraFollowPoint.position.y < minYVal)
         {
             cameraFollowPoint.position = new Vector3(cameraFollowPoint.position.x, minYVal, cameraFollowPoint.position.z);
         }
