@@ -18,6 +18,6 @@ MonoBehaviour:
   description: 
   goalTime: 22
   isUnlocked: 1
-  fallingDeathZoneY: 0
+  fallingDeathZoneY: -33
   cloudBoundLeft: -45
   cloudBoundRight: 95

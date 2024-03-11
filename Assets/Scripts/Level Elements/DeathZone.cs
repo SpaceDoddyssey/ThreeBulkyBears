@@ -8,11 +8,9 @@ public class DeathZone : MonoBehaviour
     {
         if (gameObject.name == "FallingDeathZone")
         {
-            GameObject fdzLoc = GameObject.Find("FallingDeathZoneLoc");
-            if (fdzLoc != null)
-            {
-                transform.position = fdzLoc.transform.position;
-            }
+            transform.position = new Vector3(0, -500, 0); //In case there's no gameManager, during testing
+            float fdzY = GameObject.Find("GameManager").GetComponent<GameManager>().curLevelInfo.fallingDeathZoneY;
+            transform.position = new Vector3(0, fdzY, 0);
         }
     }
 

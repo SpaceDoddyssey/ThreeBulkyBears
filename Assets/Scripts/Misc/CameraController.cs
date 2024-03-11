@@ -15,7 +15,7 @@ public class CameraController : MonoBehaviour
     {
         cameraFollowPoint = GameObject.Find("CameraFollowPoint").transform;
         mainCamera = GetComponent<Camera>();
-        minYVal = GameObject.Find("FallingDeathZoneLoc").transform.position.y + mainCamera.orthographicSize + 1;
+        minYVal = GameObject.Find("GameManager").GetComponent<GameManager>().curLevelInfo.fallingDeathZoneY + mainCamera.orthographicSize + 1;
         transform.position = GameObject.Find("BearSpawnLoc").transform.position + new Vector3(0, 0, -10);
     }
 
