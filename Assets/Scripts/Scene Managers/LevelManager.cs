@@ -72,6 +72,12 @@ public class LevelManager : MonoBehaviour
                 TogglePause();
             }
         }
+
+        //Remove in final build
+        if (Input.GetKeyDown(KeyCode.RightBracket))
+        {
+            Victory();
+        }
     }
 
     public void UpdateTimer()
