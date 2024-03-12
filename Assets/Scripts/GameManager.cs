@@ -18,8 +18,11 @@ public class GameManager : MonoBehaviour
             DontDestroyOnLoad(gameObject);
         }
         LocalizationSettings.InitializationOperation.WaitForCompletion();
-        Debug.Log(LocalizationSettings.AvailableLocales.Locales[0].LocaleName);
-        Debug.Log(LocalizationSettings.AvailableLocales.Locales[1].LocaleName);
+
+        if (!PlayerPrefs.HasKey("TutorialUnlocked"))
+        {
+            PlayerPrefs.SetInt("TutorialUnlocked", 1);
+        }
     }
 
     void Update()
