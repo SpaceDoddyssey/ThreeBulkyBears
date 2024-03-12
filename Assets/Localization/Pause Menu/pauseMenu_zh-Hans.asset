@@ -10,17 +10,24 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
-  m_Name: TutorialText_en
+  m_Name: pauseMenu_zh-Hans
   m_EditorClassIdentifier: 
   m_LocaleId:
-    m_Code: en
-  m_SharedData: {fileID: 11400000, guid: abf4d654a39d8984dae6dae3912acf4f, type: 2}
+    m_Code: zh-Hans
+  m_SharedData: {fileID: 11400000, guid: 1e2f2d0f76092ac4e9cb1478b33fa33e, type: 2}
   m_Metadata:
     m_Items: []
   m_TableData:
-  - m_Id: 12729450496
-    m_Localized: This jump is too high to make normally. Think about the bears' physics,
-      and see if you can figure out the trick
+  - m_Id: 7734702080
+    m_Localized: Placeholder Mandarin Text
+    m_Metadata:
+      m_Items: []
+  - m_Id: 93835374592
+    m_Localized: Placeholder Mandarin Text
+    m_Metadata:
+      m_Items: []
+  - m_Id: 623865376768
+    m_Localized: Placeholder Mandarin Text
     m_Metadata:
       m_Items: []
   references:
