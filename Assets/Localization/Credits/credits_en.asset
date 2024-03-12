@@ -19,7 +19,7 @@ MonoBehaviour:
     m_Items: []
   m_TableData:
   - m_Id: 24272842752
-    m_Localized: Credits
+    m_Localized: CREDITS
     m_Metadata:
       m_Items: []
   references:

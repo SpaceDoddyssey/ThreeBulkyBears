@@ -40,11 +40,15 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 3089113690112
-    m_Localized: 'Gold Time:'
+    m_Localized: 'Goal Time:'
     m_Metadata:
       m_Items: []
   - m_Id: 6267032973312
     m_Localized: Not there yet!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36904771137536
+    m_Localized: World 1
     m_Metadata:
       m_Items: []
   references:

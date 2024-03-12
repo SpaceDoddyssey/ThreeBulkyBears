@@ -39,6 +39,10 @@ MonoBehaviour:
     m_Key: nobesttime
     m_Metadata:
       m_Items: []
+  - m_Id: 36904771137536
+    m_Key: world
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:
