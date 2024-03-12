@@ -145,6 +145,8 @@ public class LevelManager : MonoBehaviour
 
         if (gameManager.curLevelInfo != null)
         {
+            PlayerPrefs.SetInt(gameManager.curLevelInfo.levelName + "Beaten", 1);
+
             float bestTime = PlayerPrefs.GetFloat(gameManager.curLevelInfo.sceneName + "BestTime", float.PositiveInfinity);
             Debug.Log("Best Time: " + bestTime);
             Debug.Log("Current Time: " + currentTime);
