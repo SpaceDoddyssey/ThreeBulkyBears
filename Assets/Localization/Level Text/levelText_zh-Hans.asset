@@ -19,11 +19,11 @@ MonoBehaviour:
     m_Items: []
   m_TableData:
   - m_Id: 32015527936
-    m_Localized: Placeholder Mandarin Text
+    m_Localized: "\u4F60\u8D0F\u4E86!\nR \u91CD\u65B0\nEsc \u6309\u9375\u4F86\u56DE\u5230\u7B49\u7D1A\u9078\u55AE"
     m_Metadata:
       m_Items: []
   - m_Id: 1455751049216
-    m_Localized: Placeholder Mandarin Text
+    m_Localized: "\r\u904A\u6232\u7D50\u675F\r\nR \u91CD\u65B0\nEsc \u8FD4\u56DE\r\n\u7B49\u7D1A\u9078\u64C7"
     m_Metadata:
       m_Items: []
   references:

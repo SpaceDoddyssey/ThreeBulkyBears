@@ -19,36 +19,32 @@ MonoBehaviour:
     m_Items: []
   m_TableData:
   - m_Id: 1387706855424
-    m_Localized: 'Placeholder mandarin text
-
-      Placeholder mandarin text
-
-      Placeholder
-      mandarin text'
+    m_Localized: "A/D \u6539\u8B8A\u95DC\u5361\n\u9032\u5165\u95DC\u5361\u7684\u7A7A\u9593\r\nEsc
+      \u8FD4\u56DE"
     m_Metadata:
       m_Items: []
   - m_Id: 2178211524608
-    m_Localized: Placeholder Mandarin Text
+    m_Localized: "\u6559\u5B78"
     m_Metadata:
       m_Items: []
   - m_Id: 2392389464064
-    m_Localized: Placeholder Mandarin Text
+    m_Localized: "\u95DC\u5361\u540D\u7A31"
     m_Metadata:
       m_Items: []
   - m_Id: 2705888522240
-    m_Localized: Placeholder Mandarin Text
+    m_Localized: "\u6700\u597D\u7684\u6642\u9593\uFF1A"
     m_Metadata:
       m_Items: []
   - m_Id: 3089113690112
-    m_Localized: Placeholder Mandarin Text
+    m_Localized: "\u76EE\u6A19\u6642\u9593\uFF1A"
     m_Metadata:
       m_Items: []
   - m_Id: 6267032973312
-    m_Localized: Placeholder Mandarin Text
+    m_Localized: "\u5DEE\u4E00\u9EDE!"
     m_Metadata:
       m_Items: []
   - m_Id: 36904771137536
-    m_Localized: Placeholder Mandarin Text
+    m_Localized: "\u4E16\u754C1"
     m_Metadata:
       m_Items: []
   references:

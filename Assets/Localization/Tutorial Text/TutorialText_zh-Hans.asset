@@ -16,44 +16,51 @@ MonoBehaviour:
     m_Code: zh-Hans
   m_SharedData: {fileID: 11400000, guid: abf4d654a39d8984dae6dae3912acf4f, type: 2}
   m_Metadata:
-    m_Items: []
+    m_Items:
+    - rid: 7845345610364092419
   m_TableData:
   - m_Id: 12729450496
-    m_Localized: Placeholder Chinese Text
+    m_Localized: "\u6309 W \u6216 \u4E0A\u9375\u5169\u6B21\u5C31\u53EF\u4EE5\u63DB\u6210\u7238\u7238\u718A\uFF0C\n\u63A5\u4E0B\u4F86\u6211\u5011\u53EF\u4EE5\u7528\u7238\u7238\u4F86\u649E\u7834\u77F3\u982D!"
     m_Metadata:
       m_Items: []
   - m_Id: 221840670720
-    m_Localized: Placeholder Chinese Text
+    m_Localized: "\u8ACB\u6309 A/D \u6216\u662F\n\u5DE6/\u53F3\u9375\u4F86\u79FB\u52D5"
     m_Metadata:
-      m_Items: []
+      m_Items:
+      - rid: 7845345610364092419
   - m_Id: 209425530880
-    m_Localized: Placeholder Chinese Text
+    m_Localized: "\u6309 S \u6216\u4E0B\u6309\u9375\u63DB\u6210\u5C0F\u718A\u3002\u5C0F\u718A\u53EF\n\u5C0F\u718A\u53EF\u4EE5\u9032\u5165\u5F88\u7A84\u7684\u7A7A\u9593\u548C\u79FB\u52D5\u5F88\u5FEB"
     m_Metadata:
       m_Items: []
   - m_Id: 3006114702962688
-    m_Localized: Placeholder Chinese Text
+    m_Localized: "\u6309\u7A7A\u9593\u4F86\u8DF3\u3002\u4F60\u8981\u9700\u8981\u63DB\u6210\u5ABD\u5ABD\u718A\u5148
+      - \u56E0\u70BA\u5C0F\u718A\u592A\u5F31\u4E86\u548C\u7238\u7238\u718A\u592A\u91CD\u4E86"
     m_Metadata:
       m_Items: []
   - m_Id: 3007341020983296
-    m_Localized: Placeholder Chinese Text
+    m_Localized: "\u9577\u6309\u7A7A\u9375\u53EF\u4EE5\u8B93\u4F60\u8DF3\u6839\u9AD8"
     m_Metadata:
       m_Items: []
   - m_Id: 3008098042523648
-    m_Localized: Placeholder Chinese Text
+    m_Localized: "\u5C0F\u5FC3\u6709\u9677\u9631!\n\u5982\u679C\u78B0\u5230\u4F60\u9700\u8981\u91CD\u65B0\u958B\u59CB!"
     m_Metadata:
       m_Items: []
   - m_Id: 3008938073534464
-    m_Localized: Placeholder Chinese Text
+    m_Localized: "\u8DF3\u7684\u6642\u5019\u63DB\u6210\u7238\u7238\u718A\n\u53EF\u4EE5\u8B93\u4F60\u6389\u7684\u8DDF\u5FEB\n\u4E26\u4E14\u53EF\u4EE5\u649E\u7834\u77F3\u982D\u3002"
     m_Metadata:
       m_Items: []
   - m_Id: 3011950393307136
-    m_Localized: Placeholder Chinese Text
+    m_Localized: "\u9084\u6709\u4E00\u500B\u6280\u5DE7\uFF1A\u4F60\u5FC5\u9808\u4F7F\u7528\n\u718A\u5ABD\u5ABD\u624D\u80FD\u7372\u5F97\u8DB3\u5920\u7684\u9AD8\u5EA6\n\u5728\u9019\u88E1\uFF0C\u7136\u5F8C\u7ACB\u523B\u5207\u63DB\u5230\u5C0F\u718A\n\u5C31\u53EF\u4EE5\u8DF3\u7684\u66F4\u9060"
     m_Metadata:
       m_Items: []
   - m_Id: 3013785078345728
-    m_Localized: Placeholder Chinese Text
+    m_Localized: "\u5979\u5728\u54EA!\n\u6293\u5979!"
     m_Metadata:
       m_Items: []
   references:
     version: 2
-    RefIds: []
+    RefIds:
+    - rid: 7845345610364092419
+      type: {class: SmartFormatTag, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_Entries: 0000bca633000000
