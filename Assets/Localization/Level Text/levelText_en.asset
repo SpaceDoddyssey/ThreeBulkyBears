@@ -10,17 +10,34 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
-  m_Name: TutorialText_en
+  m_Name: levelText_en
   m_EditorClassIdentifier: 
   m_LocaleId:
     m_Code: en
-  m_SharedData: {fileID: 11400000, guid: abf4d654a39d8984dae6dae3912acf4f, type: 2}
+  m_SharedData: {fileID: 11400000, guid: da0ccd2acd0beeb4ebea13d4588ac497, type: 2}
   m_Metadata:
     m_Items: []
   m_TableData:
-  - m_Id: 12729450496
-    m_Localized: This jump is too high to make normally. Think about the bears' physics,
-      and see if you can figure out the trick
+  - m_Id: 32015527936
+    m_Localized: 'You Win!
+
+      R to restart
+
+      Esc to return to
+
+      level
+      select'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1455751049216
+    m_Localized: 'Game Over
+
+      R to restart
+
+      Esc to return tp
+
+      level
+      select'
     m_Metadata:
       m_Items: []
   references:

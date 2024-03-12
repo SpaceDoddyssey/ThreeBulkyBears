@@ -29,6 +29,30 @@ MonoBehaviour:
     m_SerializedLabels:
     - Locale-it
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e0af50eefbf72084380f1c05b6838243
+    m_Address: Level Select_it
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-it
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e1bfefb06fc45204fab29c4be051ed9e
+    m_Address: credits_it
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-it
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d46037e815bca194ab96c20917b2d55c
+    m_Address: levelText_it
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-it
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 683ff67440b72904d945d6c1960052eb
+    m_Address: pauseMenu_it
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-it
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 1
   m_Settings: {fileID: 11400000, guid: 254f6baaf24585a45af9852aa0ff1656, type: 2}
   m_SchemaSet:

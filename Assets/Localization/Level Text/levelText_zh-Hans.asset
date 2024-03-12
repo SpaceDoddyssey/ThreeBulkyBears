@@ -10,16 +10,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
-  m_Name: TutorialText_zh-Hans
+  m_Name: levelText_zh-Hans
   m_EditorClassIdentifier: 
   m_LocaleId:
     m_Code: zh-Hans
-  m_SharedData: {fileID: 11400000, guid: abf4d654a39d8984dae6dae3912acf4f, type: 2}
+  m_SharedData: {fileID: 11400000, guid: da0ccd2acd0beeb4ebea13d4588ac497, type: 2}
   m_Metadata:
     m_Items: []
   m_TableData:
-  - m_Id: 12729450496
-    m_Localized: Placeholder Chinese Text
+  - m_Id: 32015527936
+    m_Localized: Placeholder Mandarin Text
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1455751049216
+    m_Localized: Placeholder Mandarin Text
     m_Metadata:
       m_Items: []
   references:

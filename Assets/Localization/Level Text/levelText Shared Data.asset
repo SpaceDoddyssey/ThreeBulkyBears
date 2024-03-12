@@ -10,31 +10,27 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5b11a58205ec3474ca216360e9fa74a8, type: 3}
-  m_Name: TutorialText Shared Data
+  m_Name: levelText Shared Data
   m_EditorClassIdentifier: 
-  m_TableCollectionName: TutorialText
-  m_TableCollectionNameGuidString: abf4d654a39d8984dae6dae3912acf4f
+  m_TableCollectionName: levelText
+  m_TableCollectionNameGuidString: da0ccd2acd0beeb4ebea13d4588ac497
   m_Entries:
-  - m_Id: 221840670720
-    m_Key: New Entry 1
+  - m_Id: 32015527936
+    m_Key: victory
     m_Metadata:
       m_Items: []
-  - m_Id: 209425530880
-    m_Key: New Entry
-    m_Metadata:
-      m_Items: []
-  - m_Id: 12729450496
-    m_Key: Level3HighJump
+  - m_Id: 1455751049216
+    m_Key: defeat
     m_Metadata:
       m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:
-    rid: 1512126510446936110
+    rid: 6370192414937710609
   references:
     version: 2
     RefIds:
-    - rid: 1512126510446936110
+    - rid: 6370192414937710609
       type: {class: DistributedUIDGenerator, ns: UnityEngine.Localization.Tables, asm: Unity.Localization}
       data:
-        m_CustomEpoch: 1709506451061
+        m_CustomEpoch: 1710221231697

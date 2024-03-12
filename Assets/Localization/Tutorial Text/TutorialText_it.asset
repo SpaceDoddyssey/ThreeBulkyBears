@@ -1,0 +1,71 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: TutorialText_it
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: it
+  m_SharedData: {fileID: 11400000, guid: abf4d654a39d8984dae6dae3912acf4f, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 12729450496
+    m_Localized: "Tocca W (o S\xF9 due volte) per\ndiventare Orsopap\xE0, e colpisci\nil
+      muro fragile per romperlo!"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 221840670720
+    m_Localized: "tocca A/D o \nsinistra/destro \nper muovere"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 209425530880
+    m_Localized: "Tocca S o Gi\xF9 per diventare\nun orso pi\xF9 piccolo. Orsetto
+      pu\xF2\nentrare le spazie strette, ed \xE8 pi\xF9\r\nveloce\n"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3006114702962688
+    m_Localized: "Tocca Spazio per saltare. Primo\ndevi ritornare a Orsomama-\nOresetto
+      \xE8 troppo debole per\nsaltare e Orsopap\xE0 \xE8 troppo\npesante"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3007341020983296
+    m_Localized: "Tieni spazio per saltare pi\xF9 in alto"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3008098042523648
+    m_Localized: 'Stai attento al trappola
+
+      cattura orso! Se sei preso
+
+      devi
+      ricominciare il livello'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3008938073534464
+    m_Localized: "Dopo hai saltato diventi\nOrso Pap\xE0,\r\nlui cade pi\xF9 veloce\r\ne
+      puo distruggere \nil muro fragile"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3011950393307136
+    m_Localized: "Un trucco finale: primo devi usare\r\nOrsomama per saltare pi\xF9
+      in alto, dopo puoi diventare Orsetto per spostare pi\xF9 in lungo"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3013785078345728
+    m_Localized: 'ECCOLA!
+
+      PRENDILA!'
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds: []
