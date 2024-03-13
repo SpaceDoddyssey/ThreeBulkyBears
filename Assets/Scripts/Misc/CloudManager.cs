@@ -17,9 +17,7 @@ public class CloudManager : MonoBehaviour
         cloudBoundLeft = GameObject.Find("GameManager").GetComponent<GameManager>().curLevelInfo.cloudBoundLeft;
         cloudBoundRight = GameObject.Find("GameManager").GetComponent<GameManager>().curLevelInfo.cloudBoundRight;
         spacing = (cloudBoundRight - cloudBoundLeft) / gridWidth;
-        Debug.Log("Spacing: " + spacing);
         cloudObjs = new List<GameObject>(GameObject.FindGameObjectsWithTag("Cloud"));
-        Debug.Log("Clouds found: " + cloudObjs.Count);
         DistributeClouds();
     }
 
@@ -38,12 +36,9 @@ public class CloudManager : MonoBehaviour
         foreach (var cloud in cloudObjs)
         {
             Vector3 tf = cloud.transform.localPosition;
-            float seed = Random.Range(0, 100);
-            Debug.Log("Seed: " + seed);
 
             float dx = Random.Range(-variance, variance);
             float dy = Random.Range(-variance, variance);
-            Debug.Log("dx: " + dx + " dy: " + dy);
 
             tf.x += dx * noiseMult;
             tf.y += dy * noiseMult;
