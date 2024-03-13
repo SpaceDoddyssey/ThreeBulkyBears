@@ -24,7 +24,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 221840670720
-    m_Localized: "tocca A/D o \nsinistra/destro \nper muovere"
+    m_Localized: "Tocca A/D o \nsinistra/destro \nper muovere"
     m_Metadata:
       m_Items: []
   - m_Id: 209425530880
@@ -47,7 +47,7 @@ MonoBehaviour:
       cattura orso! Se sei preso
 
       devi
-      ricominciare il livello'
+      ricominciare il livello!'
     m_Metadata:
       m_Items: []
   - m_Id: 3008938073534464

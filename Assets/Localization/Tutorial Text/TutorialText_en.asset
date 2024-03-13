@@ -19,12 +19,12 @@ MonoBehaviour:
     m_Items: []
   m_TableData:
   - m_Id: 12729450496
-    m_Localized: "Press W or Up twice to change to\r\nPapa Bear, then slam into the
+    m_Localized: "Press W or Up twice to change to\r Papa Bear, then slam into the
       rock\r wall to break it!"
     m_Metadata:
       m_Items: []
   - m_Id: 221840670720
-    m_Localized: 'press A/D or
+    m_Localized: 'Press A/D or
 
       Left/Right to
 
@@ -32,14 +32,8 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 209425530880
-    m_Localized: 'Press S or Down to change to a
-
-      smaller bear. Baby bear
-      can fit
-
-      into tight passages, and moves
-
-      faster'
+    m_Localized: Press S or Down to change to a smaller bear. Baby Bear can fit into
+      tight passages, and moves faster
     m_Metadata:
       m_Items: []
   - m_Id: 3006114702962688
@@ -57,7 +51,7 @@ MonoBehaviour:
       you trigger one you''ll have
       to
 
-      restart the level
+      restart the level!
 
 '
     m_Metadata:
@@ -69,7 +63,7 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 3011950393307136
     m_Localized: "One more trick: You'll have to use\r\nMama Bear to get enough height\r\nhere,
-      then switch to Baby Bear after\rjumping to travel further"
+      then switch to Baby Bear after \rjumping to travel further"
     m_Metadata:
       m_Items: []
   - m_Id: 3013785078345728
