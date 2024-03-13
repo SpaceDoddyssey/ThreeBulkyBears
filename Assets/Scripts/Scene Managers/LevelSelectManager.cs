@@ -14,6 +14,7 @@ public class LevelSelectManager : MonoBehaviour
     private int curLevelIndex = 0;
     public TextMeshProUGUI levelNameText, bestTimeText, goalTimeText;
     [SerializeField] Image starImage;
+    [SerializeField] Sprite lockSprite, unlockedSprite;
 
     //Start is called before the first frame update
     void Start()
@@ -43,6 +44,7 @@ public class LevelSelectManager : MonoBehaviour
     IEnumerator FadeLockIcon(GameObject icon)
     {
         Image lockImage = icon.transform.Find("LockImage").GetComponent<Image>();
+        lockImage.sprite = unlockedSprite;
         Color originalColor = lockImage.color;
         Color targetColor = new Color(originalColor.r, originalColor.g, originalColor.b, 0f);
         float elapsedTime = 0f;
@@ -68,7 +70,9 @@ public class LevelSelectManager : MonoBehaviour
 
     void Lock(int levelID)
     {
-        levelIcons[levelID].transform.Find("LockImage").gameObject.SetActive(true);
+        Image lockImage = levelIcons[levelID].transform.Find("LockImage").GetComponent<Image>();
+        lockImage.sprite = lockSprite;
+        lockImage.gameObject.SetActive(true);
     }
 
     // Update is called once per frame
