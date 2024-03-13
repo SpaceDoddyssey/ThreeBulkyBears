@@ -9,25 +9,21 @@ public class Porridge : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Debug.Log("Porridge Start");
+        GameObject spawnLoc = GameObject.Find("PorridgeSpawnLoc");
+        spawnLoc.GetComponent<SpriteRenderer>().enabled = false;
+
         gameManager = FindObjectOfType<GameManager>();
         if (gameManager.curLevelInfo.hasPorridge == false
             || PlayerPrefs.GetInt(gameManager.curLevelInfo.levelName + "PorridgeCollected") == 1)
         {
-            Debug.Log("Porridge not in level or already collected");
             gameObject.SetActive(false);
             return;
         }
 
-        GameObject spawnLoc = GameObject.Find("PorridgeSpawnLoc");
         if (spawnLoc != null)
         {
-            Debug.Log("Porridge SpawnLoc found");
             transform.position = spawnLoc.transform.position;
-            spawnLoc.GetComponent<SpriteRenderer>().enabled = false;
         }
-
-        Debug.Log("Porridge End");
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -36,7 +32,9 @@ public class Porridge : MonoBehaviour
         {
             Debug.Log("Just Right!");
             PlayerPrefs.SetInt(gameManager.curLevelInfo.levelName + "PorridgeCollected", 1);
-            gameObject.SetActive(false);
+            GetComponent<SpriteRenderer>().enabled = false;
+            GetComponent<CircleCollider2D>().enabled = false;
+            GetComponent<ParticleSystem>().Play();
         }
     }
 }
