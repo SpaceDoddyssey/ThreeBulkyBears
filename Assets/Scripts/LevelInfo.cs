@@ -11,6 +11,7 @@ public class LevelInfo : ScriptableObject
     public string description;
     [Tooltip("In seconds")]
     public float goalTime;
+    public bool hasPorridge;
 
     [Space]
     [Header("Level Construction Settings")]
