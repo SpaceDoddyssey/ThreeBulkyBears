@@ -13,7 +13,7 @@ public class LevelSelectManager : MonoBehaviour
     public List<GameObject> levelIcons;
     private int curLevelIndex = 0;
     public TextMeshProUGUI levelNameText, bestTimeText, goalTimeText;
-    [SerializeField] Image starImage;
+    [SerializeField] Image starImage, porridgeImage;
     [SerializeField] Sprite lockSprite, unlockedSprite;
 
     //Start is called before the first frame update
@@ -71,6 +71,7 @@ public class LevelSelectManager : MonoBehaviour
     void Lock(int levelID)
     {
         Image lockImage = levelIcons[levelID].transform.Find("LockImage").GetComponent<Image>();
+        lockImage.color = new Color(1, 1, 1, 1);
         lockImage.sprite = lockSprite;
         lockImage.gameObject.SetActive(true);
     }
@@ -93,6 +94,7 @@ public class LevelSelectManager : MonoBehaviour
         {
             PlayerPrefs.DeleteAll();
             SelectLevel(0);
+            StopAllCoroutines();
             for (int i = 0; i < levels.Count; i++)
             {
                 Lock(i);
@@ -149,6 +151,23 @@ public class LevelSelectManager : MonoBehaviour
         {
             goalTimeText.text = "Gold Time: " + gt.ToString("m':'ss'.'fff");
             starImage.enabled = false;
+        }
+
+        if (level.hasPorridge)
+        {
+            porridgeImage.enabled = true;
+            if (PlayerPrefs.GetInt(level.levelName + "PorridgeCollected") == 1)
+            {
+                porridgeImage.color = new Color(1, 1, 1, 1);
+            }
+            else
+            {
+                porridgeImage.color = new Color(0.8f, 0.8f, 0.8f, 0.8f);
+            }
+        }
+        else
+        {
+            porridgeImage.enabled = false;
         }
     }
 

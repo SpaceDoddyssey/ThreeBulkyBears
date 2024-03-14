@@ -31,7 +31,7 @@ public class Porridge : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             Debug.Log("Just Right!");
-            PlayerPrefs.SetInt(gameManager.curLevelInfo.levelName + "PorridgeCollected", 1);
+            GameObject.Find("LevelManager").GetComponent<LevelManager>().holdingPorridge = true;
             GetComponent<SpriteRenderer>().enabled = false;
             GetComponent<CircleCollider2D>().enabled = false;
             GetComponent<ParticleSystem>().Play();

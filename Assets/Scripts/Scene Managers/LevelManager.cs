@@ -14,6 +14,7 @@ public class LevelManager : MonoBehaviour
     public bool isGameOver;
     public bool paused = false;
     public GameObject pauseMenu;
+    public bool holdingPorridge;
 
     //Sign vars
     public GameObject gameOverObj, victoryObj;
@@ -37,6 +38,7 @@ public class LevelManager : MonoBehaviour
     void Start()
     {
         Cursor.visible = false;
+        holdingPorridge = false;
     }
 
     void Update()
@@ -152,6 +154,11 @@ public class LevelManager : MonoBehaviour
         if (gameManager.curLevelInfo != null)
         {
             PlayerPrefs.SetInt(gameManager.curLevelInfo.levelName + "Beaten", 1);
+
+            if (holdingPorridge)
+            {
+                PlayerPrefs.SetInt(gameManager.curLevelInfo.levelName + "PorridgeCollected", 1);
+            }
 
             float bestTime = PlayerPrefs.GetFloat(gameManager.curLevelInfo.sceneName + "BestTime", float.PositiveInfinity);
             Debug.Log("Best Time: " + bestTime);
