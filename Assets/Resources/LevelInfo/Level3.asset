@@ -17,7 +17,7 @@ MonoBehaviour:
   sceneName: Level3
   description: 
   goalTime: 26
-  isUnlocked: 1
-  fallingDeathZoneY: 0
+  hasPorridge: 0
+  fallingDeathZoneY: -39
   cloudBoundLeft: -45
   cloudBoundRight: 95
