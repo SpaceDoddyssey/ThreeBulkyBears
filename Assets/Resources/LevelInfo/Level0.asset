@@ -17,7 +17,7 @@ MonoBehaviour:
   sceneName: Level0
   description: Learn how to play the game
   goalTime: 31
-  isUnlocked: 1
+  hasPorridge: 1
   fallingDeathZoneY: -16
   cloudBoundLeft: -80
   cloudBoundRight: 90
