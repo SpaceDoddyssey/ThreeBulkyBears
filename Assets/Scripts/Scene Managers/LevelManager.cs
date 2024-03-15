@@ -27,11 +27,25 @@ public class LevelManager : MonoBehaviour
     void Awake()
     {
         gameManager = FindObjectOfType<GameManager>();
-        if (gameManager == null) { Debug.Log("Game Manager not found"); return; }
-        if (gameManager.curLevelInfo != null)
+        if (gameManager == null)
+        {
+            Debug.Log("Game Manager not found");
+            GameObject gm = new GameObject("GameManager");
+            gameManager = gm.AddComponent<GameManager>();
+            if (gameManager != null)
+            {
+                string currentSceneName = SceneManager.GetActiveScene().name;
+                gameManager.curLevelInfo = Resources.Load("LevelInfo/" + currentSceneName) as LevelInfo;
+            }
+        }
+        else if (gameManager.curLevelInfo != null)
         {
             Debug.Log("Loading level: " + gameManager.curLevelInfo.sceneName);
             SceneManager.LoadScene(gameManager.curLevelInfo.sceneName, LoadSceneMode.Additive);
+        }
+        else
+        {
+            Debug.Log("Game Manager found, but no level info!");
         }
     }
 
