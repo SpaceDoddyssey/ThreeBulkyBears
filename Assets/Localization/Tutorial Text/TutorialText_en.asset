@@ -19,8 +19,8 @@ MonoBehaviour:
     m_Items: []
   m_TableData:
   - m_Id: 12729450496
-    m_Localized: "Press W or Up twice to change to\r Papa Bear, then slam into the
-      rock\r wall to break it!"
+    m_Localized: Press W or Up twice to change to Papa Bear, then slam into the rock
+      wall to break it!
     m_Metadata:
       m_Items: []
   - m_Id: 221840670720
@@ -62,8 +62,8 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 3011950393307136
-    m_Localized: "One more trick: You'll have to use\r\nMama Bear to get enough height\r\nhere,
-      then switch to Baby Bear after \rjumping to travel further"
+    m_Localized: 'One more trick: You''ll have to use Mama Bear to get enough height
+      here, then switch to Baby Bear after jumping to travel further'
     m_Metadata:
       m_Items: []
   - m_Id: 3013785078345728
