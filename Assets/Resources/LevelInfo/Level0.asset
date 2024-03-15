@@ -18,6 +18,6 @@ MonoBehaviour:
   description: Learn how to play the game
   goalTime: 31
   hasPorridge: 1
-  fallingDeathZoneY: -16
+  fallingDeathZoneY: -26
   cloudBoundLeft: -80
   cloudBoundRight: 90
