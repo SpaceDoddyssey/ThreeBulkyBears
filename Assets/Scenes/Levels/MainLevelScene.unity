@@ -1045,6 +1045,7 @@ MonoBehaviour:
   isGameOver: 0
   paused: 0
   pauseMenu: {fileID: 2062382514}
+  holdingPorridge: 0
   gameOverObj: {fileID: 40989680}
   victoryObj: {fileID: 1850439145}
   signStartPos: {x: 0, y: 700, z: 0}
@@ -3320,6 +3321,14 @@ PrefabInstance:
       propertyPath: lm
       value: 
       objectReference: {fileID: 1123080338}
+    - target: {fileID: 5896457351026524451, guid: 61a8766044189ff43ac62b3c1f29f910, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: d479e2fb64c7b3747b8f95c3bf8f3521, type: 3}
+    - target: {fileID: 6937452896908900422, guid: 61a8766044189ff43ac62b3c1f29f910, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 3635a77a337fe584596254329ebcdec0, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3470,7 +3479,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3821529237492343426, guid: 92fd4ab7b2f8ea64caedc45e0cd5bdf4, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -1.92
       objectReference: {fileID: 0}
     - target: {fileID: 3821529237492343426, guid: 92fd4ab7b2f8ea64caedc45e0cd5bdf4, type: 3}
       propertyPath: m_LocalRotation.w
