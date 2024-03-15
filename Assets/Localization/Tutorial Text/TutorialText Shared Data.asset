@@ -51,6 +51,14 @@ MonoBehaviour:
     m_Key: rolldilocks
     m_Metadata:
       m_Items: []
+  - m_Id: 4345128309682176
+    m_Key: highJump
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4346765002600448
+    m_Key: porridge
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

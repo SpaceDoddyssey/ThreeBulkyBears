@@ -72,6 +72,16 @@ MonoBehaviour:
       GET HER!'
     m_Metadata:
       m_Items: []
+  - m_Id: 4345128309682176
+    m_Localized: This jump is too high to make normally. Think about the bears' physics,
+      and see if you can figure out the trick
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4346765002600448
+    m_Localized: This porridge looks just right! Keep an eye out for a bowl in each
+      level!
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []
