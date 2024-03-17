@@ -5,6 +5,10 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using TMPro;
 using System.Collections;
+using UnityEngine.Localization;
+using UnityEngine.Localization.Settings;
+using UnityEngine.Localization.Tables;
+using UnityEngine.ResourceManagement.AsyncOperations;
 
 public class LevelSelectManager : MonoBehaviour
 {
@@ -121,6 +125,12 @@ public class LevelSelectManager : MonoBehaviour
         SelectLevel(newLevel);
     }
 
+    public string localString(string tableref, string key) {
+        string localized;
+        localized = LocalizationSettings.StringDatabase.GetLocalizedString(tableref, key);
+        return localized;
+    }
+
     public void SelectLevel(int index)
     {
         levelIcons[curLevelIndex].transform.localScale = new Vector2(1, 1);
@@ -133,12 +143,12 @@ public class LevelSelectManager : MonoBehaviour
         float bestTime = PlayerPrefs.GetFloat(level.sceneName + "BestTime", float.PositiveInfinity);
         if (bestTime == float.PositiveInfinity)
         {
-            bestTimeText.text = "Best Time: None so far!";
+            bestTimeText.text = localString("Level Select", "besttime") + " " + localString("Level Select", "nobesttime");
         }
         else
         {
             TimeSpan bt = TimeSpan.FromSeconds(bestTime);
-            bestTimeText.text = "Best Time: " + bt.ToString("m':'ss'.'fff");
+            bestTimeText.text = localString("Level Select", "besttime") + " " + bt.ToString("m':'ss'.'fff");
         }
 
         TimeSpan gt = TimeSpan.FromSeconds(level.goalTime);
