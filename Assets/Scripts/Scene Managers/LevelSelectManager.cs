@@ -125,7 +125,8 @@ public class LevelSelectManager : MonoBehaviour
         SelectLevel(newLevel);
     }
 
-    public string localString(string tableref, string key) {
+    public string localString(string tableref, string key)
+    {
         string localized;
         localized = LocalizationSettings.StringDatabase.GetLocalizedString(tableref, key);
         return localized;
@@ -154,12 +155,12 @@ public class LevelSelectManager : MonoBehaviour
         TimeSpan gt = TimeSpan.FromSeconds(level.goalTime);
         if (bestTime < level.goalTime)
         {
-            goalTimeText.text = "Gold Time: " + gt.ToString("m':'ss'.'fff") + " (Achieved!)";
+            goalTimeText.text = localString("Level Select", "goldtime") + " " + gt.ToString("m':'ss'.'fff") + " (Achieved!)";
             starImage.enabled = true;
         }
         else
         {
-            goalTimeText.text = "Gold Time: " + gt.ToString("m':'ss'.'fff");
+            goalTimeText.text = localString("Level Select", "goldtime") + " " + gt.ToString("m':'ss'.'fff");
             starImage.enabled = false;
         }
 
