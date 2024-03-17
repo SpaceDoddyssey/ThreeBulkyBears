@@ -381,7 +381,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: Option A
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 22a73d5fe085cd24f95223b3fab0db6b, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -445,7 +445,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 0
+  m_hasFontAssetChanged: 1
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!222 &152317477
@@ -2187,7 +2187,6 @@ GameObject:
   - component: {fileID: 989202406}
   - component: {fileID: 989202405}
   - component: {fileID: 989202404}
-  - component: {fileID: 989202407}
   m_Layer: 5
   m_Name: LanguageDropdown
   m_TagString: Untagged
@@ -2271,14 +2270,14 @@ MonoBehaviour:
       m_Image: {fileID: 0}
     - m_Text: Italiano
       m_Image: {fileID: 0}
-    - m_Text: Mandarin
+    - m_Text: "\u4E2D\u6587"
       m_Image: {fileID: 0}
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 989202407}
+      - m_Target: {fileID: 1360607560}
         m_TargetAssemblyTypeName: SettingsMenu, Assembly-CSharp
-        m_MethodName: GetLanguage
+        m_MethodName: SetLanguage
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2327,22 +2326,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 989202402}
   m_CullTransparentMesh: 1
---- !u!114 &989202407
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 989202402}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e351b2527006f4a4f8fd81451c9a8ef4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mixer: {fileID: 24100000, guid: 71fc13d740ca56a4ea4f2d8256234fae, type: 2}
-  musicSlider: {fileID: 1143087434}
-  sfxSlider: {fileID: 1547650255}
-  dropdown: {fileID: 989202404}
 --- !u!1 &1071316473
 GameObject:
   m_ObjectHideFlags: 0

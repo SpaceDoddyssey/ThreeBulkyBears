@@ -49,11 +49,10 @@ public class SettingsMenu : MonoBehaviour
         return Mathf.Log10(input) * 20;
     }
 
-    public void GetLanguage()
+    public void SetLanguage()
     {
         int pickedIndex = dropdown.value;
-        string selectedOption = dropdown.options[pickedIndex].text;
-        Debug.Log(selectedOption);
+        LocalizationSettings.SelectedLocale = LocalizationSettings.AvailableLocales.Locales[pickedIndex];
     }
 
     public void ReturnToMain()
