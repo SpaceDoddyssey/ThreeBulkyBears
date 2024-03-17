@@ -66,6 +66,16 @@ MonoBehaviour:
       PRENDILA!'
     m_Metadata:
       m_Items: []
+  - m_Id: 4345128309682176
+    m_Localized: "Questo salto \xE8 troppo alto per essere eseguito normalmente.
+      Pensa alla fisica degli orsi e vedi se riesci a capire il trucco"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4346765002600448
+    m_Localized: "\rQuesto porridge sembra proprio perfetto! Tieni gli occhi aperti
+      per una ciotola in ogni livello!"
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

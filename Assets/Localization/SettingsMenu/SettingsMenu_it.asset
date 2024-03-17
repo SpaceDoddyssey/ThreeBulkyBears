@@ -17,7 +17,19 @@ MonoBehaviour:
   m_SharedData: {fileID: 11400000, guid: c668137b781342d48adabd4576ec99bc, type: 2}
   m_Metadata:
     m_Items: []
-  m_TableData: []
+  m_TableData:
+  - m_Id: 6138818560
+    m_Localized: Musica
+    m_Metadata:
+      m_Items: []
+  - m_Id: 45997289472
+    m_Localized: Effetti Sonori
+    m_Metadata:
+      m_Items: []
+  - m_Id: 61109366784
+    m_Localized: Lingua
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []
