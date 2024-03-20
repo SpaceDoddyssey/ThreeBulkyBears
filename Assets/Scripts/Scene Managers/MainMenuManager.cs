@@ -10,6 +10,8 @@ public class MainMenuManager : MonoBehaviour
     private GameManager gameManager;
     private bool onMainScreen = true;
 
+    private float curButtonDefaultRotation = 0;
+
     // Start is called before the first frame update
     void Start()
     {

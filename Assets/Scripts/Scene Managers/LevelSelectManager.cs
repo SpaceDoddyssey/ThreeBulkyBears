@@ -38,6 +38,12 @@ public class LevelSelectManager : MonoBehaviour
             }
         }
 
+        for (int i = 0; i < levels.Count; i++)
+        {
+            Image checkmarkImage = levelIcons[i].transform.Find("CheckmarkImage").GetComponent<Image>();
+            checkmarkImage.enabled = PlayerPrefs.HasKey(levels[i].levelName + "Beaten");
+        }
+
         if (PlayerPrefs.HasKey(levels[levels.Count - 1].levelName + "Beaten") && !PlayerPrefs.HasKey("ThanksForPlayingShown"))
         {
             StartCoroutine(FadeInThanks());
@@ -108,18 +114,18 @@ public class LevelSelectManager : MonoBehaviour
         }
 
         //Following are for testing, DELETE for final build ///////////////////////////////////////////////////////////
-        // if (Input.GetKeyDown(KeyCode.LeftBracket))
-        // {
-        //     PlayerPrefs.DeleteAll();
-        //     SelectLevel(0);
-        //     StopAllCoroutines();
-        //     for (int i = 0; i < levels.Count; i++)
-        //     {
-        //         Lock(i);
-        //     }
-        //     PlayerPrefs.SetInt("TutorialUnlocked", 1);
-        //     StartUnlocked(0);
-        // }
+        if (Input.GetKeyDown(KeyCode.LeftBracket))
+        {
+            PlayerPrefs.DeleteAll();
+            SelectLevel(0);
+            StopAllCoroutines();
+            for (int i = 0; i < levels.Count; i++)
+            {
+                Lock(i);
+            }
+            PlayerPrefs.SetInt("TutorialUnlocked", 1);
+            StartUnlocked(0);
+        }
         // if (Input.GetKeyDown(KeyCode.RightBracket))
         // {
         //     for (int i = 0; i < levels.Count; i++)
@@ -205,7 +211,7 @@ public class LevelSelectManager : MonoBehaviour
 
     IEnumerator FadeInThanks()
     {
-        fadingIn = true;
+        thanksScreenShowing = true;
         thanksForPlayingScreen.SetActive(true);
         Image img = thanksForPlayingScreen.GetComponent<Image>();
         Color originalColor = new Color(1, 1, 1, 0);
@@ -235,7 +241,6 @@ public class LevelSelectManager : MonoBehaviour
         }
 
         img.color = targetColor;
-        thanksScreenShowing = true;
         PlayerPrefs.SetInt("ThanksForPlayingShown", 1);
     }
 
