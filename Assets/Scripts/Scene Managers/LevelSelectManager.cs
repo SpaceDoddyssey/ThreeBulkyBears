@@ -94,25 +94,25 @@ public class LevelSelectManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Escape)) SceneManager.LoadScene("MainMenu");
 
         //Following are for testing, DELETE for final build ///////////////////////////////////////////////////////////
-        if (Input.GetKeyDown(KeyCode.LeftBracket))
-        {
-            PlayerPrefs.DeleteAll();
-            SelectLevel(0);
-            StopAllCoroutines();
-            for (int i = 0; i < levels.Count; i++)
-            {
-                Lock(i);
-            }
-            PlayerPrefs.SetInt("TutorialUnlocked", 1);
-            StartUnlocked(0);
-        }
-        if (Input.GetKeyDown(KeyCode.RightBracket))
-        {
-            for (int i = 0; i < levels.Count; i++)
-            {
-                Unlock(i);
-            }
-        }
+        // if (Input.GetKeyDown(KeyCode.LeftBracket))
+        // {
+        //     PlayerPrefs.DeleteAll();
+        //     SelectLevel(0);
+        //     StopAllCoroutines();
+        //     for (int i = 0; i < levels.Count; i++)
+        //     {
+        //         Lock(i);
+        //     }
+        //     PlayerPrefs.SetInt("TutorialUnlocked", 1);
+        //     StartUnlocked(0);
+        // }
+        // if (Input.GetKeyDown(KeyCode.RightBracket))
+        // {
+        //     for (int i = 0; i < levels.Count; i++)
+        //     {
+        //         Unlock(i);
+        //     }
+        // }
     }
 
     void ChangeSelectedLevel(int direction)

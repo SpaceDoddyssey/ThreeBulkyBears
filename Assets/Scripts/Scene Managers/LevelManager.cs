@@ -90,10 +90,10 @@ public class LevelManager : MonoBehaviour
         }
 
         //Remove in final build
-        if (Input.GetKeyDown(KeyCode.RightBracket))
-        {
-            Victory();
-        }
+        // if (Input.GetKeyDown(KeyCode.RightBracket))
+        // {
+        //     Victory();
+        // }
     }
 
     public void UpdateTimer()
