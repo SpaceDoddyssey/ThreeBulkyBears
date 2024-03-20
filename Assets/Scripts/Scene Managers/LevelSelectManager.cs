@@ -5,10 +5,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using TMPro;
 using System.Collections;
-using UnityEngine.Localization;
 using UnityEngine.Localization.Settings;
-using UnityEngine.Localization.Tables;
-using UnityEngine.ResourceManagement.AsyncOperations;
 
 public class LevelSelectManager : MonoBehaviour
 {
@@ -19,6 +16,8 @@ public class LevelSelectManager : MonoBehaviour
     public TextMeshProUGUI levelNameText, bestTimeText, goalTimeText;
     [SerializeField] Image starImage, porridgeImage;
     [SerializeField] Sprite lockSprite, unlockedSprite;
+    [SerializeField] GameObject thanksForPlayingScreen;
+    private bool fadingIn = false, thanksScreenShowing = false;
 
     //Start is called before the first frame update
     void Start()
@@ -37,6 +36,11 @@ public class LevelSelectManager : MonoBehaviour
             {
                 Unlock(i);
             }
+        }
+
+        if (PlayerPrefs.HasKey(levels[levels.Count - 1].levelName + "Beaten") && !PlayerPrefs.HasKey("ThanksForPlayingShown"))
+        {
+            StartCoroutine(FadeInThanks());
         }
     }
 
@@ -91,7 +95,17 @@ public class LevelSelectManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.A)) ChangeSelectedLevel(-1);
         if (Input.GetKeyDown(KeyCode.D)) ChangeSelectedLevel(1);
         if (Input.GetKeyDown(KeyCode.Space)) GoToLevel(levels[curLevelIndex]);
-        if (Input.GetKeyDown(KeyCode.Escape)) SceneManager.LoadScene("MainMenu");
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (thanksScreenShowing)
+                StartCoroutine(FadeOutThanks());
+            else
+                SceneManager.LoadScene("MainMenu");
+        }
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            StartCoroutine(FadeInThanks());
+        }
 
         //Following are for testing, DELETE for final build ///////////////////////////////////////////////////////////
         // if (Input.GetKeyDown(KeyCode.LeftBracket))
@@ -127,9 +141,7 @@ public class LevelSelectManager : MonoBehaviour
 
     public string localString(string tableref, string key)
     {
-        string localized;
-        localized = LocalizationSettings.StringDatabase.GetLocalizedString(tableref, key);
-        return localized;
+        return LocalizationSettings.StringDatabase.GetLocalizedString(tableref, key);
     }
 
     public void SelectLevel(int index)
@@ -189,6 +201,77 @@ public class LevelSelectManager : MonoBehaviour
         {
             SceneManager.LoadScene("MainLevelScene");
         }
+    }
+
+    IEnumerator FadeInThanks()
+    {
+        fadingIn = true;
+        thanksForPlayingScreen.SetActive(true);
+        Image img = thanksForPlayingScreen.GetComponent<Image>();
+        Color originalColor = new Color(1, 1, 1, 0);
+        Color targetColor = new Color(1, 1, 1, 1);
+        float elapsedTime = 0f;
+        float fadeDuration = 0.8f;
+        foreach (TextMeshProUGUI textComponent in thanksForPlayingScreen.GetComponentsInChildren<TextMeshProUGUI>())
+        {
+            Color originalTextColor = textComponent.color;
+            Color transparentColor = new Color(originalTextColor.r, originalTextColor.g, originalTextColor.b, 0f);
+            textComponent.color = transparentColor;
+        }
+
+        while (elapsedTime < fadeDuration)
+        {
+            elapsedTime += Time.deltaTime;
+            float t = elapsedTime / fadeDuration;
+            img.color = Color.Lerp(originalColor, targetColor, t);
+
+            // Fade in text components in child objects
+            foreach (TextMeshProUGUI textComponent in thanksForPlayingScreen.GetComponentsInChildren<TextMeshProUGUI>())
+            {
+                textComponent.color = Color.Lerp(new Color(textComponent.color.r, textComponent.color.g, textComponent.color.b, 0f), new Color(textComponent.color.r, textComponent.color.g, textComponent.color.b, 1f), t);
+            }
+
+            yield return null;
+        }
+
+        img.color = targetColor;
+        thanksScreenShowing = true;
+        PlayerPrefs.SetInt("ThanksForPlayingShown", 1);
+    }
+
+    IEnumerator FadeOutThanks()
+    {
+        thanksScreenShowing = false;
+        Image img = thanksForPlayingScreen.GetComponent<Image>();
+        Color originalColor = img.color;
+        Color targetColor = new Color(originalColor.r, originalColor.g, originalColor.b, 0f);
+        float elapsedTime = 0f;
+        float fadeDuration = 0.8f;
+
+        foreach (TextMeshProUGUI textComponent in thanksForPlayingScreen.GetComponentsInChildren<TextMeshProUGUI>())
+        {
+            Color originalTextColor = textComponent.color;
+            Color transparentColor = new Color(originalTextColor.r, originalTextColor.g, originalTextColor.b, 0f);
+            textComponent.color = transparentColor;
+        }
+
+        while (elapsedTime < fadeDuration)
+        {
+            elapsedTime += Time.deltaTime;
+            float t = elapsedTime / fadeDuration;
+            img.color = Color.Lerp(originalColor, targetColor, t);
+
+            // Fade out text components in child objects
+            foreach (TextMeshProUGUI textComponent in thanksForPlayingScreen.GetComponentsInChildren<TextMeshProUGUI>())
+            {
+                textComponent.color = Color.Lerp(new Color(textComponent.color.r, textComponent.color.g, textComponent.color.b, 1f), new Color(textComponent.color.r, textComponent.color.g, textComponent.color.b, 0f), t);
+            }
+
+            yield return null;
+        }
+
+        img.color = targetColor;
+        thanksForPlayingScreen.SetActive(false);
     }
 
     public void ReturnToMain()
