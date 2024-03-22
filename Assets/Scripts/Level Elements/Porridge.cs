@@ -35,6 +35,7 @@ public class Porridge : MonoBehaviour
             GetComponent<SpriteRenderer>().enabled = false;
             GetComponent<CircleCollider2D>().enabled = false;
             GetComponent<ParticleSystem>().Play();
+            GetComponent<AudioSource>().Play();
         }
     }
 }

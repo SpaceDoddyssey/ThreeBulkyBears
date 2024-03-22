@@ -17,7 +17,7 @@ public class LevelSelectManager : MonoBehaviour
     [SerializeField] Image starImage, porridgeImage;
     [SerializeField] Sprite lockSprite, unlockedSprite;
     [SerializeField] GameObject thanksForPlayingScreen;
-    private bool fadingIn = false, thanksScreenShowing = false;
+    private bool thanksScreenShowing = false;
 
     //Start is called before the first frame update
     void Start()
@@ -79,6 +79,7 @@ public class LevelSelectManager : MonoBehaviour
     void Unlock(int levelID)
     {
         StartCoroutine(FadeLockIcon(levelIcons[levelID]));
+        GetComponent<AudioSource>().Play();
         PlayerPrefs.SetInt(levels[levelID].levelName + "Unlocked", 1);
     }
 
