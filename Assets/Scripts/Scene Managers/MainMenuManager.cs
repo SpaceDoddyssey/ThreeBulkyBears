@@ -15,6 +15,7 @@ public class MainMenuManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        curButtonDefaultRotation = buttons[0].transform.rotation.eulerAngles.z;
         SelectButton(0);
         gameManager = FindObjectOfType<GameManager>();
     }
@@ -23,6 +24,8 @@ public class MainMenuManager : MonoBehaviour
     void Update()
     {
         CheckInput();
+
+        buttons[curButtonIndex].transform.rotation = Quaternion.Euler(0, 0, curButtonDefaultRotation + Mathf.Sin(Time.time * 2) * 5);
     }
 
     void CheckInput()
@@ -50,7 +53,9 @@ public class MainMenuManager : MonoBehaviour
     public void SelectButton(int index)
     {
         buttons[curButtonIndex].transform.localScale = new Vector2(1, 1);
+        buttons[curButtonIndex].transform.rotation = Quaternion.Euler(0, 0, curButtonDefaultRotation);
         curButtonIndex = index;
+        curButtonDefaultRotation = buttons[curButtonIndex].transform.rotation.eulerAngles.z;
         buttons[curButtonIndex].transform.localScale = new Vector2(1.3f, 1.3f);
     }
 

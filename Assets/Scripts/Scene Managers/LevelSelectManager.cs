@@ -95,6 +95,8 @@ public class LevelSelectManager : MonoBehaviour
     void Update()
     {
         CheckInput();
+
+        levelIcons[curLevelIndex].transform.rotation = Quaternion.Euler(0, 0, Mathf.Sin(Time.time * 2) * 5);
     }
 
     void CheckInput()
@@ -154,6 +156,7 @@ public class LevelSelectManager : MonoBehaviour
     public void SelectLevel(int index)
     {
         levelIcons[curLevelIndex].transform.localScale = new Vector2(1, 1);
+        levelIcons[curLevelIndex].transform.rotation = Quaternion.Euler(0, 0, 0);
         curLevelIndex = index;
         levelIcons[curLevelIndex].transform.localScale = new Vector2(1.5f, 1.5f);
 
